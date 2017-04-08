@@ -29,6 +29,7 @@ TE // Tabla de Enlace
   TC_9 =  RECIBIDO       
   TC_10 =  ESTADO 	
   TC_11 =  OBSERVACION	
+  TC_12 = NOMBRE DOCUMENTO ADJUNTO
 
 ---- Table TE ------
   TE_1 // CODIGO correspondencia 1

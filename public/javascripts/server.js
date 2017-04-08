@@ -14,7 +14,7 @@ var options = {
 var pgp = require('pg-promise')(options);
 
 //------ CONEXION A LA BASE DE DATOS ------------------
-var connectionString = "pg://postgres:postgres@localhost:5432/BD_SITUN"; // CAMBIAR POR CLAVE DEL POSTGRES DE USTEDES
+var connectionString = "pg://postgres:root@localhost:5432/BD_SITUN"; // CAMBIAR POR CLAVE DEL POSTGRES DE USTEDES
 var db = pgp(connectionString);
 
 
@@ -59,8 +59,9 @@ function createTU(req, res, next) {
 //-------- CREACION DE UN NUEVO TC EN LA TABLA ----------
 function createTC(req, res, next) {
 	console.log("Insert received...");
-     db.none('insert into TC (TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, TC_9, TC_10, TC_11)' +
-      'values(current_date, ${TC_3}, ${TC_4}, ${TC_5}, ${TC_6},${TC_7}, ${TC_8}, ${TC_9}, ${TC_10}, ${TC_11})',
+	
+     db.none('insert into TC (TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, TC_9, TC_10, TC_11, TC_12)' +
+      'values($(TC_2), ${TC_3}, ${TC_4}, ${TC_5}, ${TC_6},${TC_7}, ${TC_8}, ${TC_9}, ${TC_10}, ${TC_11}, ${TC_12})',
 	     req.body)
     .then(function () {
 		console.log("Theniando en insert tc");
@@ -433,6 +434,22 @@ function getALLTA_FECHA(req, res, next) {
     });
 }
 
+//----- RETORNO DE TODOS LOS TP SEGUN TP_1
+function getALLTA1(req, res, next) {
+	//var low = req.body.TP_1.toLowerCase();
+ //req.body.TP_1 = '%' + low + '%';
+ var promises = [];
+  db.any('select * from TA where TA_1=${TA_1}', req.body)
+	.then( function (data) {
+		res.status(200)
+        .json({
+          status: 'success',
+          data: data,
+          message: 'Retrieved ALL TA FROM TA_1'
+        });
+    });
+}
+
 
 //-------- ACTUALIZACIONES  DE UNA TABLA ----------
 //-------- ACTUALIZACION DE LA TABLA TP ----------
@@ -516,6 +533,28 @@ function updateTA(req, res, next) {
         .json({
           status: 'success',
           message: 'Updated TA'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
+
+//-------- ACTUALIZACION DE LA TABLA TA solo fechas----------
+function updateTAFechas(req, res, next) {
+	
+	req.body.TA_1 = parseInt(req.body.TA_1);
+	 req.body.TA_4 = parseInt(req.body.TA_4);
+	 console.log("actualiza");
+  db.none('update TA set TA_2=${TA_2},TA_3=${TA_3},TA_4=${TA_4}'+
+          'where TA_1=${TA_1}',
+    req.body)
+    .then(function () {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'Updated TA fechas'
         });
     })
     .catch(function (err) {
@@ -683,6 +722,7 @@ module.exports = {
   getALLTC6: getALLTC6,
   getALLTE_ONE: getALLTE_ONE,
   getALLTA_FECHA: getALLTA_FECHA,
+  getALLTA1:getALLTA1,
   createTP: createTP,
   createTU: createTU,
   createTC: createTC,
@@ -699,6 +739,7 @@ module.exports = {
   updateTE: updateTE,
   getLastTC: getLastTC,
   updateTA: updateTA,
+  updateTAFechas:updateTAFechas,
   getAllEnlaces: getAllEnlaces,
   getUSR: getUSR
 };

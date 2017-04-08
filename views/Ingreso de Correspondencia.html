@@ -2,38 +2,20 @@
 <html ng-app = "app">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="shortcut icon" href="../images/ico.ico" type="image/ico" />
         <title>Ingreso Correspondencia</title>
      
-	 <!--
- <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
- 
+<script src="\..\javascripts\script_menu.js"></script>
+	<script type="text/javascript" src="\..\javascripts\script_IngresoCorrespondencia.js"></script>
 
-   
-  <link rel="stylesheet" href="\..\stylesheets\bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <script src="\..\javascripts\bootstrap.min.js"></script>
-  <link href="\..\stylesheets\bootstrap-datetimepicker.min.css" rel="stylesheet">
+  
+			<script src="\..\javascripts\jquery-1.12.2.js"></script>
+<script src="\..\javascripts\moment-2.15.1.js"></script>
+<script src="\..\javascripts\bootstrap-3-3-7.min.js"></script>
+<link rel="stylesheet" href="\..\stylesheets\bootstrap-3-3-7.min.css">
+<script src="\..\javascripts\bootstrap-datetimepicker-4.7.14.js"></script>
+<link rel="stylesheet" href="\..\stylesheets\bootstrap-datetimepicker-4.7.14.css">
 
-  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> 
-    <!--script type="text/javascript"src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script->
-    <script type="text/javascript" src="\..\javascripts\bootstrap-datetimepicker.min.js"></script>
-
-     <!--Eliminar este archivo de css---link href="\node_modules\bootstrap\dist\css\style.css" rel="stylesheet"->
- 
- <link rel="stylesheet" href="\..\stylesheets\datepicker.css">
-        <link rel="stylesheet" href="\..\stylesheets\bootstrap.css">   
-		-->
-			<script src="\..\javascripts\new\jquery-1.12.2.js"></script>
-<script src="\..\javascripts\new\moment-2.15.1.js"></script>
-
-<script src="\..\javascripts\new\bootstrap-3-3-7.min.js"></script>
-
-<link rel="stylesheet" href="\..\javascripts\new\bootstrap-3-3-7.min.css">
-
-
-<script src="\..\javascripts\new\bootstrap-datetimepicker-4.7.14.js"></script>
-
-<link rel="stylesheet" href="\..\javascripts\new\bootstrap-datetimepicker-4.7.14.css">
 	<!-- Angular--> 
 	<script src="\..\javascripts\angular.min.js"></script>
 	
@@ -42,41 +24,7 @@
     <body  id = "buscar" data-ng-init = "init()">  
 
     <div id="menuDiv"></div>
-	<!--
-	<nav class="navbar navbar-default" style="background-color:#60161E; ">
-    <div class="container-fluid">
-    <!-- ReEsponsive ->
-    <div class="navbar-header" >
-    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-    </button>
-	
-    <IMG SRC="../images/situn2.png" WIDTH=90 HEIGHT=90  class="nav navbar-nav navbar-right" >
-    </div>
-	
-    <!-- Menu ->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav" id ='menu' style="margin-top:7px;">
-		<!--li><a href=""style="color:#FFFFFF;">SCC-SITUN</a></li->
-        <li ><a href=""style="color:#FFFFFF;">Ingreso Correspondencia</span> </a></li>
-        <li><a href="../HTML/Enlace de Documentos"style="color:#FFFFFF;">Enlace Documentos</a></li>
-        <li><a href="../HTML/Busqueda"style="color:#FFFFFF;">Búsqueda</a></li>	
-		<li><a href="#"style="color:#FFFFFF;">Reportes</a></li>
-		<!--li><a href="#"style="color:#FFFFFF;">Escanear</a></li->
-		<li><a href="../HTML/ingresaUser"style="color:#FFFFFF;">Agregar Usuario</a></li>
-		<li><a href="../HTML/BusquedaUsuarios"style="color:#FFFFFF;">Buscar Usuarios</a></li>
-		<li><a href="#" style="color:#FFFFFF;">Ayuda</a></li>
-		<li><a href="../logout"style="color:#FFFFFF;">Cerrar sesion</a></li>
-		->
-      </ul>
-    
-        <IMG SRC="../images/situn2.png" WIDTH=90 HEIGHT=90  class="nav navbar-nav navbar-right">
-    </div><!-- /.navbar-collapse ->
-  </div><!-- /.container-fluid ->
-</nav>
-	  -->
+
 	  <!-- **************** estilo de mensajes de error -->
 	  
 	   <style>
@@ -98,8 +46,8 @@
   <!-- Trigger the modal with a button -->
 <!-- Modal -->
 	  
-<div id="myAyuda" class="modal fade" role="dialog" style="margin: 0 auto; width:675px; height:600px;">
-  <div class="modal-dialog">
+<div id="myAyuda" class="modal fade" role="dialog" style="margin: 0 auto; width:675px; height:600px;"> 
+  <div class="well">
    
     <!-- Modal content-->
    <div class="modal-content">
@@ -112,13 +60,13 @@
                 <tbody>
 				Ingresar:<p>
 				Se deberá llenar todos los campos requeridos de la izquierda de la
-				página en forma correcta y luego presionar el botón Guardar.<p>
+				página en forma correcta y luego presionar el botón Guardar.</p>
 				
 				Programar Alarma:<p>
 				Si desea que la correspondencia a ingresar tenga una alarma, deberá
 				llenar los campos de la fecha de aviso y fecha limite que se encuentra 
 				al centro de la página antes de presionar el botón Guardar, cuando se 
-				hayan ingresado los campos de la alarma podrá presiona el boton Guardar.<p>
+				hayan ingresado los campos de la alarma podrá presiona el boton Guardar.</p>
 					
 				Enlazar Correspondencia:<p>
 					Deberá llenar los campos requeridos y seguidamente seleccionar la 
@@ -129,12 +77,12 @@
 					la correspondencia que deseo enlazar en el documento 2, esta aparecera 
 					en el cuadro de la derecha, se presiona el simbolo más(+) de la correspondencia 
 					que va a enlazar y luego presiono el botón realizar enlace. Al terminar la acción 
-					con exito el sistema lo devolverá a la página de ingreso de correspondencia<p>
+					con exito el sistema lo devolverá a la página de ingreso de correspondencia</p>
 					
 				Eliminar Alarmas del Dia:<p>
 					En el cuadro de las alarmas del dia aparecerán todas las alarmas 
 					programadas para ese día. Cada una de ellas tendra un botón, el cual 
-					para eliminar alguna alarma deberá ser presionado.<p>
+					para eliminar alguna alarma deberá ser presionado.</p>
 					
 					Nota: La correspondencia puede ser ingresada al sistema sin ninguna 
 					alarma ni enlace.
@@ -151,14 +99,11 @@
   </div>  <!-- fin del popup de ayuda --> 
 	  
 	  
-  
-	  
-	  <!-- **************** fin  estilo de mensajes de error ----->
 	    <!---Cuerpo--->
-	   <a href='#' onclick='MIC_14();return false' title='Ir Arriba'></a><!--Para subir la pagina-->
+	   <a href='#' onclick='subePagina();return false' title='Ir Arriba'></a><!--Para subir la pagina-->
 	   <body background="../images/situn4.png" ng-app ng-controller = "ControllerAngular">
-	      <div class="col-md-1"></div>
-	   <div class="col-md-4">
+	
+	   <div class="col-md-4"> 
          <span class="text-danger"><h4>Ingreso de Correspondencia</h4></span>
             <form name = "Formulario">
             <table id ="tablaIC">
@@ -166,110 +111,107 @@
 						<tr>
                    <td> <label class="text-danger">Fecha Recibido</label></td>
                     <td> 
-                    <!--<div id="datetimepicker4" class="input-append form-group"><input class="form-control"id="IC1" data-format="dd-MM-yyyy" type="text" onfocus="MIC_20(1)" > <!--****** NUEVO ***********->
-					<span class="add-on"><i  data-date-icon="icon-calendar" onclick="MIC_20(1)"></i></span> 
-					</div>
-					-->
+                   
 					<div class='input-group date' id='datetimepicker4'>
-          					<input type='text' class="form-control" id="IC1"/>
+          					<input type='text' class="form-control" id="IC1" data-toggle="tooltip" data-placement="right" title="Fecha invalida o mayot a la de oficio"/>
           					<span class="input-group-addon">
-            					<span class="glyphicon glyphicon-calendar" onclick="MIC_20(1)"></span>
+            					<span class="glyphicon glyphicon-calendar" onclick="limpiaCamposEnfocados(1)"></span>
           					</span>
         				</div>
 					</td>
                 </tr>
                 <tr>
                     <td> <label class="text-danger">N° Oficio</label> </td>
-                    <td><div  id="div2"class="form-group"><textarea id="IC2" type="text" class="form-control" onfocus="MIC_20(2)"></textarea>
-					<label class="text-danger" style=""><input  type="checkbox" id="IC12" value="first_checkbox" onchange="MIC_21()">Sin Oficio</label></div></td>           
+                    <td><div  id="div2"class="form-group"><textarea id="IC2" data-toggle="tooltip" data-placement="right" title="N° oficio imcompleto"type="text" class="form-control" onfocus="limpiaCamposEnfocados(2)"></textarea>
+					<label class="text-danger" style=""><input  type="checkbox" id="IC12" value="first_checkbox" onchange="checkCampoOficio()">Sin Oficio</label></div></td>           
 					</tr>
                 <tr >
                     <td> <label class="text-danger">Fecha Oficio</label></td>
                     <td > 
-                    <!--<div id="datetimepicker3" class="input-append form-group"><input class="form-control"id="IC3" data-format="dd-MM-yyyy" type="text" onfocus="MIC_20(3)" > <!--****** NUEVO ***********->
-					<span class="add-on"><i  data-date-icon="icon-calendar" onclick="MIC_20(3)"></i></span> 
-					</div> -->
-					<div class='input-group date' id='datetimepicker3'>
-          					<input type='text' class="form-control" id="IC3"/>
+                   	<div class='input-group date' id='datetimepicker3'>
+          					<input type='text' class="form-control" id="IC3" onfocus="limpiaCamposEnfocados(3)" data-toggle="tooltip" data-placement="right" title="Fecha invalida o menor a la de recibido" />
           					<span class="input-group-addon">
-            					<span class="glyphicon glyphicon-calendar" onclick="MIC_20(3)"></span>
+            					<span class="glyphicon glyphicon-calendar" ></span>
           					</span>
         				</div>
 					</td>
                 </tr>
                 <tr>
                     <td> <label class="text-danger">Destinatario </label></td>
-                    <td><div id="div4" class="form-group"><textarea id="IC4" type="text" class="form-control"  onfocus="MIC_20(4)"></textarea></div></td> 
+                    <td><div id="div4" class="form-group"><textarea id="IC4"data-toggle="tooltip" data-placement="right" title="Datos de destinatario imcompletos" type="text" class="form-control" onfocus="limpiaCamposEnfocados(4)"></textarea></div></td> 
                 </tr>
 				 <tr>
                     <td> <label class="text-danger">Copia </label></td>
-                    <td><div id="div5" class="form-group"><textarea id="IC5" type="text" class="form-control" onfocus="MIC_20(5)"></textarea></div></td> 
-                </tr>
+                    <td><div id="div5" class="form-group"><textarea id="IC5"data-toggle="tooltip" data-placement="right" title="Datos de copia imcompletos" type="text" class="form-control" onfocus="limpiaCamposEnfocados(5)"></textarea>
+					<label class="text-danger" style=""><input  type="checkbox" id="check_SinCopia" value="first_checkbox" onchange="checkCampoCopia()">Sin Copia</label></div></td>
+			   </tr>
 				 <tr>
                     <td> <label class="text-danger">Remitente </label></td>
-                    <td><div id="div6" class="form-group"><textarea type="text" class="form-control" id="IC6" data-toggle="tooltip" data-placement="right" title="Hooray!" onfocus="MIC_20(5)"></textarea></div></td>                </tr>
+                    <td><div id="div6" class="form-group"><textarea type="text" class="form-control" id="IC6"data-toggle="tooltip" data-placement="right" title="Datos de remitente imcompletos" onfocus="limpiaCamposEnfocados(6)"></textarea></div></td>               
+			     </tr>
                 <tr>
                     <td> <label class="text-danger">Asunto</label></td>
-                    <td><div id="div7"class="form-group"><textarea id="IC7" type="text" class="form-control"rows=4 cols=30 onfocus="MIC_20(7)"></textarea></input></div></td> <!--****** NUEVO ***********-->
+                    <td><div id="div7"class="form-group"><textarea id="IC7" data-toggle="tooltip" data-placement="right" title="Datos de asunto imcompletos"type="text" class="form-control"rows=4 cols=30 onfocus="limpiaCamposEnfocados(7)"></textarea></input></div></td> 
                 </tr>
 				<tr>
                     <td> <label class="text-danger">Recibido</label></td>
-                    <td><div id="div8"class="form-group"><input id="IC8" type="text" class="form-control" onfocus="MIC_20(8)" ng-model="usuario" disabled></input> <div></td> <!--****** NUEVO ***********-->
+                    <td><div id="div8"class="form-group"><input id="IC8" data-toggle="tooltip" data-placement="right" title="Datos de recibido imcompletos"type="text" class="form-control" onfocus="limpiaCamposEnfocados(8)" ng-model="usuario" disabled></input> </div></td> 
                 </tr>
 				<tr>
                     <td> <label class="text-danger">Estado</label></td>
-                    <td><div id="div9"class="form-group"><textarea type="text" class="form-control" id="IC9"  onfocus="MIC_20(9)"></textarea></div></td> <!--****** NUEVO ***********-->
+                    <td><div id="div9"class="form-group"><textarea type="text" class="form-control" id="IC9"  data-toggle="tooltip" data-placement="right" title="Datos de estado imcompletos"onfocus="limpiaCamposEnfocados(9)"></textarea></div></td> <!--****** NUEVO ***********-->
                 </tr>
                 <tr>
                     <td> <label class="text-danger">Observaciones</label></td>
-                    <td><div id="div10"class="form-group"><textarea type="text"class="form-control" id="IC10"  ></textarea></input></div></td> <!--****** NUEVO ***********-->
+                    <td><div id="div10"class="form-group"><textarea type="text"class="form-control" id="IC10" ></textarea></input></div></td> <!--****** NUEVO ***********-->
                 </tr>
                 <tr>
                     <td ><center><button type="button" class="btn btn-default"  ng-click ="guardarCorrespondencia()">Guardar</button>
 					</a></td>
-                    <td ><center><button type="button" class="btn btn-default" onclick="MIC_09()">Cancelar</button></td>
+                    <td ><center><button type="button" class="btn btn-default" onclick="botonCancelar()">Cancelar</button></td>
                 </tr>
 						</tbody>
 		           </table>  
         </form>  
-	   </div>
+		</div>
+	
 	   
-	   
+	    
 		<div class="col-md-2 form-group"><!--Genera el espacio entre componentes---->	 
 			<span class="text-danger"><h4>Alarma</h4></span>
                 <label class="text-danger">Fecha Aviso</label>
-                   <!-- <div id="datetimepicker5" class="input-append form-group"><input class="form-control"id="IC14" data-format="dd-MM-yyyy" type="text" onfocus="MIC_20(3)" > <!--****** NUEVO ***********->
-					<span class="add-on"><i  data-date-icon="icon-calendar" onclick="MIC_20(3)"></i></span> 
-					</div>
-					-->
+                  
 					<div class='input-group date' id='datetimepicker5'>
           					<input type='text' class="form-control" id="IC14"/>
           					<span class="input-group-addon">
-            					<span class="glyphicon glyphicon-calendar" onclick="MIC_20(3)"></span>
+            					<span class="glyphicon glyphicon-calendar" onclick="limpiaCamposEnfocados(3)"></span>
           					</span>
         				</div>
-				<label class="text-danger">Fecha limite</label>
-				<!--
-                   <div id="datetimepicker6" class="input-append form-group"><input class="form-control"id="IC13" data-format="dd-MM-yyyy" type="text" onfocus="MIC_20(3)"> <!--****** NUEVO ***********->
-					<span class="add-on"><i  data-date-icon="icon-calendar" onclick="MIC_20(3)"></i></span> 
-					</div>
-				-->
+				<label class="text-danger">Fecha límite</label>
+			
 				<div class='input-group date' id='datetimepicker6'>
           					<input type='text' class="form-control" id="IC13"/>
           					<span class="input-group-addon">
-            					<span class="glyphicon glyphicon-calendar" onclick="MIC_20(3)"></span>
+            					<span class="glyphicon glyphicon-calendar" onclick="limpiaCamposEnfocados(3)"></span>
           					</span>
         				</div>
-				<!--<button id="IC11" style="margin-top:15px"type="button" onclick="MIC_06()"class="btn btn-default"disabled>Enlace</button><!--</a>-->
+				
 
 				<label class="text-danger" style=""><input  type="checkbox" id="enlace_checkbox" value="enlace_checkbox">Con Enlace</label>
+				
+				<!-- Inicio Adjuntar -->
+				<div class="input-group">
+                <label class="input-group-btn">
+                    <span class="btn btn-danger">
+                        <img src="../../../../images/adjuntar.png" width="20" height="20" /> <input id ='adjun' onchange = "dato_Adjunto()" style="display: none;" accept=".pdf" type="file">
+                    </span>
+                </label>
+                <input id='input_adjunto' class="form-control" readonly="" type="text" style="width:150px" disabled>
+            </div>
+			<!-- Fin Adjuntar -->
+				
 		<div style="margin-top:60px"><label id="mensaje" class="text-danger"></label></div>
-		
-	
-		<input id = "adjun" type="file" name="adjunto" accept=".pdf" onchange="prueba(this.value)" > <!-- NUEVO -->
-		 <a id="hrefAdjunto" target="_blank" style = "display:none" title=>Ver Documento</a> <!-- NUEVO -->
-		<!-- <embed src="a.pdf"  width="250" height="375"> </embed> QUITAR --> 
-		
+
 		
 		 </div>
 	
@@ -279,22 +221,24 @@
 			
 			<div class="panel panel-danger"  style=" border-radius: 5px 5px 5px 5px;"><!---div alarmas-->
 			<center><span class="text-danger"><h4>Alarmas del día</h4></span>
-			<div> </div></center>	
-			<table class="table" >
+			</center>	
+			 <div  align="left" class="table table-bordered"  style="height: 250px;   overflow-y:auto;">
+
+			<table class="table" id="tabla_busqueda" >
+			<!--<table class="table" > -->
 			<thead> 
 			    <tr class="danger">
-				  <td> <td>
+				<td></td>
 			      <td>Nº Oficio</td>
 			      <td>Fecha de aviso</td>
-			      <td>Fecha de limite</td>
+			      <td>Fecha de límite</td>
 			    </tr>
-				  </thead>
-				</table>
-    <div class="table table-bordered"  style="height: 100px;   overflow-y:auto;">
-	<p align="left"><table class="table" id="tabla_busqueda" >
+				   </thead> 
+			<!--	</table> -- VER-->
+   
 		  <tbody>
 			<tr ng-repeat = "c in alarmas">
-			<!--ng-click="visto(c)"        <img src="img/check.ico" border="0" width="5">-->
+	
 		 
 					<td> <button   ng-click="visto(c)"  data-toggle="modal" data-target="#myModal"  >-</button> </td>
 					<td> {{c.tc_3}} </td>
@@ -309,7 +253,7 @@
 			</div> 
 		   </div>
 		
-		<!---div class="date hero-unit"  style="background-color:#60161E; margin-top:200px; color:white;" ><!-- div calendario-->
+	
           
             <center><div class="date panel panel-danger " id="calend" style="background-color:#60161E;  color:white;" ></center><!-- div calendario-->
 			   
@@ -342,16 +286,23 @@
 	   
 <script type="text/javascript">
 
-
-// document.addEventListener("DOMContentLoaded", MIC_08);
+let app = angular.module('app', []);
  
-$( document ).ready(function() {
+   app.controller('ControllerAngular', controllerAngular); 
+  
+ $( document ).ready(function() {
+
+//$("#menuDiv").load("/HTML/menu", function(){$("#ICM").addClass("activa");}); 
+
+  solicitarInformacionDeSesion("#ICM");
+  //$(".nav li").addClass("activa");
     // Solicita la informacion de la sesion si aun no existe en el storage
 	
-	
+	/*
 var u = localStorage.getItem('usuario');
-//if(!u)
+
 {
+  
 	 $.ajax({  
     	url: 'http://localhost:3000/sessionInfo',  
     	type: "GET",  
@@ -360,29 +311,12 @@ var u = localStorage.getItem('usuario');
     		
     		localStorage.setItem('usuario', JSON.stringify(req));
     		var name = req.nombre + ' '+ req.apellido;
-    		//$("#IC8").attr('value', name);
+    		
     		$("#IC8").val(name);
-    		//document.getElementById('IC8').value='holaaa';
-/*
-    		var encabezado = '<li ><a href=""style="color:#FFFFFF;">Ingreso Correspondencia</span> </a></li>'+
-        			'<li><a href="../HTML/Enlace de Documentos"style="color:#FFFFFF;">Enlace Documentos</a></li>'+
-        			'<li><a href="../HTML/Busqueda"style="color:#FFFFFF;">Búsqueda</a></li>'+
-					'<li><a href="#"style="color:#FFFFFF;">Reportes</a></li>'+
-					'<!--li><a href="#"style="color:#FFFFFF;">Escanear</a></li-->';
-					if(req.tipo === '1')
-					{
-						encabezado+= '<li><a href="../HTML/ingresaUser"style="color:#FFFFFF;">Agregar Usuario</a></li>'+
-						'<li><a href="../HTML/BusquedaUsuarios"style="color:#FFFFFF;">Buscar Usuarios</a></li>';
-					}					
-					encabezado+= '<li><a href="#" style="color:#FFFFFF;">Ayuda</a></li>'+
-					'<li><a href="../logout"style="color:#FFFFFF;">Cerrar sesion</a></li>';
 
-
-
-		$('#menu').html(encabezado);
-		*/
     		console.log(req);
       	console.log("success!");
+        
     	},  
     	complete: function() {  
       		console.log("complete!");  
@@ -391,134 +325,18 @@ var u = localStorage.getItem('usuario');
 	});
 }
 
-$("#menuDiv").load("/HTML/menu"); 
+*/
   
 
 });
 
-
-
-let app = angular.module('app', []);
-
-function prueba(valor){ // NUEVO ---- VER
-	console.log("Valor del elemento adjunto  "+document.getElementById("adjun").files[0].name ); // Da el nombre del archivo
-	console.log(valor);
-document.getElementById("hrefAdjunto").href = document.getElementById("adjun").files[0].name;
-$("#hrefAdjunto").show();
-}
-
-function MIC_22($scope)//ControllerAngular 
- {
-	$scope.alarmas = new Array();
-	$scope.updateAlarmas= c => $scope.alarmas = c;
-	$scope.init = _ => MIC_10($scope);	
-	$scope.visto = a => MIC_11(a, $scope);
-	$scope.guardarCorrespondencia =   _  => MIC_07($scope);
-	$scope.updateU = u => $scope.usuario = u;
-	$scope.usuario = "gaga";
-  }
-  
-   app.controller('ControllerAngular', MIC_22); 
-  function MIC_10($scope) {
-  
-	 fetch( 'http://localhost:3000/api/TA/ALL_FECHA', {  
-    method: 'POST', 
-    datatype:'json',
-    headers: {  
-      "Content-type": "application/x-www-form-urlencoded"  
-      } 
-      }
-	)	
-	.then(res => res.json())
-	.then(obj => $scope.$apply( _=>	$scope.updateAlarmas(obj.data)))
-	.catch(err => console.log('Request failed', err));
- }
  
- function MIC_11(a, $scope){
 
-$("#IC15").click(function(){
-    fetch( 'http://localhost:3000/api/TA/UD', {  
-    method: 'POST', 
-    datatype:'json',
-    headers: {  
-      "Content-type": "application/x-www-form-urlencoded"  
-      } ,
-    body: "TA_1="+ a.ta_1+ "&TA_2="+ a.ta_2+ "&TA_3="+a.ta_3+
-	"&TA_4="+ 1
-      }
-	  )
-  .then(function(response) {
-  return response.text().then(function(res) {
-     MIC_10($scope);
-    console.log("Resultado: "+res);
-  });
-})
-  .catch(function(error) {  
-   console.log('Request failed', error);  
-  });
-		});
-	
-	}
- 
- function MIC_20(n){//Limpia los campos cuando se enfocan
-  MIC_19();
-  //MIC_04(n);
- }
- 
- /*
-function MIC_08(){  //Toma la fecha del sistema y la refleja en el campo de la fecha de recibido
-	var f = new Date();
-	//$("#IC1").val(f.getDate() + "-" + (f.getMonth() +1) + "-" + f.getFullYear());
-	//$("#IC1")
-	//console.log($("#datetimepicker4").datetimepicker('getDate'));
-}*/
 
-function MIC_21(){ //Cambia el valor del campo referente al numero de oficio si la opcion SIN OFICIO esta marcada
-if($("#IC12").is(':checked')){
-	$("#IC2").val("SIN OFICIO");
-	$("#IC2").prop("disabled",true);	
-	}
-	else{
-	$("#IC2").val("");
-	$("#IC2").prop("disabled",false);
-	}
-}
 /**
 * Funciones de los calendarios de la pagina
-**//*
- $(document).ready(function () {  //Calendario que se muestra en la pagina
-                
-                $('.date').datepicker({
-                     
-                });
-            
-     });
-	 
-	   $(function() {     //Calendario de la fecha de recibido
-    $('#datetimepicker4').datetimepicker({
-      pickTime: false
-    });
-  });
+**/
 
-  $(function() {     //Calendario de la fecha de oficio
-    $('#datetimepicker3').datetimepicker({
-      pickTime: false
-    });
-  });
-  
-   $(function() { //Calendario de la fecha de aviso de la alarma
-    $('#datetimepicker5').datetimepicker({
-      pickTime: false
-    });
-  });
-  
-  $(function() { //Calendario de la fecha de limite de la alarma
-    $('#datetimepicker6').datetimepicker({
-      pickTime: false
-    });
-  });
-  
-  */
 
 $(document).ready(function () {  //Calendario que se muestra en la pagina
                 
@@ -548,502 +366,6 @@ $('#datetimepicker4').datetimepicker({
     	format: 'DD-MM-YYYY', 
    		showClear:true
     });
-
-
- function MIC_01($scope){ //Recoge los datos de los campos y realiza el fecth de inserción 
-							//a la base de datos
-	var d=new Date();
-	let b3 = d.getFullYear() + '-'+d.getMonth() + '-' + d.getDate();
-	let c3 = $('#IC2').val().toUpperCase(); 
-	let fecha=$('#IC3').val();
-	let d3 = fecha.substring(10, 6)+'-'+fecha.substring(5, 3)+'-'+fecha.substring(2, 0);
-	let e3 = $('#IC4').val().toUpperCase();
-	let f3 = $('#IC5').val().toUpperCase();
-	let g3 = $('#IC6').val().toUpperCase();
-	let h3 = $('#IC7').val().toUpperCase();
-	let i3 = '1'; // cambiar solo lo puse por que si no mamaron al ingresar
-	let j3 = $('#IC9').val().toUpperCase();
-    let k3 = $('#IC10').val().toUpperCase();
-    let adj = document.getElementById("adjun").files[0];//$('#adjun').prop('files');
-    console.log(adj);
- fetch( 'http://localhost:3000/api/TC/I', {  
-    method: 'POST', 
-    datatype:'json',
-    headers: {  
-      "Content-type": "application/x-www-form-urlencoded",
-
-      } ,
-    body: "TC_2="+ b3+ "&TC_3="+c3+
-	"&TC_4="+ d3 + "&TC_5="+ e3 +"&TC_6="+ f3 + 
-	"&TC_7="+ g3 + "&TC_8="+ h3 +"&TC_9="+ i3+"&TC_10="+ j3+ "&TC_11="+ k3
-      }
-	  )
-  .then(function(response) {
-
-		return response.text().then(function(res) {
-				console.log("Resultado: "+res);
-					if(res.indexOf("error")==-1){
-						$("#mensaje").text("Acción realizada con exito");
-							MIC_13($scope); 
-							console.log($("#enlace_checkbox").is(':checked'));
-							if($("#enlace_checkbox").is(':checked'))
-							{
-								MIC_06();
-							}
-
-							 var formData  = new FormData();		
-							 formData.append('arc', adj);
-							fetch('http://localhost:3000/upload', {
-    						method: 'POST',
-    						body: formData
-  });
-					}
-					else
-						$("#mensaje").text("Fallo al realizar la acción"); 
-				});
-	})
-  .catch(function(error) {  
-     console.log('Request failed', error);  
-  });
-  
-}
-	
-<!--valida todos los campos--->
-function MIC_02(){	 //Valida los campos 
-	IC1 = true;
-	IC2 = true;
-	IC3 = true;
-	IC4	= true;
-	IC5 = true;
-	IC6 = true;
-	IC7 = true;
-	IC8 = true;
-	IC9 = true;
-	IC10 = true;
-	
-	if($("#IC1").val().length == 0){
-		MIC_23(1);
-		IC1 = false;
-	}
-	else{
-	MIC_04(1);
-	}
-	if($("#IC2").val().length == 0){
-		MIC_23(2);		
-		IC2 = false;
-	}
-	else{
-		MIC_04(2);
-	}
-	
-	if($("#IC3").val().length == 0){
-		MIC_23(3);
-		IC3 = false;
-	}
-	else{
-		MIC_04(3);
-		}
-	if($("#IC4").val().length == 0){
-		MIC_23(4);
-		IC4 = false;
-	}
-	else{
-		MIC_04(4);
-	}
-	if($("#IC5").val().length == 0){
-		MIC_23(5); 
-		IC5 = false;
-	}
-	else{
-		MIC_04(5);
-	}
-	if($("#IC6").val().length == 0){
-		MIC_23(6);
-		IC6 = false;
-	}
-	else{
-		MIC_04(6);
-	}
-	if($("#IC7").val().length == 0){
-		MIC_23(7);
-		IC7 = false;
-	}
-	else{
-		MIC_04(7);
-	}
-	if($("#IC8").val().length == 0){
-		MIC_23(8);
-		IC8 = false;
-	}
-	else{
-		MIC_04(8);
-	}
-	if($("#IC9").val().length == 0){
-		MIC_23(9);
-		IC9 = false;
-	}
-	else{
-		MIC_04(9);
-	}
-	if( $("#IC13").val().length != 0 ||   $("#IC14").val().length != 0  ){ // En caso de programar la alarma
-	  var aux=MIC_18();
-		return (IC1 && IC2  && IC3  && IC4 	&& IC5 && IC6 && IC7 && IC8 && IC9 && aux &&MIC_05());
-		}
-		else{
-		return (IC1 && IC2  && IC3  && IC4 	&& IC5 && IC6 && IC7 && IC8 && IC9 && MIC_05());
-		}
-}
-<!--limpia todos los campos--->
-function MIC_09(){//Metodo de cancelar
-	MIC_03();
-	MIC_19();
-	MIC_14();//sube la pagina
-}
-function MIC_03(){//Limpia el valor de los campos de entrada
-	for(let i=1;i<10;i++){
-	MIC_04(i);
-}
-	$("#IC2").val("");
-	$("#IC3").val("");
-	$("#IC4").val("");
-	$("#IC5").val("");
-	$("#IC6").val("");
-	$("#IC7").val("");
-	$("#IC9").val("");
-	$("#IC10").val("");
-	$("#IC13").val("");
-	$("#IC14").val("");
-	$("#IC12").prop("checked",false);
-	$("#IC2").prop("checked",false);
-	$( "#enlace_checkbox" ).prop( "checked", false );
-	}
-function MIC_19(){//Limpia el div con el id=mensaje
-	$("#mensaje").text("");
-}
-function MIC_04(op){//Realiza un cambio de clase a los campos de entrada del formulario de la clase has-error a from-group
-	switch(op){
-	case 1: $("#datetimepicker4").attr('class','input-append  form-group') ;
-			$("#IC1").attr('title','') ;
-			break;
-	case 2: $("#div2").attr('class','input-append  form-group') ;
-			$("#IC2").attr('title','') ;
-			break;
-	case 3: $("#datetimepicker3").attr('class','input-append  form-group') ;
-			$("#IC3").attr('title','') ;
-			break;
-	case 4: $("#div4").attr('class','input-append  form-group') ;
-			$("#IC4").attr('title','') ;
-			break;
-	case 5: $("#div5").attr('class','input-append  form-group') ;
-			$("#IC5").attr('title','') ;
-			break;
-	case 6: $("#div6").attr('class','input-append  form-group') ;
-			$("#IC6").attr('title','') ;
-			break;
-	case 7: $("#div7").attr('class','input-append  form-group') ;
-			$("#IC7").attr('title','') ;
-			break;
-	case 8: $("#div8").attr('class','input-append  form-group') ;
-			$("#IC8").attr('title','') ;
-			break;
-	case 9: $("#div9").attr('class','input-append  form-group') ;
-			$("#IC9").attr('title','') ;
-			break;
-	
-	
-	default: break;
-	}
-}	
-function MIC_05(){//Realiza el cambio de clase de los campon de fecha del formulario a la clase has-error
-
-	
-	
-	var d=new Date();
-	
-	let fecha1 = d.getFullYear() + '-'+ ((d.getMonth()<10)?'0':'') +(d.getMonth()+1) + '-' + ((d.getDate()<10)?'0':'') + d.getDate();
-	let fecha2=$("#IC3").val();
-	//La fecha debe de llevar el formato YYYY/MM/dd
-	
-	let r=fecha2.substring(10, 6)+'-'+fecha2.substring(5, 3)+'-'+fecha2.substring(2, 0);
-	
-	if(fecha1>=r){
-		$("#datetimepicker4").attr('class','input-append  form-group') ;
-		$("#IC1").attr('title','') ;
-		$("#datetimepicker3").attr('class','input-append  form-group') ;
-		$("#IC3").attr('title','') ;
-	return true;}
-	else{
-		$("#datetimepicker4").attr('class','input-append form-group has-error') ;
-		$("#IC1").attr('title','La fecha de oficio no debe ser mayor que la fecha de recibido') ;
-		$("#datetimepicker3").attr('class','input-append form-group has-error') ;
-		$("#IC3").attr('title','La fecha de oficio no debe ser mayor que la fecha de recibido') ;
-		return false;}
-}
-function MIC_06(){//Realiza la consulta del id de la ultima correspondencia ingresada
-					//Guarda el dato en el localstorage y cambia a la pagina a la de enlace
-		fetch( 'http://localhost:3000/api/TC/BC', {  
-			method: 'GET', 
-			datatype:'json',
-			headers: {  
-				"Content-type": "application/x-www-form-urlencoded"  
-			} 
-		})
-		.then(res =>res.json())
-		.then(obj =>{
-			localStorage.clear();
-			let y = obj.data[0].tc_1; // TC_1
-			let correspondencia = new Correspondencia(obj.data[0].tc_3,y,true); // // Aqui necesitamos los datos de la correspondencia de la BD
-			localStorage.setItem("user",JSON.stringify(correspondencia));
-		})
-		.then( _ => window.location.href='http://localhost:3000/HTML/Enlace%20de%20Documentos')
-		.catch(function(error) {  
-			console.log('Request failed', error);  
-		});
- 	}
-
-function MIC_07($scope){//Realiza la consulta si la correspondencia a ingresar ya existe
-	if(MIC_02() == false){
-	     $("#mensaje").text("Campos requeridos");
-		 MIC_14();
-	     return;
-		}
-	let parametro = $('#IC2').val().toUpperCase(); 
-	fetch( 'http://localhost:3000/api/TC/BO', {  
-    method: 'POST', 
-    datatype:'json',
-    headers: {  
-      "Content-type": "application/x-www-form-urlencoded"  
-      } ,
-    body: "TC_3="+ parametro
-      }
-	)	 
-	.then(res => res.json())
-     .then(obj => {
-		if(obj.data[0]==null)
-			MIC_01($scope);
-		else{ 
-			if(obj.data[0].tc_3=="SIN OFICIO")
-			MIC_01($scope);
-			else
-			{
-			MIC_14();
-			$("#mensaje").text("Fallo al realizar la acción, la correspondencia a ingresar ya existe"); 
-			}
-	  
-		}
-   })
-	.then( _ => MIC_14())
-	.catch(err => {
-		console.log('Request failed', err)});
-		
-	}
-	
-	//--- NUEVO --//
-	function MIC_12(){//Oculta Muestra el div con id=div_dias  
-		if($("#op").val() == "Pd"){ // En caso de programar la alarma
-			$("#div_dias").show();  
-		}
-	
-		else{
-			$("#div_dias").hide();
-		}
-	
-	}
-	
-	function MIC_13($scope){//Programa una alarma de una correspondencia 
-	var aux = MIC_17();
-	aux.then(data=> {
-		let a5 = data;  // Cambiar eso falta
-		let b5 = $('#IC13').val().toUpperCase(); 
-		let c5 = $('#IC14').val().toUpperCase();
-		console.log('Fecha limte '+b5);  // QUITAR
-			console.log('Fecha aviso '+c5);
-		let d5 = 0;
-	    if( !$("#enlace_checkbox").is(':checked'))
-		{
-			MIC_03();
-		}
-		if(b5!= "" && c5!=""){ 
-		fetch( 'http://localhost:3000/api/TA/I', {  
-			method: 'POST', 
-			datatype:'json',
-			headers: {  
-				"Content-type": "application/x-www-form-urlencoded"  
-			} ,
-			body: "TA_1="+ a5+ "&TA_2="+ b5+ "&TA_3="+c5+"&TA_4="+ d5 
-		}
-	  )
-		.then(function(response) {
-			return response.text().then(function(res) {
-				MIC_10($scope);
-					console.log("Resultado enlace: "+res);
-                 $("#op > option[value=Nd]").attr("selected",true);
-				  $("#input_dias").val("");
-				 $("#div_dias").hide();
-			});
-		})
-		.catch(function(error) {  
-			console.log('Request failed', error);  
-		});
-		}
-	});
-	}
-	
-	function MIC_14() {
-	if (document.body.scrollTop != 0 || document.documentElement.scrollTop != 0) {
-	window.scrollBy(0, -15);
-	arriba = setTimeout('MIC_14()', 10);
-	}
-	else clearTimeout(arriba);
-	}
-	
-	function MIC_17(){  //Devuelve el ultimo codigo de la ultima correspondencia
-	return Promise.resolve(fetch( 'http://localhost:3000/api/TC/BC', {  
-    method: 'GET', 
-    datatype:'json',
-    headers: {  
-      "Content-type": "application/x-www-form-urlencoded"  
-      } 
-      }
-	  )
-   .then(res =>res.json())
-   .then(obj =>obj.data[0].tc_1)
-  
-  .catch(function(error) {  
-   console.log('Request failed', error);  
-  })
-   	);
-	}
-	
-function MIC_18(){
-let A1=true;
-let  A2=true;
-let A3= true;
-let  A4 = true;
-let A5 = true;
-let A6= true;
-
-let fechaAviso=$("#IC14").val();//Toma el valor del campo de la fecha
-let fechaLimite=$("#IC13").val();
-var d=new Date();
-let fecha1 = d.getFullYear() + '-'+((d.getMonth()+1<10)?'0':'') +(d.getMonth()+1) + '-' + ((d.getDate()<10)?'0':'') + d.getDate();
-
-if(fechaAviso.length == 0 || fechaLimite.length == 0){
-	
-	if( fechaAviso.length == 0){
-		$("#datetimepicker5").attr('class','input-append form-group has-error') ;
-		$("#IC14").attr('title','Campo Obligatorio') ;
-		A1=false;
-	}
-	else{
-	$("#datetimepicker5").attr('class','input-append  form-group') ;
-		$("#IC14").attr('title','') ;
-	}
-	
-	  if(fechaLimite.length == 0){
-		$("#datetimepicker6").attr('class','input-append form-group has-error') ;
-			$("#IC13").attr('title','Campo Obligatorio') ;
-		A2=false;
-	}
-	else{
-	$("#datetimepicker6").attr('class','input-append  form-group') ;
-		$("#IC13").attr('title','') ;
-	}
-	
-	}
-	
-	
-	
-	
-	if( fechaAviso.length != 0  && fechaLimite.length != 0  ){
-	
-	let fA=fechaAviso.substring(10, 6)+'-'+fechaAviso.substring(5, 3)+'-'+fechaAviso.substring(2, 0);
-	let fL=fechaLimite.substring(10, 6)+'-'+fechaLimite.substring(5, 3)+'-'+fechaLimite.substring(2, 0);
-
-	if(fA< fecha1){
-	 $("#datetimepicker5").attr('class','input-append form-group has-error') ;
-	$("#IC14").attr('title','La fecha de aviso de la alarma debe ser mayor a la fecha Actual') ;
-	A3=false;
-	
-	}
-	else{
-		$("#datetimepicker5").attr('class','input-append  form-group') ;
-		$("#IC14").attr('title','') ;
-	if(fA>fL){
-	$("#datetimepicker5").attr('class','input-append form-group has-error') ;
-	$("#IC14").attr('title','La fecha de Aviso de la alarma no puede ser mayor a la fecha limite de respuesta del documento') ;
-	A4=false;
-	
-	}
-	else{
-	$("#datetimepicker5").attr('class','input-append  form-group') ;
-	$("#IC14").attr('title','') ;
-	}
-	}
-	
-    if(fL< fecha1){
-	$("#datetimepicker6").attr('class','input-append  form-group has-error') ;
-	$("#IC13").attr('title','La fecha Limite de respuesta del documento debe ser mayor a la fecha Actual') ;
-	A5=false;
-	
-	}
-	else{
-	$("#datetimepicker6").attr('class','input-append  form-group');
-	$("#IC13").attr('title','') ;
-	if(fA>fL){
-	$("#datetimepicker5").attr('class','input-append  form-group has-error') ;
-	$("#IC13").attr('title','La fecha de aviso de la alarma no puede ser mayor a la fecha limite de respuesta del documento') ;
-	A6=false;
-	
-	}
-	else{
-	$("#datetimepicker5").attr('class','input-append  form-group') ;
-	$("#IC14").attr('title','') ;
-	}
-	}
-	
-	
-	}
-
-	return  ( A1 && A2 && A3  && A4 && A5 && A6 ); 
-}
-
-function MIC_23(op){//Realiza un cambio de clase a los campos de entrada del formulario de la from-group a la clase has-error
-	switch(op){
-	case 1: $("#datetimepicker4").attr('class','input-append form-group has-error') ;
-			$("#IC1").attr('title','Campo Obligatorio') ;
-			break;
-	case 2: $("#div2").attr('class','form-group has-error') ;
-			$("#IC2").attr('title','Campo Obligatorio') ;
-			break;
-	case 3: $("#datetimepicker3").attr('class','input-append form-group has-error') ;
-			$("#IC3").attr('title','Campo Obligatorio') ;
-			break;
-	case 4: $("#div4").attr('class','form-group has-error') ;
-			$("#IC4").attr('title','Campo Obligatorio') ;
-			break;
-	case 5: $("#div5").attr('class','form-group has-error') ;
-			$("#IC5").attr('title','Campo Obligatorio') ;
-			break;
-	case 6: $("#div6").attr('class','form-group has-error') ;
-			$("#IC6").attr('title','Campo Obligatorio') ;
-			break;
-	case 7: $("#div7").attr('class','form-group has-error') ;
-			$("#IC7").attr('title','Campo Obligatorio') ;
-			break;
-	case 8: $("#div8").attr('class','form-group has-error') ;
-			$("#IC8").attr('title','Campo Obligatorio') ;
-			break;
-	case 9: $("#div9").attr('class','form-group has-error') ;
-			$("#IC9").attr('title','Campo Obligatorio') ;
-			break;
-	
-	
-	default: break;
-	}
-}
-    
-    
 	
 </script>
     </body>

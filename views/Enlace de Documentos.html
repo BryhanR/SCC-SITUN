@@ -2,74 +2,28 @@
 <html ng-app = "app">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="shortcut icon" href="../images/ico.ico" type="image/ico" />
         <title>Enlace de Documentos</title>
-  <!--
-  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
-   
-  <link rel="stylesheet" href="\stylesheets\bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <script src="\javascripts\bootstrap.min.js"></script>
-  <link href="\stylesheets\bootstrap-datetimepicker.min.css" rel="stylesheet">
-  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> 
-    <script type="text/javascript" src="\javascripts\bootstrap-datetimepicker.min.js"></script>
-	-->
-
-	<script src="\..\javascripts\new\jquery-1.12.2.js"></script>
-<script src="\..\javascripts\new\moment-2.15.1.js"></script>
-
-<script src="\..\javascripts\new\bootstrap-3-3-7.min.js"></script>
-
-<link rel="stylesheet" href="\..\javascripts\new\bootstrap-3-3-7.min.css">
-
-
-<script src="\..\javascripts\new\bootstrap-datetimepicker-4.7.14.js"></script>
-
-<link rel="stylesheet" href="\..\javascripts\new\bootstrap-datetimepicker-4.7.14.css">
+        <script src="\..\javascripts\script_menu.js"></script>
+			<script type="text/javascript" src="\..\javascripts\script_EnlaceCorrespondencia.js"></script>
+	<script src="\..\javascripts\jquery-1.12.2.js"></script>
+	<script src="\..\javascripts\moment-2.15.1.js"></script>
+	<script src="\..\javascripts\bootstrap-3-3-7.min.js"></script>
+	<link rel="stylesheet" href="\..\stylesheets\bootstrap-3-3-7.min.css">
+	<script src="\..\javascripts\bootstrap-datetimepicker-4.7.14.js"></script>
+	<link rel="stylesheet" href="\..\stylesheets\bootstrap-datetimepicker-4.7.14.css">
     <!-- Angular--> 
 	<script src="\javascripts\angular.min.js"></script>
 	
     </head>
-    <body ng-app ng-controller = "ControllerAngular" data-ng-init = "init()">
+	<body ng-app ng-controller = "ControllerAngular" data-ng-init = "init()">
 
     <div id="menuDiv"></div>
 	  
-	   <!--
-	<nav class="navbar navbar-default" style="background-color:#60161E;">
-	<div class="container-fluid">
-    <!-- REsponsive ->
-    <div class="navbar-header" >
-    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-    </button>
-   <IMG SRC="../images/situn2.png" WIDTH=90 HEIGHT=90  class="nav navbar-nav navbar-right">
-    </div>
-
-    <!-- Menu ->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav" style="margin-top:7px;">
-        <li ><a href="../HTML/Ingreso de Correspondencia"style="color:#FFFFFF;">Ingreso Correspondencia</span> </a></li>
-        <li><a href="#"style="color:#FFFFFF;">Enlace Documentos</a></li>
-        <li><a href="../HTML/Busqueda"style="color:#FFFFFF;">Búsqueda</a></li>
-		<li><a href="#"style="color:#FFFFFF;">Reportes</a></li>
-		<!--li><a href="#"style="color:#FFFFFF;">Escanear</a></li->
-		<li><a href="../HTML/ingresaUser"style="color:#FFFFFF;">Agregar Usuario</a></li>
-		<li><a href="../HTML/BusquedaUsuarios"style="color:#FFFFFF;">Buscar Usuarios</a></li>
-		<li><a href="#" style="color:#FFFFFF;">Ayuda</a></li>
-		<li><a href="../logout"style="color:#FFFFFF;">Cerrar sesion</a></li>
-
-      </ul>
-    
-       		<IMG SRC="../images/situn2.png" WIDTH=90 HEIGHT=90  class="nav navbar-nav navbar-right">
-    </div><!-- /.navbar-collapse ->
-  </div><!-- /.container-fluid ->
-</nav>  -->
-
-	<!-- Trigger the modal with a button -->
+		<!-- Trigger the modal with a button -->
 <!-- Modal -->
-<div id="myAyuda" class="modal fade" role="dialog" style="margin: 0 auto; width:675px; height:375px;">
-  <div class="well">
+	<div id="myAyuda" class="modal fade" role="dialog" style="margin: 0 auto; width:675px; height:375px;">
+	<div class="well">
    
     <!-- Modal content-->
     <div class="modal-content">
@@ -89,7 +43,7 @@
 					se ingrese en el campo. Se debe hacer este proceso para llenar cada uno de los 
 					campos. Cuando los dos campos esten llenos se debe presionar le botón Realizar Enlace.<p>		
 				</tbody> 
-	       </right>
+	    </right>
 		
       </div>
       <div class="modal-footer">
@@ -130,7 +84,7 @@
 								</div>
 								<div class="col-xs-12">
 									<input type="text" class = "form-control input-sm" id = "E1"  ng-model="doc1.tc_3" ng-Keypress = "buscar('E1', $event)" ng-click="setCurrent(1)"></input>
-									<input type ="button" class = "btn" id = "E3" value = "editar" ng-click="editar('E1')"></input>
+									<button class = "btn" id = "E3" value = "editar" ng-click="editar('E1')"><img src="../../../../images/quitar.png" width="20" height="20" /></button>
 								</div>
 							</div>
  
@@ -138,20 +92,18 @@
 								<label class="col-sm-8 control-label  text-danger">Documento 2</label>
 								<div class="col-sm-12">
 									<input type="text" class="form-control" id="E2"  ng-model = "doc2.tc_3" ng-Keypress = "buscar('E2', $event)" ng-click="setCurrent(2)">
-									<input type ="button" class = "btn" id = "E4" value = "editar" ng-click="editar('E2')"></input>
+									<button  class = "btn" id = "E4" ng-click="editar('E2')"> <img src="../../../../images/quitar.png" width="20" height="20" /></button>
 								</div>
 							</div>
+							
+							<center><div >
+							<button type = "button" class="btn btn-default" id ="guardar"  ng-click = "enlazar()">Realizar Enlace</button>
+						
+							<button type = "button" class="btn btn-default" id="cancelar"  onclick = "limpiaCampos()" >Cancelar</button>
+						</div></center>
 						</form>
           
-						<div class="col-sm-5">
-							<input type = "button" class="btn btn-default" id ="guardar" value = "Realizar Enlace" ng-click = "enlazar()">
-						</div>
-						<div class="col-sm-3">
-      
-						</div>
-						<div class="col-sm-2">
-							<input type = "button" class="btn btn-default" id="cancelar" value = "Cancelar" onclick = "ME_07()" >
-						</div>	
+							
 						<div style="margin-top:100px; margin-left:60px; "><label id="mensaje" class="text-danger"></label></div>
 					</div>	
 						
@@ -159,6 +111,7 @@
 						
 				<td></td>
 				<td>
+				<div  style="max-height: 550px; overflow-y:auto;">
 					<table class = "table table-bordered" id = "busqueda_enlace">
 					
 							<tr class="danger">
@@ -179,6 +132,7 @@
 								</tr>
 							</tbody>
 					</table>
+					</div>
 				</td>
 			</tr>
         </table>
@@ -188,11 +142,13 @@
 		
 		
 <script type="text/javascript">
- document.addEventListener("DOMContentLoaded", ME_01);
+ document.addEventListener("DOMContentLoaded", recuperarCorrespondenciaLS);
 
 $(document).ready(function() {
     // Solicita la informacion de la sesion si aun no existe en el storage
-	$("#menuDiv").load("/HTML/menu");
+	//$("#menuDiv").load("/HTML/menu", function(){$("#EDM").addClass("activa");}); 
+	
+solicitarInformacionDeSesion("#EDM");
 		$("#ayuda").click(
 	function(){
 		$("#miAyuda").show();
@@ -200,195 +156,15 @@ $(document).ready(function() {
 
 });
 
-
  
-  let obj;
-  let banderita;
-function ME_01(){  //metodo para recuperar el id de la correspondencia guardado en el local storage
-
-	$("#E3").hide();
-	$("#E4").hide();
-
-	 obj  = JSON.parse(localStorage.getItem("user"));
-	 console.log("Objeto cargado de local.." + localStorage.getItem("user"));
-	  banderita = obj.bandera;
-	  if ( banderita==true){
-	  $("#E1").val(obj.numOficio);
-	  $("#E1").prop("disabled", true );
-	  
-	  }
-	  localStorage.clear();
-}
-
-
-
-
-
+  
 	var app = angular.module('app', []);
 
 
-function ME_02($scope)//ControllerAngular
- {
-	$scope.correspondencias = new Array();
-	$scope.doc1 = {'tc_3': ""};
-	$scope.doc2;
-	$scope.current;
-	$scope.criterio = "Asunto";	
-	$scope.init = _ => console.log("Se ha iniciado el sistema...");
-	$scope.setCurrent = c => $scope.current = c;
-	$scope.updateDoc = a => ME_03(a, $scope);//$scope.current == 1? ($scope.doc1 = a, deshabilitar('E1')): ($scope.doc2 = a, deshabilitar('E2'));
-	
-	$scope.updateCorrespondencias = c => $scope.correspondencias = c;
-	$scope.buscar = (a,b) => ME_05(a,$scope,b);
-	$scope.enlazar = _ => ME_06($scope);
-	
-	$scope.editar = d => ME_04(d, $scope);//(d == "E1") ? ($scope.doc1 = null, habilitar(d)) : ($scope.doc2 = null, habilitar(d));
-		
-  }
-  
-   app.controller('ControllerAngular', ME_02);
+   app.controller('ControllerAngular', controllerAngular);
    
    
-	function ME_03(a, $scope)//Modifica los campos E1 o E2
-	{
-		$scope.current == 1? ($scope.doc1 =  a, $("#E3").show() ): ($scope.doc2 = a , $("#E4").show());
-		let id = ($scope.current == 1)? "E1" : "E2";
-		$("#" + id ).attr("value",a.tc_3);
-		$("#" + id ).prop('disabled', true);
-	}
-	
-	function ME_04(d, $scope)//Edita el documento
-	{
-		(d == "E1") ? ($scope.doc1 = null, $("#E3").hide()) : ($scope.doc2 = null, $("#E4").hide());
-		$("#"+d).prop('disabled', false);
-		$("#mensaje").html('');
-	}
-  
-/*
- *	Realiza la busqueda en la base de datos de los elementos que coinciden
- *	parcialmente con el criterio, ya sea para el documento 1 o el 2 
- */
-	function ME_05(id, $scope,h) //Metodo de buscar
-	{
-		let keycode = (h.which)?h.which : h.keyCode;
-		
-		let h3 = $("#" + id ).val();
-		let criterio = ((keycode != 8)?(h3 + String.fromCharCode(keycode)) : h3.substr(0,h3.length-1)).toUpperCase();
-
-	
-		fetch( 'http://localhost:3000/api/TC/' + ME_08($scope), {  
-			method: 'POST', 
-			datatype:'json',
-			headers: {  
-				"Content-type": "application/x-www-form-urlencoded"  
-			} ,
-			body: ME_09($scope) + "="+ criterio
-		})	 
-		.then(res => res.json())
-		.then(obj =>  
-				$scope.$apply( _=>
-					$scope.updateCorrespondencias(obj.data)) 
-		)  
-		.catch(err => console.log('Request failed', err));
-	}
-	
-	
-	function ME_08($scope)// Toma el tipo de busqueda y regresa el sufijo correspondiente a la dirección del servidor
-{
-	let op = $scope.criterio;
-	console.log("El tipo de busqueda es por: |" + op + "|");
-	switch(op)
-	{
-		case 'Nº oficio': // Oficio
-			return 'BO';
-		case 'Destinatorio': // Destinatario
-			return 'BD';
-		case 'Remitente': // Remitente
-			return 'BR';
-		case 'Asunto': // Asunto
-			return 'BA';
-	}
-}  
-function ME_09($scope) //Toma el criterio de busqueda y devuelve la columna que se debe buscar en la BD
-{
-	let op = $scope.criterio;
-	switch(op)
-	{
-		case 'Nº oficio': // Oficio
-			return 'TC_3';
-		case 'Destinatorio': // Destinatario
-			return 'TC_5';
-		case 'Remitente': // Remitente
-			return 'TC_7';
-		case 'Asunto': // Asunto
-			return 'TC_8';
-	}
-	
-} 
-	
-	
- 
- /*
-  *		Realiza el enlace de los documentos seleccionados
-  */
-  
-	function ME_06($scope){//Crea el enlace entre documentos
-	  let a4;
-	  let b4;
-	  if(banderita == true){
-		a4 = obj.id;
-		b4 = $scope.doc2.tc_1;
-		localStorage.clear();
-		}
-		else{
-		a4= $scope.doc1.tc_1;
-		b4 = $scope.doc2.tc_1;}
-		
-		console.log(a4 , b4);
-		if(a4==b4){
-		$("#mensaje").html('Fallo al realizar la acción, el documento a enlazar es el mismo');
-		
-		}
-		else{
-		fetch( 'http://localhost:3000/api/TE/I', {  
-			method: 'POST', 
-			datatype:'json',
-			headers: {  
-				"Content-type": "application/x-www-form-urlencoded"  
-			} ,
-			body: "TE_1="+ a4 + "&TE_2="+ b4
-		}
-		)
-		.then(function(response) {
-			return response.text().then(function(res) {
-					if(res.indexOf("error")==-1){
-						console.log(res);
-						$("#mensaje").html('Acción realizada con exito');
-						setTimeout(ME_07, 2000);
-					}
-					else
-						$("#mensaje").html('Fallo al realizar la acción');
-			});
-		})
-		.catch(function(error) {  
-			console.log('Request failed', error);  
-		});
-		}
-  }
-  
-  function ME_07(){//Limpia los campos , Metodo Cancelar
-	$("#E1").val("");
-	$("#E2").val("");
-	$("#E1").prop("disabled",false);
-	$("#E2").prop("disabled",false);
-	$("#mensaje").html('');
-  
-	if(banderita == true)
-	{
-		localStorage.clear();
-		window.location.href ='http://localhost:3000/HTML/Ingreso%20de%20Correspondencia'
-	}
-  }
+   
   
   
     

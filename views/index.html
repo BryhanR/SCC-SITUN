@@ -2,10 +2,13 @@
 
 <html>
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- 
+<link rel="shortcut icon" href="../images/ico.ico" type="image/ico" />
+ <script src="\..\javascripts\script_menu.js"></script>
+	<script src="\..\javascripts\jquery-1.12.2.js"></script>
+	<script src="\..\javascripts\jquery.validate.min.js"></script>
+	<script src="\..\javascripts\bootstrap-3-3-7.min.js"></script>
+	<link rel="stylesheet" href="\..\stylesheets\bootstrap-3-3-7.min.css">
+	
 </head>
 <body background="../images/situn4.png">
 	<div class="container">
@@ -25,14 +28,14 @@
         <% if (error) { %> 
           <div class="alert alert-danger" id= "mensaje"><STRONG>Error: </STRONG> <%= mensaje %></div>
         <% } %>
-          <form role="form" action="http://localhost:3000/login" method="POST">
+          <form role="form" id="formu"  method="POST">
             <div class="form-group">
-              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
-              <input type="text" class="form-control" name = "username" id="usrname" placeholder="Ingrese su usuario">
+              <label for="usrname" id="hty"><span class="glyphicon glyphicon-user"></span> Username</label>
+              <input type="text" class="form-control" name = "username" id="usrname" placeholder="Ingrese su usuario" autofocus="">
             </div>
             <div class="form-group">
               <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-              <input type="password" class="form-control" name = "password" id="psw" placeholder="Ingrese su contraseña">
+              <input type="password" class="form-control" name = "password" id="psw" placeholder="Ingrese su contraseña" focus>
             </div>
               <button type="submit" class="btn btn-success" id = "login"><span class="glyphicon glyphicon-off"></span> Login</button>
 			  <button type="submit" class="btn btn-danger  pull-right" ><span class="glyphicon glyphicon-remove"></span> Cancel</button>
@@ -51,24 +54,43 @@
 </div>
  
 <script>
-$(document).ready(function(){    
-        //$("#myModal").modal();  
-        
+$(document).ready(function(){     
+ $("input:text:visible:first").focus();
         $('#myModal').modal({ backdrop: 'static', keyboard: false });
-
-
-        <% if (error) { %> 
-
-          
+        <% if (error) { %>           
           $('#usrname').val('<%= usr  %>');
          $('#psw').val('<%= pass  %>');
         <% } %>
-       /* if(error)
-        {
-          $('#usrname').value('hay error');
-        }
-        */
+
+        $('#formu').validate({
+          debug: true,
+          rules: {
+            username: {
+              required: true
+            },
+            password: {
+              required: true
+            }
+          },
+          messages: {
+            username: {
+              required: "Se requiere nombre de usuario"
+            },
+            password: {
+              required: "Se requiere contraseña"
+            }
+          },
+          submitHandler: function(form) {
+             var $form = $(form);
+             form.action='http://' + ip + ':' + puerto + '/login';
+              form.submit();
+          
+            }
+        });
 });
+
+
+
 
 </script>
 

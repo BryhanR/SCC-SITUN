@@ -27,7 +27,7 @@ module.exports = function(passport){
 		.then(function(data){
 			if(data.length === 0) // si no existe el usuario
 			{
-				req.retry = true;
+				req.session.retry = true;
 				return done(null,false, email);
 			}
 			else
@@ -47,7 +47,7 @@ module.exports = function(passport){
 				}
 				else
 				{
-					req.retry = true;
+					req.session.retry = true;
 					return done(null,false, email);
 				}
 				console.log(usr);
