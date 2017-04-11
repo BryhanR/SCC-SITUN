@@ -247,7 +247,7 @@ function limpiarValores(){ //Limpia los valores de los campos de entrada
  function busquedaUsuario($scope)  //Metodo de Busqueda
  {
  console.log("Retornado de url > " + tipoBusqueda($scope));
-	let h3 = document.getElementById('buscar').value;}
+	let h3 = document.getElementById('buscar').value;
 
 	fetch( 'http://' + ip + ':'+ puerto +'/api/TP/'+tipoBusqueda($scope), {  
     method: 'POST', 
