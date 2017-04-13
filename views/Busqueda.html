@@ -270,6 +270,7 @@
 			</tbody>
 		</table> 
 		</center>
+
       </div>
       <div class="modal-footer">
 	    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -278,6 +279,36 @@
   </div>
   </div>
 </div>
+
+
+	   <!---Cuerpo-->
+	   <body background="../images/situn4.png">
+	
+	   <div class="col-md-8" style="margin-left:20px">
+         <span class="text-danger"><h2>Tipo de Busqueda</h2></span>
+ 
+           <form class="navbar-form navbar-left">         
+        
+            <div   class="form-group ">
+				<select class="form-control input-sm" id="opBusqueda" ng-model = "criterio">
+					<option value="Nº oficio">Nº Oficio
+					<option value="Destinatorio">Destinatorio                                            
+					<option value="Remitente">Remitente                                          
+					<option value="Asunto">Asunto                                      
+				</select> 
+               
+          
+				<input type="text" class="form45" id="buscar"  >
+				<input type = "button" class="btn btn-default" id="buscar" value = "Buscar" ng-click="buscar()" >
+				<input type = "button"class="btn btn-default" id ="cancelar" value = "Cancelar"  ng-click="clear()" >
+            
+			</div>
+         <p align="left"><p align="left"><div class="table table-bordered" >
+	<p align="left"><table class="table" id="tabla_busqueda">
+	
+		
+
+		<thead> 
 
 <!-- popup alarma-->
 		   	    <!-- Modal -->
@@ -297,6 +328,7 @@
 	  <center>
 		<table class="table">
 			<thead>
+
 			<tr class="danger">
 				<td>
 					 <label class="text-danger">Fecha Aviso</label>
@@ -323,6 +355,14 @@
 				<td>
 				</td>
 			</tr>
+
+		</tbody>        
+	</table>
+               </div></p>
+      </form>
+           
+	   </div>
+
 			</thead>	
 		</table>
 		</center>
@@ -447,6 +487,41 @@ app.controller('ControllerAngular', controllerAngular);
     });
   
  
+
+function MB_03($scope)// Toma el tipo de busqueda y regresa el sufijo correspondiente a la dirección del servidor
+{
+	let op = $scope.criterio;
+	console.log("El tipo de busqueda es por: |" + op + "|");
+	switch(op)
+	{
+		case 'Nº oficio': // Oficio
+			return 'BO';
+		case 'Destinatorio': // Destinatario
+			return 'BD';
+		case 'Remitente': // Remitente
+			return 'BR';
+		case 'Asunto': // Asunto
+			return 'BA';
+	}
+}  
+
+function MB_04($scope) //Toma el criterio de busqueda y devuelve la columna que se debe buscar en la BD
+{
+	let op = $scope.criterio;
+	switch(op)
+	{
+		case 'Nº oficio': // Oficio
+			return 'TC_3';
+		case 'Destinatorio': // Destinatario
+			return 'TC_5';
+		case 'Remitente': // Remitente
+			return 'TC_7';
+		case 'Asunto': // Asunto
+			return 'TC_8';
+	}
+	
+} 
+
    $('#datetimepicker7').datetimepicker({
         format: 'DD-MM-YYYY', 
    		showClear:true
@@ -456,6 +531,7 @@ app.controller('ControllerAngular', controllerAngular);
         format: 'DD-MM-YYYY', 
    		showClear:true
     });
+
 
 
 </script>

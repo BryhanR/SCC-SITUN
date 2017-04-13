@@ -1,26 +1,26 @@
 
-function MR_01($scope)//ControllerAngular controller de todos los metodos
+function  controllerAngular($scope)//ControllerAngular controller de todos los metodos
  {
 
 	$scope.correspondencias = new Array();
 	$scope.updateCorrespondencias = c => $scope.correspondencias = c;
-	$scope.buscar = _ => MR_02($scope);
-	$scope.clear = _ => MR_03($scope);
-	$scope.generarReporte = _ =>MR_04($scope);
+	$scope.buscar = _ => buscarCorrespondencias($scope);
+	$scope.clear = _ => limpiarPantalla($scope);
+	$scope.generarReporte = _ => crearReporte($scope);
 	
   }
   
   
- function MR_02($scope)  //Metodo de Busqueda , substrae las fechas y las manda como rango de fecha
+ function buscarCorrespondencias($scope)  //Metodo de Busqueda , substrae las fechas y las manda como rango de fecha
  {
    
 	let fecha1 = $('#f1').val();
 	let fecha2 = $('#f2').val();
 	let usuario = JSON.parse(localStorage.getItem('usuario'));
 	let fecha = new Date();
-	if(MR_05() == true )  {
+	if(validarEspaciosVacios() == true )  {
 	
-	if(MR_06() == true )  {
+	if(validarRangoDeFechas() == true )  {
 	
 
 	$("#tabla_encabezado tr").detach(); //Limpia el encabezado
@@ -29,6 +29,7 @@ function MR_01($scope)//ControllerAngular controller de todos los metodos
 	
     let rowCount = table.rows.length;
     let row = table.insertRow(rowCount);
+
 	
 	let cell1 = row.insertCell(0);
 	let element1 = document.createTextNode("Desde :");
@@ -115,7 +116,7 @@ function MR_01($scope)//ControllerAngular controller de todos los metodos
  
  
  
-function MR_03($scope){// limpia 
+function limpiarPantalla($scope){// limpia 
     $('#f1').val("");
 	$('#f2').val("");
 	$scope.correspondencias = new Array();
@@ -126,9 +127,29 @@ function MR_03($scope){// limpia
 } 
 	
 
-function MR_04($scope){ //Metodo que genera el reporte
+function crearReporte($scope){ //Metodo que genera el reporte
 
-if(MR_05()){
+if(validarEspaciosVacios()){
+
+
+
+let doc = new jsPDF('l', 'pt', 'a4');
+
+doc.text("Reporte de correspondencia SCC-SITUN ", 260, 30); //Escribe el texto de encabezado
+
+let res = doc.autoTableHtmlToJson(document.getElementById('tabla_encabezado')); //Recupera la primer tabla
+doc.autoTable(res.columns, res.data); //Lo envia al PDF
+
+let res2 = doc.autoTableHtmlToJson(document.getElementById('tabla_busqueda')); //Recupera la segunda tabla
+doc.autoTable(res2.columns, res2.data, { //Lo envia al PDF
+    startY: doc.autoTableEndPosY() + 80 
+});
+doc.save('ReporteCorrespondencia.pdf');	  //Guarda el PDF
+ 
+ 
+ 
+//Deje este código en caso de que se necesite cambiar, después se puede quitar
+ /*  Para usar este codigo hay que cambiar el script de abajo en Reportes.HTML  por jspdf2 y comentar el codigo de arriba
 let pdf = new jsPDF('l', 'pt', 'letter');
 let source =  $('#HTMLtoPDF')[0] ;
 pdf.setFontSize(15);
@@ -158,13 +179,17 @@ pdf.fromHTML(
         pdf.save('ReporteCorrespondencia.pdf');
       }
   )		
+ */
   
-  }
+  
+  
+  } 
+  
 }
 
 
 
-function MR_05(){  //Metodo para validar fechas vacias
+function validarEspaciosVacios(){  //Metodo para validar fechas vacias
 let A1=true;
 let A2=true;
 let A3=true;
@@ -256,7 +281,7 @@ if(fecha2.length < 1 ){
 
 		
 	
-function MR_06(){ //Metodo para validar rango de fechas
+function validarRangoDeFechas(){ //Metodo para validar rango de fechas
 
 fetch( 'http://' + ip + ':'+ puerto +'/api/TC/FR', {   //Envia la ruta del servidor (rutas.js) y el sufijo Correspondiente
     method: 'POST',  
