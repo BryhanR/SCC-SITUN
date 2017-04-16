@@ -96,7 +96,12 @@
                     <td> <label class="text-danger">Segundo Apellido</label> </td>
                    <td><div id="div3" class="form-group"><textarea id="IU3" type="text" class="form-control" onfocus="cambioClase1(3)"></textarea></div></td> 
                 </tr>
-				
+
+				<tr>
+                    <td> <label class="text-danger">Correo</label> </td>
+                   <td><div id="div8" class="form-group"><textarea id="IU8" type="email" class="form-control"  onfocus="cambioClase1(8)"></textarea></div></td> 
+                </tr>
+                
                 <tr>
 				    <td><label class="text-danger" for="exampleInputPassword1" >Contraseña</label> </td> 
                     <td><div id="div4" class="form-group"><input type="password" class="form-control" id="IU4" onfocus="cambioClase1(4)" disabled></input></div> </td>  
@@ -177,7 +182,7 @@
 
 <!--cierra eliminacion-->
 
-	   <!---Cuerpo--->
+	   <!---Cuerpo-->
 	   <body background="../../../../images/situn4.png">
 	   
 
@@ -219,6 +224,7 @@
 			<td>Nombre</td>
 			<td>Primer apellido</td>
 			<td>Segundo apellido</td>
+			<td>Correo</td>
 			<td>Edición</td> 
 			<td>Eliminar</td> <!--// VER -->
 			</tr>
@@ -229,6 +235,7 @@
 					<td style="max-width: 287px;"> {{c.tp_1 }} </td>
 					<td style="max-width: 287px;"> {{c.tp_2 }} </td>
 					<td style="max-width: 287px;"> {{c.tp_3 }} </td>
+					<td style="max-width: 287px;"> {{c.tp_5 }} </td>
 					<td style="max-width: 75px;"> 
 						<button   type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" ng-click="obtenerUsuario(c)"><img src="../../../../images/editar-usuario.png" width="20" height="20" /></button>
 					</td>

@@ -4,6 +4,7 @@
   TP_2 varchar(15),
   TP_3 varchar(15),
   TP_4 varchar (15),
+  TP_5 varchar(30),
   CONSTRAINT pkTP PRIMARY KEY (TP_4)
 );
 
@@ -56,7 +57,7 @@ CONSTRAINT pkTA PRIMARY KEY (TA_1, TA_2)
 );
 
 
-insert into TP values ('Alexandra','Aguilar','Najera','304780037');
+insert into TP values ('Alexandra','Aguilar','Najera','304780037','algunCorreo@gmail.com');
 
 insert into TU values ('304780037','123',1);
 

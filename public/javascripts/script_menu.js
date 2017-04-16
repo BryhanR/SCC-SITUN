@@ -134,6 +134,7 @@ function cargarDatosUsuarioP(data){
      $("#IPU3").val(data.tp_3);
 	 $("#IPU0").val(data.tu_1);
 	 $("#IPU4").val(data.tu_2);
+	 $("#IPU8").val(data.tp_5);
 	 if(data.tu_3 == 1)
 		$("#administrador_checkboxP").prop("checked", "checked");
 	 
@@ -177,6 +178,7 @@ function cargarDatosUsuarioP(data){
 	let b = $('#IPU1').val().toUpperCase();
 	let c = $('#IPU2').val().toUpperCase(); 
 	let d = $('#IPU3').val().toUpperCase(); 
+	let e = $('#IPU8').val(); 
  
    return fetch( 'http://' + ip +':'+ puerto + '/api/TP/UD', {  
     method: 'POST', 
@@ -185,7 +187,7 @@ function cargarDatosUsuarioP(data){
       "Content-type": "application/x-www-form-urlencoded"  
       } ,
     body: "TP_1="+ b+ "&TP_2="+c+
-	"&TP_3="+ d + "&TP_4="+ a 
+	"&TP_3="+ d + "&TP_4="+ a + "&TP_5="+ e 
       }
 	  );
   /*.then(function(response) {
