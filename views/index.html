@@ -39,13 +39,44 @@
             </div>
               <button type="submit" class="btn btn-success" id = "login"><span class="glyphicon glyphicon-off"></span> Login</button>
 			  <button type="submit" class="btn btn-danger  pull-right" ><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-
+        <p><a onclick="OlvidarContrasenia()">¿Olvidó su contraseña?</a></p>
           </form>
         </div>
         <div class="modal-footer">
 			<center>
 				<h3><IMG SRC="../images/situn2.png" WIDTH=90 HEIGHT=50></h3>
 			</center>
+        </div>
+      </div>
+      
+    </div>
+  </div> 
+</div>
+
+<div class="container">
+  <!-- Modal -->
+  <div  class="modal fade"  id="myModalPass" role="dialog" >
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" >
+        <div class="modal-header" style="padding:35px 50px;">
+         
+          <h4><span class="glyphicon glyphicon-lock"></span> Recuperacion de Contraseña</h4>
+        </div>
+        <div class="modal-body" style="padding:40px 50px;">
+            <div class="form-group">
+              <label for="usrnamer" id="hty"><span class="glyphicon glyphicon-user"></span> Username</label>
+              <input type="text" class="form-control" name = "usernamer" id="usrnamer" placeholder="Ingrese su usuario" autofocus="">
+            </div>
+            <button  class="btn btn-success" onclick="recuperarPassword()"><span class="glyphicon glyphicon-off"></span> Recuperar</button>
+            <button  onclick="cerrar()" class="btn btn-danger  pull-right" ><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+         
+        </div>
+        <div class="modal-footer">
+      <center>
+        <h3><IMG SRC="../images/situn2.png" WIDTH=90 HEIGHT=50></h3>
+      </center>
         </div>
       </div>
       
@@ -87,10 +118,44 @@ $(document).ready(function(){
           
             }
         });
+
+
+         $("recPass").submit(function(){
+          return false;
+        });
 });
 
 
+function OlvidarContrasenia()
+{
+  $('#myModalPass').modal({ backdrop: 'static', keyboard: false });
+}
 
+function recuperarPassword()
+{
+
+  usr = $("#usrnamer").val();
+  
+  fetch( 'http://' + ip + ':'+ puerto +'/recoverPass', {  
+    method: 'POST', 
+    mode: 'no-cors',
+    datatype:'json',
+    headers: {  
+      "Content-type": "application/x-www-form-urlencoded"  
+      },
+      body: "usuario=" +usr
+      }
+  ) 
+  .then(res => console.log(res))
+  .catch(err => console.log('Request failed', err));
+  alert("Se ha recuperado");
+}
+
+
+function cerrar()
+{
+  $('#myModalPass').modal("hide");
+}
 
 </script>
 

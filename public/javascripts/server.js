@@ -23,8 +23,8 @@ var db = pgp(connectionString);
 //-------- CREACION DE UN NUEVO DATO DE UNA TABLA ----------
 //-------- CREACION DE UN NUEVO TP EN LA TABLA ----------
 function createTP(req, res, next) {
-  db.none('insert into TP(TP_1, TP_2, TP_3, TP_4)' +
-      'values(${TP_1}, ${TP_2}, ${TP_3}, ${TP_4})',
+  db.none('insert into TP(TP_1, TP_2, TP_3, TP_4, TP_5)' +
+      'values(${TP_1}, ${TP_2}, ${TP_3}, ${TP_4}, ${TP_5})',
     req.body)
     .then(function () {
       res.status(200)
@@ -454,7 +454,7 @@ function getALLTA1(req, res, next) {
 //-------- ACTUALIZACIONES  DE UNA TABLA ----------
 //-------- ACTUALIZACION DE LA TABLA TP ----------
 function updateTP(req, res, next) {
-  db.none('update TP set TP_1=${TP_1}, TP_2=${TP_2}, TP_3=${TP_3} where TP_4=${TP_4}',
+  db.none('update TP set TP_1=${TP_1}, TP_2=${TP_2}, TP_3=${TP_3}, TP_5=${TP_5} where TP_4=${TP_4}',
     req.body)
     .then(function () {
       res.status(200)
@@ -668,7 +668,7 @@ function getLastTC(req, res, next) {
 
 function getTPTU(req, res, next) {
 console.log('Entro '+req.TU_1);
-  db.any('select TP_1, TP_2, TP_3, TU_1, TU_2, TU_3 from TP, TU '+
+  db.any('select TP_1, TP_2, TP_3, TP_5, TU_1, TU_2, TU_3 from TP, TU '+
      'where TU_1 = ${TU_1} and TP_4 = TU_1', req.body)
     .then(function (data) {
       res.status(200)
@@ -686,7 +686,7 @@ console.log('Entro '+req.TU_1);
 
 function getUSR(usr) {
 console.log('Entro '+usr.TU_1);
-  return db.any('select TP_1, TP_2, TP_3, TU_1, TU_2, TU_3 from TP, TU '+
+  return db.any('select TP_1, TP_2, TP_3, TP_5, TU_1, TU_2, TU_3 from TP, TU '+
      'where TU_1 = ${TU_1} and TP_4 = TU_1', usr)
     /*.then(function (data) {
       console.log("data recogida en server...");
@@ -698,6 +698,12 @@ console.log('Entro '+usr.TU_1);
     });*/
 }
 
+function resetPassword(usr)
+{
+  usr.TU_2 = 'newPass';
+
+  return db.none('update TU set TU_2 = ${TU_2} where TU_1=${TU_1}',usr);
+}
 
 
 
@@ -741,5 +747,6 @@ module.exports = {
   updateTA: updateTA,
   updateTAFechas:updateTAFechas,
   getAllEnlaces: getAllEnlaces,
-  getUSR: getUSR
+  getUSR: getUSR,
+  resetPassword: resetPassword
 };

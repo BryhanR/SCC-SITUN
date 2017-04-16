@@ -10,6 +10,8 @@ var passport = require('passport');
 
 var formidable = require('formidable');
 
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
@@ -51,6 +53,54 @@ router.get('/logout',function(req, res){
 	req.logout();
     req.session.destroy();
     res.redirect('/');
+});
+
+
+router.post('/recoverPass',function(req, res){
+
+	console.log("Solicitud de recuperacion de passpord para " + req.body.usuario);
+
+	let nodemailer = require('nodemailer');
+
+	// create reusable transporter object using the default SMTP transport
+	let transporter = nodemailer.createTransport('SMTP',{
+    service: 'gmail',
+    host: "smtp.gmail.com",
+    auth: {
+        user: 'monkeyvar16@gmail.com',
+        pass: 'Rodriguez115420325'
+    }
+	});
+
+	// setup email data with unicode symbols
+	
+
+	let usr = {TU_1:req.body.usuario};
+	db.resetPassword(usr)
+	.then(_ => db.getUSR(usr).then( function(data){
+			usr = data[0];
+			let mailOptions = {
+    			from: '"SCC-SITUN" <monkeyvar16@gmail.com>', // sender address
+    			to: usr.tp_5, // list of receivers
+    			subject: 'Reset contraseña para SCC-SITUN', // Subject line
+    			text: 'Hello world ?' // plain text body
+			};
+
+			console.log(usr);
+
+			console.log(mailOptions);
+	} 
+		));
+
+/*
+	// send mail with defined transport object
+	transporter.sendMail(mailOptions, (error, info) => {
+    	if (error) {
+        	return console.log(error);
+    	}
+    	console.log('Message %s sent: %s', info.messageId, info.response);
+	});
+*/
 });
 
 router.get('/sessionInfo',function(req, res, next){
