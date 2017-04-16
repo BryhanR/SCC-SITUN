@@ -700,13 +700,19 @@ console.log('Entro '+usr.TU_1);
 
 function resetPassword(usr)
 {
-  usr.TU_2 = 'newPass';
+  usr.TU_2 = generar(6);
 
   return db.none('update TU set TU_2 = ${TU_2} where TU_1=${TU_1}',usr);
 }
 
 
-
+function generar(longitud)
+{
+  var caracteres = "abcdefghijkmnpqrtuvwxyzABCDEFGHIJKLMNPQRTUVWXYZ2346789";
+  var contraseña = "";
+  for (i=0; i<longitud; i++) contraseña += caracteres.charAt(Math.floor(Math.random()*caracteres.length));
+  return contraseña;
+}
 
 //------ EXPORTACIONES DE LOS MODULOS ---------
 module.exports = {

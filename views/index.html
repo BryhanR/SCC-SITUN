@@ -148,7 +148,8 @@ function recuperarPassword()
   ) 
   .then(res => console.log(res))
   .catch(err => console.log('Request failed', err));
-  alert("Se ha recuperado");
+  alert("Se ha enviado a su correo una nueva contraseña temporal");
+  cerrar();
 }
 
 
