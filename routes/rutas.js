@@ -59,49 +59,40 @@ router.get('/logout',function(req, res){
 router.post('/recoverPass',function(req, res){
 
 	console.log("Solicitud de recuperacion de passpord para " + req.body.usuario);
-
 	let nodemailer = require('nodemailer');
-
 	// create reusable transporter object using the default SMTP transport
 	let transporter = nodemailer.createTransport('SMTP',{
     service: 'gmail',
     host: "smtp.gmail.com",
     auth: {
-        user: 'monkeyvar16@gmail.com',
-        pass: 'Rodriguez115420325'
+        user: 'scc.situn@gmail.com', // scc.situn
+        pass: 'situnHeredia'	//situnHeredia
     }
 	});
-
 	// setup email data with unicode symbols
-	
-
 	let usr = {TU_1:req.body.usuario};
 	db.resetPassword(usr)
 	.then(_ => db.getUSR(usr).then( function(data){
 			usr = data[0];
 			let mailOptions = {
-    			from: '"SCC-SITUN" <monkeyvar16@gmail.com>', // sender address
+    			from: '"SCC-SITUN" <scc.situn@gmail.com>', // sender address
     			to: usr.tp_5, // list of receivers
-    			subject: 'Reset contraseña para SCC-SITUN', // Subject line
-    			text: 'Hello world ?' // plain text body
+    			subject: 'Nueva contraseña para SCC-SITUN', // Subject line
+    			text: "Su contraseña para el Sistema de Control de Correspondencia del SITUN  ha sido modificada. "+
+    			"Ahora su nueva contraseña es "+usr.tu_2 // plain text body
 			};
-
-			console.log(usr);
-
-			console.log(mailOptions);
+			// send mail with defined transport object
+			transporter.sendMail(mailOptions, (error, info) => {
+    			if (error) {
+        			return console.log(error);
+    			}
+    			console.log('Se ha enviado correo con nueva clave');
+				});
 	} 
-		));
-
-/*
-	// send mail with defined transport object
-	transporter.sendMail(mailOptions, (error, info) => {
-    	if (error) {
-        	return console.log(error);
-    	}
-    	console.log('Message %s sent: %s', info.messageId, info.response);
-	});
-*/
+	));
 });
+
+
 
 router.get('/sessionInfo',function(req, res, next){
 	console.log("Solicitud de info de sesson... ");
