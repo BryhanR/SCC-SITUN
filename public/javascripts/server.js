@@ -171,7 +171,9 @@ function getAllTC(req, res, next) {
 
 //------ RETORNO DE UN TP ESPECIFICO ---------------------
 function getSingleTP(req, res, next) {
-  db.any('select * from TP where TP_4 = ${TP_4}', req.body)
+	var low = req.body.TP_4.toLowerCase();
+	req.body.TP_4 = '%' + low + '%';
+  db.any('select * from TP where TP_4  LIKE ${TP_4}', req.body) // //-/**-**--**-*--*-*-*-
     .then(function (data) {
       console.log("Solucitud de una persona..");
       res.status(200)
