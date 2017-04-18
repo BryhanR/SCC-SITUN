@@ -171,6 +171,23 @@ function getAllTC(req, res, next) {
 
 //------ RETORNO DE UN TP ESPECIFICO ---------------------
 function getSingleTP(req, res, next) {
+  db.any('select * from TP where TP_4 = ${TP_4}', req.body)
+    .then(function (data) {
+      console.log("Solucitud de una persona..");
+      res.status(200)
+        .json({
+          status: 'success',
+          data: data,
+          message: 'Retrieved ONE TP'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
+//------ RETORNO DE TP por coincidencia ---------------------
+function getALLTP4(req, res, next) {
 	var low = req.body.TP_4.toLowerCase();
 	req.body.TP_4 = '%' + low + '%';
   db.any('select * from TP where TP_4  LIKE ${TP_4}', req.body) // //-/**-**--**-*--*-*-*-
@@ -723,6 +740,7 @@ module.exports = {
   getALLTP1: getALLTP1,
   getALLTP2: getALLTP2,
   getALLTP3: getALLTP3,
+  getALLTP4: getALLTP4,
   getAllTU: getAllTU,
   getAllTC: getAllTC,
   getSingleTP: getSingleTP,

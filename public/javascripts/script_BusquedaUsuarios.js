@@ -282,7 +282,7 @@ function tipoBusqueda($scope)// Toma el tipo de busqueda y regresa el sufijo cor
 	switch(op)
 	{
 		case 'identificacion': // Identicacion
-			return 'B';
+			return 'BA3';
 		case 'nombre': // Nombre
 			return 'BN';
 		case 'apellido1': // Primer apellido
