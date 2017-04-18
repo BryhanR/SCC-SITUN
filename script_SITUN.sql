@@ -57,9 +57,9 @@ CONSTRAINT pkTA PRIMARY KEY (TA_1, TA_2)
 );
 
 
-insert into TP values ('Alexandra','Aguilar','Najera','304780037','algunCorreo@gmail.com');
+insert into TP values ('Grettel','Castro','Cruz','111','algunCorreo@gmail.com');
 
-insert into TU values ('304780037','123',1);
+insert into TU values ('111','123',1);
 
 
 
