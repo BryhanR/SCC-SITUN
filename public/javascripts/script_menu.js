@@ -1,5 +1,5 @@
 
-var ip = '172.17.30.37';
+var ip = 'localhost';
 var puerto = 3000;
 
 
