@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html ng-app = "app">
     <head>
+	
+	
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="shortcut icon" href="../images/ico.ico" type="image/ico" />
         <title>Búsqueda</title>
-        <script src="\..\javascripts\script_menu.js"></script>
+       <script src="\..\javascripts\script_menu.js"></script>
 		<script type="text/javascript" src="\..\javascripts\script_BusquedaCorrespondencia.js"></script>
 	<script src="\..\javascripts\jquery-1.12.2.js"></script>
 	<script src="\..\javascripts\moment-2.15.1.js"></script>
-	<script src="\..\javascripts\bootstrap-3-3-7.min.js"></script>
+	<script src="\..\javascripts\bootstrap-3-3-7.min.js"></script><script type="text/javascript" src="\..\javascripts\BootstrapMenu.js"></script>
+	<script type="text/javascript" src="\..\javascripts\BootstrapMenu.min.js"></script>
 	<link rel="stylesheet" href="\..\stylesheets\bootstrap-3-3-7.min.css">
 	<script src="\..\javascripts\bootstrap-datetimepicker-4.7.14.js"></script>
 	<link rel="stylesheet" href="\..\stylesheets\bootstrap-datetimepicker-4.7.14.css">
 	<!-- Angular--> 
 	<script src="\..\javascripts\angular.min.js"></script>
+	
+	
+
+    <script type="text/javascript" src="\..\javascripts\jquery.ui.position.js"></script>
+
+    <script type="text/javascript" src=".\..\javascripts\jquery.contextMenu.js"></script>
+	 
+	
+	
 </head>
 
 <body ng-app ng-controller = "ControllerAngular">
@@ -130,12 +142,16 @@
 						
 					</td>
 					<td style="max-width:5.8%;"> 
-						<!-- Trigger the modal with a button -->
+						<!-- Trigger the modal with a button
+<!-- TERMINAR	-->		
+						
+					
 						<button type="button" class="btn btn-danger" data-toggle="modal"  ng-click="Alarma(c)"><img src="../../../../images/alarma.png" width="20" height="20" /></button>
 					</td>
 					<td style="max-width:5.8%;">
-						<center><a ng-href="http://localhost:3000/Adjunto/{{c.tc_12}}" target="_blank" ng-class="c.tc_12.length==0?'disabled':''"><img src="../../../../images/documento.png" width="32" height="32" /></a>	</center><!-- TERMINAR	-->		
-										
+					
+					<center><button id="demo2LeftBtn" data-toggle="modal" data-target="#myModal5" target="_blank" ng-click="AsignaUrl(c)"><img src="../../../../images/documento.png" width="32" height="32" /></button>	</center>
+									
 					</td>
 			</tr>
 		</tbody>        
@@ -346,6 +362,72 @@
   </div>
   </div>
 	<!-- fin del popup Alarma-->   
+	
+	
+	<div ></div>
+	   
+<div id="myModal5" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+	 <div class="modal-content">
+      <div class="modal-header">		
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		<center>
+			<h4>Archivo Adjunto </h4>	
+		</center>
+	  </div>
+      
+	   <div id="divAjuste2" class="modal-body" >   
+	  <center>
+		 <table class="table">
+			<thead>
+			<tr class="danger">
+				<td>
+					 <label class="text-danger">Ver Archivo Adjunto</label>
+				</td>
+					<td>
+					
+					
+					<a ng-href="{{url}}" class="btn btn-default" target="_blank"  >Abrir Documento</a>
+				</td>
+			</tr>
+			<tr class="danger">
+				<td>
+					 <label class="text-danger">Editar Archivo Adjunto</label>
+					 
+					<td> <div class="input-group">
+                <label class="input-group-btn">
+                    <span class="btn btn-danger">
+                        <img src="../../../../images/adjuntar.png" width="20" height="20" /> <input id ='adjun' onchange = "dato_Adjunto()" style="display: none;" accept=".pdf" type="file">
+                    </span>
+                </label>
+                <input id='input_adjunto' class="form-control" readonly="" type="text" style="width:150px" disabled>
+            </div>
+				
+				
+				
+			<!-- Fin Adjuntar -->
+				</td>
+        			
+				
+			</tr>
+			</thead>
+			
+		</table>
+		</center>
+      </div>
+      <div class="modal-footer">
+	  <center>
+		<button id = "btnGda" type="button" class="btn btn-default"   >Guardar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </center>
+	  </div>
+    </div>
+  </div>
+  </div>
+	<!-- fin del popup Alarma-->   
+	
+	
 <script type="text/javascript">
 
 $(document).ready(function() {// Solicita la informacion de la sesion si aun no existe en el storage
@@ -355,7 +437,11 @@ $(document).ready(function() {// Solicita la informacion de la sesion si aun no 
 
 	$("#ayuda").click(
 	function(){$("#miAyuda").show();});
-});
+	
+
+  
+      });
+
 
 let app = angular.module('app', []);
 app.controller('ControllerAngular', controllerAngular); 
@@ -434,6 +520,28 @@ function MB_04($scope) //Toma el criterio de busqueda y devuelve la columna que 
         format: 'DD-MM-YYYY', 
    		showClear:true
     });
+/*
+var menu1 = new BootstrapMenu('#demo2LeftBtn',{
+  menuEvent: 'click', // default value, can be omitted
+  menuSource: 'element',
+  menuPosition: 'belowLeft', // default value, can be omitted
+  actions:[{
+      name: 'Ver',
+      onClick: function() {
+       // toastr.info("'Action' clicked!");
+      }
+    }, {
+      name: 'Editar',
+      onClick: function() {document.location.href="#myModal2";
+	  $("<a href='#myModal2'></a>").click(); 
+	   //window.open('#myModal12');
+	  console.log("e'#myModal12'ntro");
+       // toastr.info("'Another action' clicked!");
+      }
+    }]
+});
+*/
+
 
 
 

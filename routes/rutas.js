@@ -179,6 +179,7 @@ router.post('/api/TA/I', db.createTA);  // Insertando en TA
 router.post('/api/TP/UD', db.updateTP); // Actualizar TP especifico
 router.post('/api/TU/UD', db.updateTU); // Actualizar TU especifico
 router.post('/api/TC/UD', db.updateTC); // Actualizar TC especifico
+router.post('/api/TC/UDA', db.updateTCAdj); // Actualizar TC Adjunto
 router.post('/api/TE/UD', db.updateTE); // Actualizar TE especifico
 router.post('/api/TA/UD', db.updateTA); // Actualizar TA especifico
 router.post('/api/TA/UDF', db.updateTAFechas); // Actualizar TA especifico solo fechas

@@ -14,7 +14,7 @@ var options = {
 var pgp = require('pg-promise')(options);
 
 //------ CONEXION A LA BASE DE DATOS ------------------
-var connectionString = "pg://postgres:admin123@localhost:5432/BD_SITUN"; // CAMBIAR POR CLAVE DEL POSTGRES DE USTEDES
+var connectionString = "pg://postgres:root@localhost:5432/BD_SITUN"; // CAMBIAR POR CLAVE DEL POSTGRES DE USTEDES
 var db = pgp(connectionString);
 
 
@@ -523,6 +523,22 @@ function updateTC(req, res, next) {
       return next(err);
     });
 }
+//-----Actualizar adjunto
+function updateTCAdj(req, res, next) {
+	req.body.TC_1 = parseInt(req.body.TC_1);
+  db.none('update TC set TC_12=${TC_12} where TC_1=${TC_1}',
+    req.body)
+    .then(function () {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'Updated TC Adjunto'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
 
 //-------- ACTUALIZACION DE LA TABLA TE ----------
 function updateTE(req, res, next) {
@@ -768,6 +784,7 @@ module.exports = {
   updateTP: updateTP,
   updateTU: updateTU,
   updateTC: updateTC,
+  updateTCAdj: updateTCAdj,
   updateTE: updateTE,
   getLastTC: getLastTC,
   updateTA: updateTA,
