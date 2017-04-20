@@ -186,6 +186,25 @@ function getSingleTP(req, res, next) {
     });
 }
 
+//------ RETORNO DE TP por coincidencia ---------------------
+function getALLTP4(req, res, next) {
+	var low = req.body.TP_4.toLowerCase();
+	req.body.TP_4 = '%' + low + '%';
+  db.any('select * from TP where TP_4  LIKE ${TP_4}', req.body) // //-/**-**--**-*--*-*-*-
+    .then(function (data) {
+      console.log("Solucitud de una persona..");
+      res.status(200)
+        .json({
+          status: 'success',
+          data: data,
+          message: 'Retrieved ONE TP'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
 //------ RETORNO DE UN TU ESPECIFICO ---------------------
 function getSingleTU(req, res, next) {
   db.one('select * from TU where TU_1 = ${TU_1}', req.body)
@@ -504,6 +523,22 @@ function updateTC(req, res, next) {
       return next(err);
     });
 }
+//-----Actualizar adjunto
+function updateTCAdj(req, res, next) {
+	req.body.TC_1 = parseInt(req.body.TC_1);
+  db.none('update TC set TC_12=${TC_12} where TC_1=${TC_1}',
+    req.body)
+    .then(function () {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'Updated TC Adjunto'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
 
 //-------- ACTUALIZACION DE LA TABLA TE ----------
 function updateTE(req, res, next) {
@@ -721,6 +756,7 @@ module.exports = {
   getALLTP1: getALLTP1,
   getALLTP2: getALLTP2,
   getALLTP3: getALLTP3,
+  getALLTP4: getALLTP4,
   getAllTU: getAllTU,
   getAllTC: getAllTC,
   getSingleTP: getSingleTP,
@@ -748,6 +784,7 @@ module.exports = {
   updateTP: updateTP,
   updateTU: updateTU,
   updateTC: updateTC,
+  updateTCAdj: updateTCAdj,
   updateTE: updateTE,
   getLastTC: getLastTC,
   updateTA: updateTA,

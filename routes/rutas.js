@@ -154,7 +154,8 @@ router.post('/api/TP/B', db.getSingleTP); // Busqueda TP especifico identificaci
 router.post('/api/TC/FR', db.getSingleTC); // Busqueda TC especifico fechaRecibido
 router.post('/api/TP/BN',db.getALLTP1); // Busqueda TP nombre
 router.post('/api/TP/BA1',db.getALLTP2); // Busqueda TP Primer apellido
-router.post('/api/TP/BA2',db.getALLTP3); // Busqueda TP Primer apellido
+router.post('/api/TP/BA2',db.getALLTP3); // Busqueda TP Segundo apellido
+router.post('/api/TP/BA3',db.getALLTP4); // Busqueda TP Por identificacion coincidencia
 router.post('/api/TU/B', db.getSingleTU); // Busqueda TU especifico
 router.post('/api/TC/BO', db.getALLTC1); // Busqueda TC  oficio
 router.post('/api/TC/BD', db.getALLTC2); // Busqueda TC  destinatario
@@ -178,6 +179,7 @@ router.post('/api/TA/I', db.createTA);  // Insertando en TA
 router.post('/api/TP/UD', db.updateTP); // Actualizar TP especifico
 router.post('/api/TU/UD', db.updateTU); // Actualizar TU especifico
 router.post('/api/TC/UD', db.updateTC); // Actualizar TC especifico
+router.post('/api/TC/UDA', db.updateTCAdj); // Actualizar TC Adjunto
 router.post('/api/TE/UD', db.updateTE); // Actualizar TE especifico
 router.post('/api/TA/UD', db.updateTA); // Actualizar TA especifico
 router.post('/api/TA/UDF', db.updateTAFechas); // Actualizar TA especifico solo fechas
