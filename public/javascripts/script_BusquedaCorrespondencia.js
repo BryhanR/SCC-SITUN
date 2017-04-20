@@ -395,7 +395,7 @@ function cambioClase2(){//Realiza el cambio de clase de los campon de fecha del 
 	
 function actualizarCorrespondencia($scope,cor){ //Recoge los datos de los campos y realiza el fecth de inserción 
 	var d=new Date($("#IC1").val());
-	let a1=conditional;
+	let a1=condicion;
 	let b3 = $("#IC1").val().substr(6,4)+"-"+$("#IC1").val().substr(3,2)+"-"+$("#IC1").val().substr(0,2);
 	console.log("anooo "+b3);
 	let c3 = $('#IC2').val().toUpperCase(); 
