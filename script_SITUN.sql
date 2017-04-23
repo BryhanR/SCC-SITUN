@@ -71,9 +71,9 @@ CREATE OR REPLACE FUNCTION post(xn integer) RETURNS void  AS
 $BODY$
 DECLARE
 v_i integer;
-BEGIN insert into x (select TE_2 from TE where TE_1=xn );
+BEGIN insert into x ((select TE_2 from TE where TE_1=xn ));
    FOR v_i IN select TE_2 from TE,x where TE.TE_1=x.a loop
-       insert into x(select TE_2 from TE,x where TE.TE_1=x.a group by TE_2,a order by a);
+       insert into x((select TE_2 from TE,x where TE.TE_1=x.a group by TE_2,a order by a));
        end loop;  
 END $BODY$ LANGUAGE 'plpgsql'
 
@@ -84,9 +84,9 @@ CREATE OR REPLACE FUNCTION pre(xn integer) RETURNS void  AS
 $BODY$
 DECLARE
 v_i integer;
-BEGIN insert into x (select TE_1 from TE where TE_2=xn );
+BEGIN insert into x (select TE_1*-1 from TE where TE_2=xn );
    FOR v_i IN select TE_1 from TE,x where TE.TE_2=x.a loop
-      insert into x(select TE_1 from TE,x where TE.TE_2=x.a group by a,TE_1 order by a);
+      insert into x(select TE_1*-1 from TE,x where TE.TE_2=x.a group by a,TE_1 order by a);
        end loop; 
 END $BODY$ LANGUAGE 'plpgsql'
 
@@ -108,11 +108,8 @@ $BODY$
 DECLARE 
 BEGIN
 perform final(x);
-return array_to_json(array_agg(row_to_json(r))) from (select tc_1,tc_3 from tc,x where tc_1=x.a group by tc.tc_1,a order by tc_1) r;  
+return array_to_json(array_agg(row_to_json(r))) from (select tc_1,tc_3,a from tc,x where tc_1=x.a or tc_1*-1=x.a  group by tc.tc_1,a order by tc_1) r;  
 END $BODY$ LANGUAGE 'plpgsql'
---------------------------------------------------------
-
-
 
 -----	no utilizar esta (dejarla aqui por si las moscas XD)-----
 CREATE OR REPLACE FUNCTION Borrado() RETURNS void  AS -- no se utilizaria.

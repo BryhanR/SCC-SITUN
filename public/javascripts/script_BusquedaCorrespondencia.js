@@ -38,7 +38,7 @@ function controllerAngular($scope)//ControllerAngular
 	)	 
 	.then(res => res.json())
 	.then(obj => ( $scope.$apply( _=>
-						$scope.enlaces = obj.data),
+						$scope.enlaces = obj.data),console.log("enlacessss"+$scope.enlaces,obj.data),
 					$("#idEnlace").text(cor.tc_3) 
 				)
 			)
