@@ -102,8 +102,7 @@ perform post(x);
 perform  pre(x);      
 END $BODY$ LANGUAGE 'plpgsql'
 --------------------------------------------------------
- DROP FUNCTION Enlaces(x integer);
- 
+
 CREATE OR REPLACE FUNCTION Enlaces(z integer) RETURNS json AS   -- funcion a llamar
 $BODY$
 DECLARE 
