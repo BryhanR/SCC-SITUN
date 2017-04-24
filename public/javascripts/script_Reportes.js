@@ -133,7 +133,7 @@ if(validarEspaciosVacios()){
 
 
 
-let doc = new jsPDF('l', 'pt', 'a4');
+let doc = new jsPDF('l', 'pt', 'legal');
 
 doc.text("Reporte de correspondencia SCC-SITUN ", 260, 30); //Escribe el texto de encabezado
 
