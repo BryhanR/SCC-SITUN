@@ -1,3 +1,8 @@
+
+function dato_Adjunto(){ //
+adj= $('#adjun').prop('files');
+$('#input_adjunto').val(adj[0].name);
+}
 function controllerAngular($scope)//ControllerAngular
  {
 	$scope.criterio = "Asunto";
@@ -5,6 +10,9 @@ function controllerAngular($scope)//ControllerAngular
 	$scope.updateCorrespondencias = c => $scope.correspondencias = c;
 	$scope.buscar = _ => busquedaCorrespondencia($scope);
 	$scope.clear = _ => limpiaTabla($scope);
+	 
+	$scope.Adjuntando = f => actualizarAdj($scope,f);
+	$scope.AsignaUrl = r => UrlAdj($scope,r);
 	$scope.obtenerEnlaces	= n => buscaEnlaces($scope, n);
 	$scope.enlaces = new Array();
     $scope.obtenerInformacion	= e => asignarInformacion($scope, e);
@@ -12,9 +20,10 @@ function controllerAngular($scope)//ControllerAngular
 	$scope.actualiza =_ => actualizarInfo($scope);
 	$scope.Alarma= x => ajusteAlarma($scope,x);
 	$scope.nuevaAlarma = h => nuevaAlarma($scope, h);
+	
+	
   }
-  
-   
+ 
  
  function buscaEnlaces($scope, cor) //Muestra todos los enlaces relacionados con una correspondencia especifica
  {	
@@ -37,9 +46,9 @@ function controllerAngular($scope)//ControllerAngular
  }
  
  
- let conditional;
+ var conditional;
   function asignarInformacion($scope, cor){ //Busca la correspondencia y muestra la informacion de esta
-   conditional=cor.tc_1;
+
    console.log("asigna"+cor.tc_1);
 	 fetch( 'http://' + ip + ':'+ puerto +'/api/TC/BC', {  
     method: 'POST', 
@@ -55,6 +64,33 @@ function controllerAngular($scope)//ControllerAngular
 			)
 	.catch(err => console.log('Request failed', err));
  }
+ 
+
+ 
+ 
+ 
+// let keyUrl;
+ function UrlAdj($scope, cor){
+	
+	 $scope.url="http://localhost:3000/Adjunto/"+cor.tc_12;
+	if(cor.tc_12.length!=0)
+		$("#abrirDoc").removeAttr("disabled");
+	else{
+		
+		 $('#abrirDoc').attr('disabled', 'disabled');
+		 $scope.url='';
+	}
+		
+	 $('#input_adjunto').val(cor.tc_12);
+	  $("#btnGda").click(function(){
+		console.log("guarde");
+		actualizarAdj(cor.tc_1);
+		$("[data-dismiss=modal]").trigger({ type: "click" });
+		busquedaCorrespondencia($scope)});
+ }
+
+ 
+
  
  let person;
  let condicion;
@@ -106,7 +142,7 @@ function controllerAngular($scope)//ControllerAngular
  }
  
  function busquedaCorrespondencia($scope)  //Metodo de Busqueda
- {
+ { 
  	console.log("Retornado de url > " + tipoBusqueda($scope));
 	let h3 = document.getElementById('buscar').value;
 	 fetch( 'http://' + ip + ':'+ puerto +'/api/TC/'+tipoBusqueda($scope), {  
@@ -192,6 +228,35 @@ function actualizarInfo($scope){ //Actualiza la informacion que se haya editado
     busquedaCorrespondencia($scope);
 	$("[data-dismiss=modal]").trigger({ type: "click" });
 	}
+  }
+  
+  function actualizarAdj(cor){ //Actualiza la informacion que se haya editado
+  console.log("conditionalllll", conditional);
+  let doc = $('#input_adjunto').val();
+  console.log("doooc",doc);
+  fetch( 'http://' + ip + ':'+ puerto +'/api/TC/UDA', {  
+    method: 'POST', 
+    datatype:'json',
+    headers: {  
+      "Content-type": "application/x-www-form-urlencoded",
+
+      } ,
+    body: "TC_1="+cor+ "&TC_12="+doc
+      }
+	  )
+  .then(function(response) {
+
+  
+			if(doc!=''){ 
+			 var formData  = new FormData();		
+			 formData.append('arc', adj[0]);
+			fetch('http://localhost:3000/upload', {
+    		method: 'POST',
+    		body: formData
+  });
+							}else
+						$("#mensaje").text("Fallo al realizar la acción"); 
+  });
   }
   
   function checkCampoOficio(){ //Cambia el valor del campo referente al numero de oficio si la opcion SIN OFICIO esta marcada
@@ -347,7 +412,7 @@ function cambioClase2(){//Realiza el cambio de clase de los campon de fecha del 
 	
 function actualizarCorrespondencia($scope,cor){ //Recoge los datos de los campos y realiza el fecth de inserción 
 	var d=new Date($("#IC1").val());
-	let a1=conditional;
+	let a1=condicion;
 	let b3 = $("#IC1").val().substr(6,4)+"-"+$("#IC1").val().substr(3,2)+"-"+$("#IC1").val().substr(0,2);
 	console.log("anooo "+b3);
 	let c3 = $('#IC2').val().toUpperCase(); 
@@ -469,3 +534,7 @@ function nuevaAlarma(data){//Insercion de una nueva alarma a las correpondencia 
 		});
 		}
 	}
+	
+	
+	
+

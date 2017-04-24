@@ -17,8 +17,50 @@
     <body ng-app ng-controller = "ControllerAngular">
 
     <div id="menuDiv"></div>
+	
+				<!-- Trigger the modal with a button -->
+<!-- Modal -->
+	<div id="myAyuda" class="modal fade" role="dialog" style="margin: 0 auto; width:675px; height:575px;">
+	<div class="well">
    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="text-danger">Ayuda</h4>
+      </div>
+      <div class="modal-body">
+		<right>
+                <tbody>
+						Para la busqueda de un usuario, en el espacio en blanco se escribirá ya sea la 
+					identificación, nombre, primer o segundo apellido del usuario, esto dependiendo 
+					del criterio de busqueda que selecciono y se debe presionar el botón busar. Los 
+					usuarios que estarán relacionadas apareceran en el cuadro siguiente. En esta 
+					página tambien podrá editar los usuarios y eliminarlos.<p><p>
+						
+						Si se desea editar la información se presiona el boton Editar del usuario en 
+					especifico, aparecera una ventana de edicion con los datos del usuario. Se 
+					debe presionar el botón cambiar para poder editar los datos. Cuando se presiona
+					el botón cambiar todos los campos de los datos del usuario excepto la identificación
+					y la administración podrán modificarse.<p>
+					
+						Si lo que se quiere hacer es eliminar algún usuario ingresado en el sistema lo 
+					que se  deberá hacer es presionar el botón eliminar(representado por un basurero) 
+					que se encuentra en cada uno de los usurios. Aperecerá un mensaje de confirmación,
+					deberá presionar Si para eliminar lo o No para cancelar la opción.
 
+				</tbody> 
+	    </right>
+		
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button></center>	
+      </div>
+    </div>
+
+  </div>
+  </div>  <!-- fin del popup de ayuda --> 
+   
 	<!-- Trigger the modal with a button -->
 <!-- Modal -->
 <div class="col-md-1"></div>
@@ -54,7 +96,12 @@
                     <td> <label class="text-danger">Segundo Apellido</label> </td>
                    <td><div id="div3" class="form-group"><textarea id="IU3" type="text" class="form-control" onfocus="cambioClase1(3)"></textarea></div></td> 
                 </tr>
-				
+
+				<tr>
+                    <td> <label class="text-danger">Correo</label> </td>
+                   <td><div id="div8" class="form-group"><textarea id="IU8" type="email" class="form-control"  onfocus="cambioClase1(8)"></textarea></div></td> 
+                </tr>
+                
                 <tr>
 				    <td><label class="text-danger" for="exampleInputPassword1" >Contraseña</label> </td> 
                     <td><div id="div4" class="form-group"><input type="password" class="form-control" id="IU4" onfocus="cambioClase1(4)" disabled></input></div> </td>  
@@ -69,7 +116,7 @@
 				
 				<tr>
                     <td> <label class="text-danger">Administrador </label></td>
-					<td> <label class="text-danger" style=""><input  type="checkbox" id="administrador_checkbox" value="enlace_checkbox"></label></td>
+					<td> <label class="text-danger" style=""><input  type="checkbox" id="administrador_checkbox" value="enlace_checkbox" disabled></label></td>
                 </tr>
 
 				</tbody> 
@@ -135,7 +182,7 @@
 
 <!--cierra eliminacion-->
 
-	   <!---Cuerpo--->
+	   <!---Cuerpo-->
 	   <body background="../../../../images/situn4.png">
 	   
 
@@ -177,6 +224,7 @@
 			<td>Nombre</td>
 			<td>Primer apellido</td>
 			<td>Segundo apellido</td>
+			<td>Correo</td>
 			<td>Edición</td> 
 			<td>Eliminar</td> <!--// VER -->
 			</tr>
@@ -187,6 +235,7 @@
 					<td style="max-width: 287px;"> {{c.tp_1 }} </td>
 					<td style="max-width: 287px;"> {{c.tp_2 }} </td>
 					<td style="max-width: 287px;"> {{c.tp_3 }} </td>
+					<td style="max-width: 287px;"> {{c.tp_5 }} </td>
 					<td style="max-width: 75px;"> 
 						<button   type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" ng-click="obtenerUsuario(c)"><img src="../../../../images/editar-usuario.png" width="20" height="20" /></button>
 					</td>

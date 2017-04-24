@@ -36,6 +36,7 @@ function controllerAngular($scope)//ControllerAngular
 	let b = $('#IU1').val().toUpperCase();
 	let c = $('#IU2').val().toUpperCase(); 
 	let d = $('#IU3').val().toUpperCase(); 
+	let e = $('#IU8').val(); 
  
    fetch( 'http://' + ip + ':'+ puerto +'/api/TP/UD', {  
     method: 'POST', 
@@ -44,7 +45,7 @@ function controllerAngular($scope)//ControllerAngular
       "Content-type": "application/x-www-form-urlencoded"  
       } ,
     body: "TP_1="+ b+ "&TP_2="+c+
-	"&TP_3="+ d + "&TP_4="+ a 
+	"&TP_3="+ d + "&TP_4="+ a+ "&TP_5="+ e
       }
 	  )
   .then(function(response) {
@@ -59,7 +60,6 @@ function controllerAngular($scope)//ControllerAngular
    console.log('Request failed', error);  
   });
   }
-  
   
   function actualizarUsuario(){ //actualiza la informaciòn del usuario
     let a = $('#IU0').val();
@@ -98,7 +98,7 @@ function controllerAngular($scope)//ControllerAngular
 	I3 = true;
 	I4 = true;
 	I5 = true;
-	I6= true;
+	I6 = true;
 
 	if($("#IU1").val().length == 0){
 		$("#div1").attr('class','form-group has-error') ;
@@ -238,6 +238,7 @@ function limpiarValores(){ //Limpia los valores de los campos de entrada
      $("#IU3").val(data.tp_3);
 	 $("#IU0").val(data.tu_1);
 	 $("#IU4").val(data.tu_2);
+	 $("#IU8").val(data.tp_5);
 	 if(data.tu_3 == 1)
 		$("#administrador_checkbox").prop("checked", "checked");
 	 
@@ -248,10 +249,16 @@ function limpiarValores(){ //Limpia los valores de los campos de entrada
  
  function busquedaUsuario($scope)  //Metodo de Busqueda
  {
- console.log("Retornado de url > " + tipoBusqueda($scope));
-	let h3 = document.getElementById('buscar').value;
-	
-	 fetch( 'http://' + ip + ':'+ puerto +'/api/TP/'+tipoBusqueda($scope), {  
+	console.log("Retornado de url > " + tipoBusqueda($scope));
+	 let h3 = document.getElementById('buscar').value;
+	 //let table=document.getElementById("tabla_busqueda").rows.length;
+	 let table= $("#tabla_busqueda tr").length;
+	 
+	 if(table<1){
+		 $("#mensaje").html('No se encontrarón coincidencias');
+		 
+	 }else{
+	fetch( 'http://' + ip + ':'+ puerto +'/api/TP/'+tipoBusqueda($scope), {  
     method: 'POST', 
     datatype:'json',
     headers: {  
@@ -264,6 +271,7 @@ function limpiarValores(){ //Limpia los valores de los campos de entrada
 	.then(obj => $scope.$apply( _=>
 					$scope.updateUsuarios(obj.data)))
 	.catch(err => console.log('Request failed', err));
+	 } 
 }
  
  
@@ -274,7 +282,7 @@ function tipoBusqueda($scope)// Toma el tipo de busqueda y regresa el sufijo cor
 	switch(op)
 	{
 		case 'identificacion': // Identicacion
-			return 'B';
+			return 'BA3';
 		case 'nombre': // Nombre
 			return 'BN';
 		case 'apellido1': // Primer apellido

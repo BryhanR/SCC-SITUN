@@ -10,6 +10,7 @@ TE // Tabla de Enlace
   TP_2 // Apellido1
   TP_3 // Apellido2
   TP_4 // ID
+  TP_5 // Correo
 
 ---- Table TU -----
   TU_1 // ID Asociado a TP
