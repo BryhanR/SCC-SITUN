@@ -323,15 +323,7 @@ function getAllEnlaces(req, res, next)	// devuelve los enlaces de una correspond
 	var flag = true;
     db.func('Enlaces',c)
 	.then( v => (v[0].enlaces) ? v[0].enlaces :[])
-	.then(en => en.reduce( (ant, act) => 
-										(
-											(act.tc_1 != c ) ? 
-															ant[ flag ? 0 : 1 ].push(act.tc_3 )
-															: flag = false
-										
-											,ant 
-										)
-							,[[],[]]))
+	.then(en => en.reduce( (ant, act) => ((act.a >0 ) ? ant[1].push(act.tc_3 ):ant[0].push(act.tc_3 ),ant ),[[],[]]))
 	.then(function (data) {
       res.status(200)
         .json({

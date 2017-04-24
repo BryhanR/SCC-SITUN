@@ -64,9 +64,23 @@ function controllerAngular($scope)//ControllerAngular
 			)
 	.catch(err => console.log('Request failed', err));
  }
- let keyUrl;
+ 
+
+ 
+ 
+ 
+// let keyUrl;
  function UrlAdj($scope, cor){
+	
 	 $scope.url="http://localhost:3000/Adjunto/"+cor.tc_12;
+	if(cor.tc_12.length!=0)
+		$("#abrirDoc").removeAttr("disabled");
+	else{
+		
+		 $('#abrirDoc').attr('disabled', 'disabled');
+		 $scope.url='';
+	}
+		
 	 $('#input_adjunto').val(cor.tc_12);
 	  $("#btnGda").click(function(){
 		console.log("guarde");
@@ -74,6 +88,9 @@ function controllerAngular($scope)//ControllerAngular
 		$("[data-dismiss=modal]").trigger({ type: "click" });
 		busquedaCorrespondencia($scope)});
  }
+
+ 
+
  
  let person;
  let condicion;
