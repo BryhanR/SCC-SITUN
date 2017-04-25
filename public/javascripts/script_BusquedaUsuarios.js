@@ -255,11 +255,6 @@ function limpiarValores(){ //Limpia los valores de los campos de entrada
 	 let table1=document.getElementById("tabla_busqueda").rows.length;
 	 let table= $("#tabla_busqueda tr").length;
 	 
-	if(table<1){
-
-	 //let table=document.getElementById("tabla_busqueda").rows.length;
-	 let table= $("#tabla_busqueda tr").length;
-	 
 	 if(table<1){
 
 		 $("#mensaje").html('No se encontrarón coincidencias');

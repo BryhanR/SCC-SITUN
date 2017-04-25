@@ -72,7 +72,7 @@ function controllerAngular($scope)//ControllerAngular
 // let keyUrl;
  function UrlAdj($scope, cor){
 	
-	 $scope.url="http://localhost:3000/Adjunto/"+cor.tc_12;
+	 $scope.url='http://' + ip + ':'+ puerto +'/Adjunto/'+cor.tc_12;
 	if(cor.tc_12.length!=0)
 		$("#abrirDoc").removeAttr("disabled");
 	else{
@@ -267,7 +267,7 @@ function actualizarInfo($scope){ //Actualiza la informacion que se haya editado
 			if(doc!=''){ 
 			 var formData  = new FormData();		
 			 formData.append('arc', adj[0]);
-			fetch('http://localhost:3000/upload', {
+			fetch('http://' + ip + ':'+ puerto +'/upload', {
     		method: 'POST',
     		body: formData
   });
