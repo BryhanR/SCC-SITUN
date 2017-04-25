@@ -106,9 +106,16 @@ function controllerAngular($scope)//ControllerAngular
  }
  
  function busquedaCorrespondencia($scope)  //Metodo de Busqueda
- {
+ { 
  	console.log("Retornado de url > " + tipoBusqueda($scope));
 	let h3 = document.getElementById('buscar').value;
+	 let table1=document.getElementById("tabla_busqueda").rows.length;
+	 let table= $("#tabla_busqueda tr").length;
+	 
+	if(table<1){
+		 $("#mensaje").html('No se encontrarón coincidencias');
+		 
+	 }else{
 	 fetch( 'http://' + ip + ':'+ puerto +'/api/TC/'+tipoBusqueda($scope), {  
     method: 'POST', 
     datatype:'json',
@@ -119,10 +126,20 @@ function controllerAngular($scope)//ControllerAngular
       }
 	)	 
 	.then(res => res.json())
-	.then(obj => $scope.$apply( _=>
-					$scope.updateCorrespondencias(obj.data)))
-	.catch(err => console.log('Request failed', err));
+	.then(obj =>{
+		mensaje(obj.data.length);
+		$scope.$apply( _=>
+		$scope.updateCorrespondencias(obj.data));})
+		.catch(err => console.log('Request failed', err));
+	 }
  }
+ 
+ function mensaje(v) {
+	if(v == 0)
+		$("#mensaje").html('No se encontrarón coincidencias');	
+	else $("#mensaje").html('');	
+}
+ 
  
 function tipoBusqueda($scope)// Toma el tipo de busqueda y regresa el sufijo correspondiente a la dirección del servidor
 {

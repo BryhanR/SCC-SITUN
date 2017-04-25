@@ -244,11 +244,17 @@ function limpiarValores(){ //Limpia los valores de los campos de entrada
 
  }
  
- function busquedaUsuario($scope)  //Metodo de Busqueda
+  function busquedaUsuario($scope)  //Metodo de Busqueda
  {
- console.log("Retornado de url > " + tipoBusqueda($scope));
-	let h3 = document.getElementById('buscar').value;
-
+	console.log("Retornado de url > " + tipoBusqueda($scope));
+	 let h3 = document.getElementById('buscar').value;
+	 let table1=document.getElementById("tabla_busqueda").rows.length;
+	 let table= $("#tabla_busqueda tr").length;
+	 
+	if(table<1){
+		 $("#mensaje").html('No se encontrarón coincidencias');
+		 
+	 }else{
 	fetch( 'http://' + ip + ':'+ puerto +'/api/TP/'+tipoBusqueda($scope), {  
     method: 'POST', 
     datatype:'json',
@@ -259,9 +265,18 @@ function limpiarValores(){ //Limpia los valores de los campos de entrada
       }
 	)	 
 	.then(res => res.json())
-	.then(obj => $scope.$apply( _=>
-					$scope.updateUsuarios(obj.data)))
+	.then(obj =>{ 
+	mensaje(obj.data.length);
+	$scope.$apply( _=>
+	$scope.updateUsuarios(obj.data));})
 	.catch(err => console.log('Request failed', err));
+	 } 
+}
+ 
+function mensaje(v) {
+	if(v == 0)
+		$("#mensaje").html('No se encontrarón coincidencias');	
+	else $("#mensaje").html('');	
 }
  
  
