@@ -10,6 +10,8 @@ var passport = require('passport');
 
 var formidable = require('formidable');
 
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
@@ -52,6 +54,45 @@ router.get('/logout',function(req, res){
     req.session.destroy();
     res.redirect('/');
 });
+
+
+router.post('/recoverPass',function(req, res){
+
+	console.log("Solicitud de recuperacion de passpord para " + req.body.usuario);
+	let nodemailer = require('nodemailer');
+	// create reusable transporter object using the default SMTP transport
+	let transporter = nodemailer.createTransport('SMTP',{
+    service: 'gmail',
+    host: "smtp.gmail.com",
+    auth: {
+        user: 'scc.situn@gmail.com', // scc.situn
+        pass: 'situnHeredia'	//situnHeredia
+    }
+	});
+	// setup email data with unicode symbols
+	let usr = {TU_1:req.body.usuario};
+	db.resetPassword(usr)
+	.then(_ => db.getUSR(usr).then( function(data){
+			usr = data[0];
+			let mailOptions = {
+    			from: '"SCC-SITUN" <scc.situn@gmail.com>', // sender address
+    			to: usr.tp_5, // list of receivers
+    			subject: 'Nueva contraseña para SCC-SITUN', // Subject line
+    			text: "Su contraseña para el Sistema de Control de Correspondencia del SITUN  ha sido modificada. "+
+    			"Ahora su nueva contraseña es "+usr.tu_2 // plain text body
+			};
+			// send mail with defined transport object
+			transporter.sendMail(mailOptions, (error, info) => {
+    			if (error) {
+        			return console.log(error);
+    			}
+    			console.log('Se ha enviado correo con nueva clave');
+				});
+	} 
+	));
+});
+
+
 
 router.get('/sessionInfo',function(req, res, next){
 	console.log("Solicitud de info de sesson... ");
@@ -113,7 +154,8 @@ router.post('/api/TP/B', db.getSingleTP); // Busqueda TP especifico identificaci
 router.post('/api/TC/FR', db.getSingleTC); // Busqueda TC especifico fechaRecibido
 router.post('/api/TP/BN',db.getALLTP1); // Busqueda TP nombre
 router.post('/api/TP/BA1',db.getALLTP2); // Busqueda TP Primer apellido
-router.post('/api/TP/BA2',db.getALLTP3); // Busqueda TP Primer apellido
+router.post('/api/TP/BA2',db.getALLTP3); // Busqueda TP Segundo apellido
+router.post('/api/TP/BA3',db.getALLTP4); // Busqueda TP Por identificacion coincidencia
 router.post('/api/TU/B', db.getSingleTU); // Busqueda TU especifico
 router.post('/api/TC/BO', db.getALLTC1); // Busqueda TC  oficio
 router.post('/api/TC/BD', db.getALLTC2); // Busqueda TC  destinatario
@@ -137,6 +179,7 @@ router.post('/api/TA/I', db.createTA);  // Insertando en TA
 router.post('/api/TP/UD', db.updateTP); // Actualizar TP especifico
 router.post('/api/TU/UD', db.updateTU); // Actualizar TU especifico
 router.post('/api/TC/UD', db.updateTC); // Actualizar TC especifico
+router.post('/api/TC/UDA', db.updateTCAdj); // Actualizar TC Adjunto
 router.post('/api/TE/UD', db.updateTE); // Actualizar TE especifico
 router.post('/api/TA/UD', db.updateTA); // Actualizar TA especifico
 router.post('/api/TA/UDF', db.updateTAFechas); // Actualizar TA especifico solo fechas

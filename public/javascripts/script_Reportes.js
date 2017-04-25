@@ -29,6 +29,7 @@ function  controllerAngular($scope)//ControllerAngular controller de todos los m
 	
     let rowCount = table.rows.length;
     let row = table.insertRow(rowCount);
+
 	
 	let cell1 = row.insertCell(0);
 	let element1 = document.createTextNode("Desde :");
@@ -129,6 +130,26 @@ function limpiarPantalla($scope){// limpia
 function crearReporte($scope){ //Metodo que genera el reporte
 
 if(validarEspaciosVacios()){
+
+
+
+let doc = new jsPDF('l', 'pt', 'legal');
+
+doc.text("Reporte de correspondencia SCC-SITUN ", 260, 30); //Escribe el texto de encabezado
+
+let res = doc.autoTableHtmlToJson(document.getElementById('tabla_encabezado')); //Recupera la primer tabla
+doc.autoTable(res.columns, res.data); //Lo envia al PDF
+
+let res2 = doc.autoTableHtmlToJson(document.getElementById('tabla_busqueda')); //Recupera la segunda tabla
+doc.autoTable(res2.columns, res2.data, { //Lo envia al PDF
+    startY: doc.autoTableEndPosY() + 80 
+});
+doc.save('ReporteCorrespondencia.pdf');	  //Guarda el PDF
+ 
+ 
+ 
+//Deje este código en caso de que se necesite cambiar, después se puede quitar
+ /*  Para usar este codigo hay que cambiar el script de abajo en Reportes.HTML  por jspdf2 y comentar el codigo de arriba
 let pdf = new jsPDF('l', 'pt', 'letter');
 let source =  $('#HTMLtoPDF')[0] ;
 pdf.setFontSize(15);
@@ -158,8 +179,12 @@ pdf.fromHTML(
         pdf.save('ReporteCorrespondencia.pdf');
       }
   )		
+ */
   
-  }
+  
+  
+  } 
+  
 }
 
 
