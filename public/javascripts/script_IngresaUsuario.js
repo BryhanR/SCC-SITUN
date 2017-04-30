@@ -43,7 +43,7 @@ function ingresaInformacion($scope){ //Recoge los datos de los campos y realiza 
 	let f3 = $('#IU2').val().toUpperCase();
 	let g3 = $('#IU3').val().toUpperCase();
 	let h3 = $('#IU4').val().toUpperCase();
-	let o3 = $('#IU5').val().toUpperCase();
+	let o3 = $('#IU5').val();//.toUpperCase();
 	let i3 = $('#IU8').val();
 	let j3;
 	if($("#IU7").prop("checked"))
