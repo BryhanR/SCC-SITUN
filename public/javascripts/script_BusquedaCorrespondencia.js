@@ -179,18 +179,11 @@ function controllerAngular($scope)//ControllerAngular
 	)	 
 	.then(res => res.json())
 	.then(obj =>{
-		mensaje(obj.data.length);
 		$scope.$apply( _=>
 		$scope.updateCorrespondencias(obj.data));})
 		.catch(err => console.log('Request failed', err));
 	 }
  }
- 
- function mensaje(v) {
-	if(v == 0)
-		$("#mensaje").html('No se encontrarón coincidencias');	
-	else $("#mensaje").html('');	
-}
  
  
 function tipoBusqueda($scope)// Toma el tipo de busqueda y regresa el sufijo correspondiente a la dirección del servidor
