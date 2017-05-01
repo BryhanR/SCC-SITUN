@@ -271,18 +271,11 @@ function limpiarValores(){ //Limpia los valores de los campos de entrada
 	)	 
 	.then(res => res.json())
 	.then(obj =>{ 
-	mensaje(obj.data.length);
 	$scope.$apply( _=>
 	$scope.updateUsuarios(obj.data));})
 	.catch(err => console.log('Request failed', err));
 	 } 
 
-}
- 
-function mensaje(v) {
-	if(v == 0)
-		$("#mensaje").html('No se encontrarón coincidencias');	
-	else $("#mensaje").html('');	
 }
  
  

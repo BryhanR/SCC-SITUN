@@ -156,6 +156,11 @@
 									
 					</td>
 			</tr>
+			<tr ng-show="correspondencias.length<=0">
+				<td  colspan="13">
+					<center><p class="lead text-danger">No se han encontrado resultados</p></center>
+				</td>
+			</tr>
 		</tbody>
 
 	</table>
@@ -163,9 +168,8 @@
 		</div>
 
 			<div class='btn-group'>
-    <ul ng-show='correspondencias.length>0' class="panel-danger" uib-pagination total-items="totalItems" ng-model="currentPage" max-size="paginationSize" items-per-page="pageSize" ng-change='pageChanged()' class="pagination-sm" boundary-links="true" force-ellipses="true" previous-text="Anterior" next-text="Siguiente" last-text="Último" first-text="Primero"></ul>
-        </div>
-
+    			<ul ng-show='correspondencias.length>0' class="panel-danger" uib-pagination total-items="totalItems" ng-model="currentPage" max-size="paginationSize" items-per-page="pageSize" ng-change='pageChanged()' class="pagination-sm" boundary-links="true" force-ellipses="true" previous-text="Anterior" next-text="Siguiente" last-text="Último" first-text="Primero"></ul>
+        	</div>
       </div>
 			
                </div>
@@ -438,12 +442,7 @@
     </div>
   </div>
   </div>
-	<!-- fin del popup Alarma-->   
-	
-
-		   <div style="margin-top:100px; margin-left:60px; "><label id="mensaje" class="text-danger"></label></div>
-
-	
+	<!-- fin del popup Alarma--> 
 <script type="text/javascript">
 
 $(document).ready(function() {// Solicita la informacion de la sesion si aun no existe en el storage

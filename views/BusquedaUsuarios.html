@@ -13,7 +13,7 @@
 	<script src="\..\javascripts\bootstrap-datetimepicker-4.7.14.js"></script>
 	<script src="\..\javascripts\angular.min.js"></script>
 	<link rel="stylesheet" href="\..\stylesheets\bootstrap-datetimepicker-4.7.14.css">
-	
+
     <body ng-app ng-controller = "ControllerAngular">
 
     <div id="menuDiv"></div>
@@ -220,13 +220,13 @@
 
 		<thead> 
 			<tr class="danger">
-			<td>Identicación</td>
-			<td>Nombre</td>
-			<td>Primer apellido</td>
-			<td>Segundo apellido</td>
-			<td>Correo</td>
-			<td>Edición</td> 
-			<td>Eliminar</td> <!--// VER -->
+			<th>Identicación</th>
+			<th>Nombre</th>
+			<th>Primer apellido</th>
+			<th>Segundo apellido</th>
+			<th>Correo</th>
+			<th>Edición</th> 
+			<th>Eliminar</th> <!--// VER -->
 			</tr>
 		</thead>
 		<tbody>
@@ -243,6 +243,11 @@
 						<button type="button" id="btnEliminar" class="btn btn-danger" data-toggle="modal" data-target="#myModal2" ng-click="obtenerUsuarios(c)" ng-disabled = "esDisabled(c.tp_4)"><img src="../../../../images/eliminar.png" width="20" height="20" /></button>
 					</td>
 			</tr>
+			<tr ng-show="usuarios.length<=0">
+				<td  colspan="7">
+					<center><p class="lead text-danger">No se han encontrado resultados</p></center>
+				</td>
+			</tr>
 		</tbody>       
 	</table>
 
@@ -250,8 +255,6 @@
       </form>
            
 	   </div>
-	   
-	   	   <div style="margin-top:100px; margin-left:60px; "><label id="mensaje" class="text-danger"></label></div>
 	
 <script type="text/javascript">
   
