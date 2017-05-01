@@ -6,6 +6,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="shortcut icon" href="../images/ico.ico" type="image/ico" />
         <title>Búsqueda</title>
+
+
+
        <script src="\..\javascripts\script_menu.js"></script>
 		<script type="text/javascript" src="\..\javascripts\script_BusquedaCorrespondencia.js"></script>
 	<script src="\..\javascripts\jquery-1.12.2.js"></script>
@@ -17,18 +20,15 @@
 	<link rel="stylesheet" href="\..\stylesheets\bootstrap-datetimepicker-4.7.14.css">
 	<!-- Angular--> 
 	<script src="\..\javascripts\angular.min.js"></script>
-	
-	
+        <script src="\..\javascripts\paginacion-bootstrap-tpls-2.2.0.js"></script>
+
 
     <script type="text/javascript" src="\..\javascripts\jquery.ui.position.js"></script>
 
     <script type="text/javascript" src=".\..\javascripts\jquery.contextMenu.js"></script>
-	 
-	
-	
 </head>
 
-<body ng-app ng-controller = "ControllerAngular">
+<body ng-controller = "ControllerAngular">
 	<div id="menuDiv"></div>
 
 	<!-- Modal de MIAYUDA-->
@@ -92,7 +92,7 @@
     
 	
 	<div  align="left" class="table table-bordered"  style="max-width: 100%; max-height:390px; margin-top:10px; border: hidden;  overflow-y:auto;">
-	<table class="table" id="tabla_busqueda">
+	<table class="table" id="tabla_busqueda" ng-init='configPages()'>
 		
 
 <style type="text/css">
@@ -100,8 +100,10 @@
     pointer-events: none;
     font-color: gray;
     opacity: 0.4;
+
 }
-</style>	
+</style>
+
 <!-- Tabla cargada al buscar correspondencias -->
 		<thead> 
 			<tr class="danger">
@@ -121,7 +123,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat = "c in correspondencias">
+			<tr ng-repeat='c in correspondencias | startFromGrid: (currentPage-1) * pageSize | limitTo: pageSize' >
 					<td style="max-width: 9.6%;"> {{c.tc_3 }} </td>
 					<td style="max-width: 7.7%;"> {{c.tc_4 | date:'dd/MM/yyyy'}} </td>
 					<td style="max-width: 7.7%;"> {{c.tc_2 | date:'dd/MM/yyyy'}} </td>
@@ -154,8 +156,18 @@
 									
 					</td>
 			</tr>
-		</tbody>        
+		</tbody>
+
 	</table>
+		
+		</div>
+
+			<div class='btn-group'>
+    <ul ng-show='correspondencias.length>0' class="panel-danger" uib-pagination total-items="totalItems" ng-model="currentPage" max-size="paginationSize" items-per-page="pageSize" ng-change='pageChanged()' class="pagination-sm" boundary-links="true" force-ellipses="true" previous-text="Anterior" next-text="Siguiente" last-text="Último" first-text="Primero"></ul>
+        </div>
+
+      </div>
+			
                </div>
       </form>
 	  
@@ -447,8 +459,14 @@ $(document).ready(function() {// Solicita la informacion de la sesion si aun no 
       });
 
 
-let app = angular.module('app', []);
+let app = angular.module('app', ['ui.bootstrap']);
 app.controller('ControllerAngular', controllerAngular); 
+app.filter('startFromGrid', function() {
+  return function(input, start) {
+    start = +start;
+    return input.slice(start);
+  }
+});
 
 /**
 * Funciones de los calendarios de la pagina

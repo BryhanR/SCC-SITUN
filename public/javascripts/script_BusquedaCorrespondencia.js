@@ -7,10 +7,9 @@ function controllerAngular($scope)//ControllerAngular
  {
 	$scope.criterio = "Asunto";
 	$scope.correspondencias = new Array();
-	$scope.updateCorrespondencias = c => $scope.correspondencias = c;
+	$scope.updateCorrespondencias = c => ($scope.correspondencias =c,$scope.totalItems=$scope.correspondencias.length);
 	$scope.buscar = _ => busquedaCorrespondencia($scope);
-	$scope.clear = _ => limpiaTabla($scope);
-	 
+	$scope.clear = _ => limpiaTabla($scope);	 
 	$scope.Adjuntando = f => actualizarAdj($scope,f);
 	$scope.AsignaUrl = r => UrlAdj($scope,r);
 	$scope.obtenerEnlaces	= n => buscaEnlaces($scope, n);
@@ -20,9 +19,26 @@ function controllerAngular($scope)//ControllerAngular
 	$scope.actualiza =_ => actualizarInfo($scope);
 	$scope.Alarma= x => ajusteAlarma($scope,x);
 	$scope.nuevaAlarma = h => nuevaAlarma($scope, h);
-	
-	
-  }
+
+
+//-----------------------------
+	$scope.totalItems = 0;
+  	$scope.currentPage = 1;
+  	$scope.pageSize = 10;
+  	$scope.paginationSize = 5;
+
+  $scope.setPage = function (pageNo) {
+    $scope.currentPage = pageNo;
+  };
+
+  $scope.pageChanged = function() {
+    console.log('Page changed to: ' + $scope.currentPage);
+    console.log('total Items: ' + $scope.totalItems);
+  };
+
+  
+//-----------------------------
+      };
  
  
  function buscaEnlaces($scope, cor) //Muestra todos los enlaces relacionados con una correspondencia especifica
