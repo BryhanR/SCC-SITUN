@@ -16,6 +16,7 @@
 
 	<!-- Angular--> 
 	<script src="\..\javascripts\angular.min.js"></script>	
+	<script src="\..\javascripts\paginacion-bootstrap-tpls-2.2.0.js"></script>
     </head>	
 
     <body ng-app ng-controller = "ControllerAngular">
@@ -129,7 +130,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr  ng-repeat = "c in correspondencias">
+									<tr  ng-repeat = "c in correspondencias | startFromGrid: (currentPage-1) * pageSize | limitTo: pageSize">
 										<td id="tdid"> {{c.tc_3 }} </td>
 										<td> {{c.tc_4 | date:'dd/MM/yyyy'}} </td>
 										<td> {{c.tc_2 | date:'dd/MM/yyyy'}} </td>
@@ -139,6 +140,13 @@
 										<td> {{c.tc_7 }} </td>					
 										<td> {{c.tc_10 }} </td>
 									</tr>
+									<tr ng-show="correspondencias.length<=0">
+										<td  colspan="13">
+											<center>
+												<p class="lead text-danger">No se han encontrado resultados</p>
+											</center>
+										</td>
+									</tr>
 								</tbody>        
 							</table>
 							<footer id="footer" style="display: none;">
@@ -147,10 +155,10 @@
     							</div>
 							</footer>	
                		</div>    
-               		</div>	   
-       		<div style="margin-top:100px; margin-left:60px; " >
-       			<label id="mensaje" class="text-danger"></label>
-       		</div>
+               		</div>
+               		<div class='btn-group'>
+    			<ul ng-show='correspondencias.length>0' class="panel-danger" uib-pagination total-items="totalItems" ng-model="currentPage" max-size="paginationSize" items-per-page="pageSize" ng-change='pageChanged()' class="pagination-sm" boundary-links="true" force-ellipses="true" previous-text="Anterior" next-text="Siguiente" last-text="Último" first-text="Primero"></ul>
+        	</div>
 	   	</div>
        
 	   
@@ -179,13 +187,18 @@ $(document).ready(function() {
 
 
 
-let app = angular.module('app', []);
+let app = angular.module('app', ['ui.bootstrap']);
 
 
   
    app.controller('ControllerAngular', controllerAngular); 
 
-
+app.filter('startFromGrid', function() {
+  return function(input, start) {
+    start = +start;
+    return input.slice(start);
+  }
+});
 $('#datetimepicker1').datetimepicker({
    		format: 'DD-MM-YYYY', 
    		showClear:true,
