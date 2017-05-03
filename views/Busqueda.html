@@ -78,7 +78,7 @@
 		 </div>
 		 	
 			<form class="navbar-form navbar-left">         
-            <div   class="form-group ">
+            <div   class="form-group "  style="width: 100%;">
 				<select class="form-control" id="opBusqueda" ng-model = "criterio">
 					<option value="Nº oficio">Nº Oficio
 					<option value="Destinatorio">Destinatorio                                            
@@ -87,7 +87,18 @@
 				</select> 
 				<input type="text" class="form-control" id="buscar" ng-keyup= "($event.which == 13)?buscar():0" />
 				<input type = "button" class="btn btn-default" id="buscar" value = "Buscar" ng-click="buscar()" />
-				<input type = "button"class="btn btn-default" id ="cancelar" value = "Cancelar"  ng-click="clear()" />
+				<input type = "button" class="btn btn-default" id ="cancelar" value = "Cancelar"  ng-click="clear()" />
+				<span ng-show="correspondencias.length>0"  style="float:right;">
+					<label>Mostrar </label>
+					<select class="form-control" ng-model = "pageSize" convert-to-number>
+					<option value="5">5
+					<option value="10" >10                                           
+					<option value="15">15                                         
+					<option value="20">20                                     
+				</select>
+				<label>Resultados por página </label>
+				</span>
+				
 			</div>
     
 	
@@ -467,6 +478,19 @@ app.filter('startFromGrid', function() {
   }
 });
 
+app.directive('convertToNumber', function() {
+  return {
+    require: 'ngModel',
+    link: function(scope, element, attrs, ngModel) {
+      ngModel.$parsers.push(function(val) {
+        return parseInt(val, 10);
+      });
+      ngModel.$formatters.push(function(val) {
+        return '' + val;
+      });
+    }
+  };
+});
 /**
 * Funciones de los calendarios de la pagina
 **/

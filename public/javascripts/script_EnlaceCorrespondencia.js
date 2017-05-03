@@ -31,11 +31,32 @@ function controllerAngular($scope)//ControllerAngular
 	$scope.setCurrent = c => $scope.current = c;
 	$scope.updateDoc = a => modificaCampos(a, $scope);//$scope.current == 1? ($scope.doc1 = a, deshabilitar('E1')): ($scope.doc2 = a, deshabilitar('E2'));
 	
-	$scope.updateCorrespondencias = c => $scope.correspondencias = c;
+	$scope.updateCorrespondencias = c => ($scope.correspondencias =c,$scope.totalItems=$scope.correspondencias.length);
 	$scope.buscar = (a,b) => busqueda(a,$scope,b);
 	$scope.enlazar = _ => crearEnlace($scope);
 	
 	$scope.editar = d => botonEditar(d, $scope);
+
+
+
+//-----------------------------
+	$scope.totalItems = 0;
+  	$scope.currentPage = 1;
+  	$scope.pageSize = 10;
+  	$scope.paginationSize = 5;
+
+  $scope.setPage = function (pageNo) {
+    $scope.currentPage = pageNo;
+  };
+
+  $scope.pageChanged = function() {
+    console.log('Page changed to: ' + $scope.currentPage);
+    console.log('total Items: ' + $scope.totalItems);
+  };
+
+  
+//-----------------------------
+	
 		
   }
   
