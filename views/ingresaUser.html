@@ -8,6 +8,7 @@
 <script src="\..\javascripts\script_menu.js"></script>
 	<script type="text/javascript" src="\..\javascripts\script_IngresaUsuario.js"></script>
 	<script src="\..\javascripts\jquery-1.12.2.js"></script>
+  <script src="\..\javascripts\jquery.validate.min.js"></script>
 <script src="\..\javascripts\moment-2.15.1.js"></script>
 
 <script src="\..\javascripts\bootstrap-3-3-7.min.js"></script>
@@ -18,9 +19,9 @@
 <script src="\..\javascripts\bootstrap-datetimepicker-4.7.14.js"></script>
 
 <link rel="stylesheet" href="\..\stylesheets\bootstrap-datetimepicker-4.7.14.css">
-    <!-- Angular--> 
 	
-	
+  <script src="\..\javascripts\validatePlugin.js"></script>
+	<link rel="stylesheet" href="\..\stylesheets\validatePlugin.css">
    </head>
    
     <body>  
@@ -64,46 +65,77 @@
 	     <div class="col-md-1"></div>
 	   <div class="col-md-4">
          <span class="text-danger"><h3>Ingresar Usuario</h3></span><br>
-            <form name = "Formulario">
-            <table id ="tablaIU">
+            <form name = "Formulario" id="Formulario">
+              <table id ="tablaIU">
                 <tbody>
-					<tr></tr>
-				<tr>
+					       <tr></tr>
+				          <tr>
                     <td><label class="text-danger">Nombre</label></td>
-					<td><div id="div1" class="form-group"><textarea id="IU1" type="text" class="form-control"  onfocus="limpiaCamposEnfocados(1)"></textarea></div></td>
-				</tr>
-                <tr>
+					          <td>
+                      <div id="div1" class="form-group">
+                        <textarea id="IU1" name ="IU1" type="text" class="form-control"  onfocus="limpiaCamposEnfocados(1)"></textarea></div>
+                    </td>
+				          </tr>
+                  <tr>
                     <td> <label class="text-danger">Apellido 1</label> </td>
-                   <td><div id="div2" class="form-group"><textarea id="IU2" type="text" class="form-control"  onfocus="limpiaCamposEnfocados(2)"></textarea></div></td> 
-				</tr>
-				  <tr>
+                    <td>
+                      <div id="div2" class="form-group">
+                        <textarea id="IU2" name ="IU2" type="text" class="form-control"  onfocus="limpiaCamposEnfocados(2)"></textarea>
+                      </div>
+                    </td> 
+				          </tr>
+				          <tr>
                     <td> <label class="text-danger">Apellido 2</label> </td>
-                   <td><div id="div3" class="form-group"><textarea id="IU3" type="text" class="form-control"  onfocus="limpiaCamposEnfocados(3)"></textarea></div></td> 
-				</tr>
-                <tr>
+                    <td>
+                      <div id="div3" class="form-group">
+                        <textarea id="IU3" name ="IU3" type="text" class="form-control"  onfocus="limpiaCamposEnfocados(3)"></textarea>
+                      </div>
+                    </td> 
+				          </tr>
+                  <tr>
                     <td> <label class="text-danger">Identificación</label> </td>
-                   <td><div id="div4" class="form-group"><textarea id="IU4" type="text" class="form-control"  onfocus="limpiaCamposEnfocados(4)"></textarea></div></td> 
-                </tr>
-                <tr>
+                    <td>
+                      <div id="div4" class="form-group">
+                        <textarea id="IU4" name ="IU4" type="text" class="form-control"  onfocus="limpiaCamposEnfocados(4)"></textarea>
+                      </div>
+                    </td> 
+                  </tr>
+                  <tr>
                     <td> <label class="text-danger">Correo</label> </td>
-                   <td><div id="div8" class="form-group"><textarea id="IU8" type="email" class="form-control"  onfocus="limpiaCamposEnfocados(8)"></textarea></div></td> 
-                </tr>
-                <tr>
+                    <td>
+                      <div id="div8" class="form-group">
+                        <textarea id="IU8" name ="IU8" type="email" class="form-control"  onfocus="limpiaCamposEnfocados(8)"></textarea>
+                      </div>
+                    </td> 
+                  </tr>
+                  <tr>
                     <td> <label class="text-danger">Contraseña </label></td>
-                    <td><div id="div5" class="form-group"><input id="IU5" type="password" class="form-control"  onfocus="limpiaCamposEnfocados(5)"></textarea></div></td> 
-                </tr>
-				 <tr>
+                    <td>
+                      <div id="div5" class="form-group">
+                        <input id="IU5" name ="IU5" type="password" class ="form-control"  onfocus="limpiaCamposEnfocados(5)">
+                      </div>
+                    </td> 
+                  </tr>
+				          <tr>
                     <td> <label class="text-danger">Confirmar contraseña  </label></td>
-                    <td><div id="div6" class="form-group" ><input id="IU6" type="password" class="form-control"  onfocus="limpiaCamposEnfocados(6)"></textarea></div></td> 
-                </tr>
-					<tr>
+                    <td>
+                      <div id="div6" class="form-group" >
+                        <input id="IU6" name ="IU6" type="password" class="form-control"  onfocus="limpiaCamposEnfocados(6)">
+                      </div>
+                    </td> 
+                  </tr>
+					        <tr>
                     <td> <label class="text-danger">Administrador </label></td>
-					<td><div id="div7" class="form-group" style="margin-left:10px;"> <input  type="checkbox" id="IU7" value="enlace_checkbox" ></div></td>
+					          <td>
+                      <div id="div7" class="form-group" style="margin-left:10px;"> 
+                        <input  type="checkbox" id="IU7" name ="IU7" value="enlace_checkbox" >
+                      </div>
+                    </td>
                 </tr>
 
 
                 <tr>
-                    <td ><center><button type="button" class="btn btn-default"  onclick ="botonGuardar()">Guardar</button></center>
+                    <td ><center><button type="submit" class="btn btn-default" ">Guardar</button></center>
 					</td>
                     <td ><center><button type="button" class="btn btn-default" onclick="botonCancelar(true)">Cancelar</button></td></center>
                 </tr>
@@ -125,14 +157,90 @@
 				</div>
 			  
 		     </div>
-		
-
 	    
 <script type="text/javascript">
   
   $(document).ready(function () { //Metodo del calendario
 
   		//$("#menuDiv").load("/HTML/menu");
+
+     $('#Formulario input[type="password"], #Formulario textarea').tooltipster({
+        trigger: 'custom',
+        onlyOne: false,
+        position: 'right'
+    });
+
+
+     $('#Formulario').validate({
+          debug: true,
+        errorPlacement: function (error, element) {
+            $(element).tooltipster('update', $(error).text());
+            $(element).tooltipster('show');
+        },
+         success: function (label, element) {
+            $(element).tooltipster('hide');
+
+        },
+          rules: {
+            IU1: {
+              required: true
+            },
+            IU2: {
+              required: true
+            },
+            IU3: {
+              required: true
+            },
+            IU4: {
+              required: true,
+              number: true,
+              minlength:9,
+              maxlength:9
+            },
+            IU5: {
+              required: true
+            },
+            IU6: {
+              required: true
+            },
+            IU8: {
+              required: true
+            }
+          },
+          messages: {
+            IU1: {
+              required: "Se requiere nombre de usuario"
+            },
+            IU2: {
+              required: "Se requiere primer Apellido de usuario"
+            },
+            IU3: {
+              required: "Se requiere segundo Apellido de usuario"
+            },
+            IU4: {
+              required: "Se requiere identificación de usuario",
+              number: "La identificación es el número de cedula sin guiones",
+              minlength:"La identificacion debe contener 9 dígitos",
+              maxlength:"La identificacion debe contener 9 dígitos"
+            },
+            IU5: {
+              required: "Se requiere contraseña"
+            },
+            IU6: {
+              required: "Se requiere confirmación de contraseña"
+            },
+            IU8: {
+              required: "Se requiere correo electrónico de usuario",
+              email: "No es un formato de correo válido"
+            }
+          },
+          submitHandler: function(form) {
+             console.log('Intentando ingresar un usuario'); 
+             botonGuardar();         
+            }
+        });
+
+
         solicitarInformacionDeSesion("#EUM");
                 $('.date').datepicker({         
             });
@@ -142,9 +250,7 @@
 			});
      });
  
-						
- 
-  
+				
 </script>
     </body>
 </html>
