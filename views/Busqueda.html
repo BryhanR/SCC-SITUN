@@ -1,22 +1,34 @@
 <!DOCTYPE html>
 <html ng-app = "app">
     <head>
+	
+	
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="shortcut icon" href="../images/ico.ico" type="image/ico" />
         <title>Búsqueda</title>
-        <script src="\..\javascripts\script_menu.js"></script>
+
+
+
+       <script src="\..\javascripts\script_menu.js"></script>
 		<script type="text/javascript" src="\..\javascripts\script_BusquedaCorrespondencia.js"></script>
 	<script src="\..\javascripts\jquery-1.12.2.js"></script>
 	<script src="\..\javascripts\moment-2.15.1.js"></script>
-	<script src="\..\javascripts\bootstrap-3-3-7.min.js"></script>
+	<script src="\..\javascripts\bootstrap-3-3-7.min.js"></script><script type="text/javascript" src="\..\javascripts\BootstrapMenu.js"></script>
+	<script type="text/javascript" src="\..\javascripts\BootstrapMenu.min.js"></script>
 	<link rel="stylesheet" href="\..\stylesheets\bootstrap-3-3-7.min.css">
 	<script src="\..\javascripts\bootstrap-datetimepicker-4.7.14.js"></script>
 	<link rel="stylesheet" href="\..\stylesheets\bootstrap-datetimepicker-4.7.14.css">
 	<!-- Angular--> 
 	<script src="\..\javascripts\angular.min.js"></script>
+        <script src="\..\javascripts\paginacion-bootstrap-tpls-2.2.0.js"></script>
+
+
+    <script type="text/javascript" src="\..\javascripts\jquery.ui.position.js"></script>
+
+    <script type="text/javascript" src=".\..\javascripts\jquery.contextMenu.js"></script>
 </head>
 
-<body ng-app ng-controller = "ControllerAngular">
+<body ng-controller = "ControllerAngular">
 	<div id="menuDiv"></div>
 
 	<!-- Modal de MIAYUDA-->
@@ -66,7 +78,7 @@
 		 </div>
 		 	
 			<form class="navbar-form navbar-left">         
-            <div   class="form-group ">
+            <div   class="form-group "  style="width: 100%;">
 				<select class="form-control" id="opBusqueda" ng-model = "criterio">
 					<option value="Nº oficio">Nº Oficio
 					<option value="Destinatorio">Destinatorio                                            
@@ -75,12 +87,23 @@
 				</select> 
 				<input type="text" class="form-control" id="buscar" ng-keyup= "($event.which == 13)?buscar():0" />
 				<input type = "button" class="btn btn-default" id="buscar" value = "Buscar" ng-click="buscar()" />
-				<input type = "button"class="btn btn-default" id ="cancelar" value = "Cancelar"  ng-click="clear()" />
+				<input type = "button" class="btn btn-default" id ="cancelar" value = "Cancelar"  ng-click="clear()" />
+				<span ng-show="correspondencias.length>0"  style="float:right;">
+					<label>Mostrar </label>
+					<select class="form-control" ng-model = "pageSize" convert-to-number>
+					<option value="5">5
+					<option value="10" >10                                           
+					<option value="15">15                                         
+					<option value="20">20                                     
+				</select>
+				<label>Resultados por página </label>
+				</span>
+				
 			</div>
     
 	
-	<div  align="left" class="table table-bordered"  style="max-width: 1300px; max-height:390px; margin-top:10px; border: hidden;  overflow-y:auto;">
-	<table class="table" id="tabla_busqueda">
+	<div  align="left" class="table table-bordered"  style="max-width: 100%; max-height:390px; margin-top:10px; border: hidden;  overflow-y:auto;">
+	<table class="table" id="tabla_busqueda" ng-init='configPages()'>
 		
 
 <style type="text/css">
@@ -88,8 +111,10 @@
     pointer-events: none;
     font-color: gray;
     opacity: 0.4;
+
 }
-</style>	
+</style>
+
 <!-- Tabla cargada al buscar correspondencias -->
 		<thead> 
 			<tr class="danger">
@@ -109,37 +134,55 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat = "c in correspondencias">
-					<td style="max-width: 125px;"> {{c.tc_3 }} </td>
-					<td style="max-width: 100px;"> {{c.tc_4 | date:'dd/MM/yyyy'}} </td>
-					<td style="max-width: 100px;"> {{c.tc_2 | date:'dd/MM/yyyy'}} </td>
-					<td style="max-width: 125px;"> {{c.tc_8 }} </td>
-					<td style="max-width: 125px;"> {{c.tc_5 }} </td>
-					<td style="max-width: 125px;"> {{c.tc_6 }} </td>
-					<td style="max-width: 125px;"> {{c.tc_7 }} </td>					
-					<td style="max-width: 125px;"> {{c.tc_9 }} </td>
-					<td style="max-width: 125px;"> {{c.tc_10 }} </td>
-						<td style="max-width: 75px;"> 
+			<tr ng-repeat='c in correspondencias | startFromGrid: (currentPage-1) * pageSize | limitTo: pageSize' >
+					<td style="max-width: 9.6%;"> {{c.tc_3 }} </td>
+					<td style="max-width: 7.7%;"> {{c.tc_4 | date:'dd/MM/yyyy'}} </td>
+					<td style="max-width: 7.7%;"> {{c.tc_2 | date:'dd/MM/yyyy'}} </td>
+					<td style="max-width: 9.6%;"> {{c.tc_8 }} </td>
+					<td style="max-width: 9.6%;"> {{c.tc_5 }} </td>
+					<td style="max-width: 9.6%;"> {{c.tc_6 }} </td>
+					<td style="max-width: 9.6%;"> {{c.tc_7 }} </td>					
+					<td style="max-width: 9.6%;"> {{c.tc_9 }} </td>
+					<td style="max-width: 9.6%;"> {{c.tc_10 }} </td>
+						<td style="max-width:5.8%;"> 
 						<!-- Trigger the modal with a button -->
 						<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" ng-click="obtenerEnlaces(c)"><img src="../../../../images/enlace.png" width="20" height="20" /></button>
 					</td>
-					<td style="max-width: 75px;"> 
+					<td style="max-width:5.8%;"> 
 						<!-- Trigger the modal with a button -->
 						<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal2" ng-click="obtenerInformacion(c)"><img src="../../../../images/editar.png" width="20" height="20" /></button>
 						
 						
 					</td>
-					<td style="max-width: 75px;"> 
-						<!-- Trigger the modal with a button -->
+					<td style="max-width:5.8%;"> 
+						<!-- Trigger the modal with a button
+<!-- TERMINAR	-->		
+						
+					
 						<button type="button" class="btn btn-danger" data-toggle="modal"  ng-click="Alarma(c)"><img src="../../../../images/alarma.png" width="20" height="20" /></button>
 					</td>
-					<td style="max-width: 75px;">
-						<center><a ng-href="http://localhost:3000/Adjunto/{{c.tc_12}}" target="_blank" ng-class="c.tc_12.length==0?'disabled':''"><img src="../../../../images/documento.png" width="32" height="32" /></a>	</center><!-- TERMINAR	-->		
-										
+					<td style="max-width:5.8%;">
+					
+					<center><button id="demo2LeftBtn" data-toggle="modal" data-target="#myModal5" target="_blank" ng-click="AsignaUrl(c)"><img src="../../../../images/documento.png" width="32" height="32" /></button>	</center>
+									
 					</td>
 			</tr>
-		</tbody>        
+			<tr ng-show="correspondencias.length<=0">
+				<td  colspan="13">
+					<center><p class="lead text-danger">No se han encontrado resultados</p></center>
+				</td>
+			</tr>
+		</tbody>
+
 	</table>
+		
+		</div>
+
+			<div class='btn-group'>
+    			<ul ng-show='correspondencias.length>0' class="panel-danger" uib-pagination total-items="totalItems" ng-model="currentPage" max-size="paginationSize" items-per-page="pageSize" ng-change='pageChanged()' class="pagination-sm" boundary-links="true" force-ellipses="true" previous-text="Anterior" next-text="Siguiente" last-text="Último" first-text="Primero"></ul>
+        	</div>
+      </div>
+			
                </div>
       </form>
 	  
@@ -270,6 +313,7 @@
 			</tbody>
 		</table> 
 		</center>
+
       </div>
       <div class="modal-footer">
 	    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -279,64 +323,6 @@
   </div>
 </div>
 
-<!-- popup alarma-->
-		   	    <!-- Modal -->
-<!-- Modal -->
-<div ></div>
-<div id="myModal3" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-	 <div class="modal-content">
-      <div class="modal-header">		
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-		<center>
-			<h4>Ajuste de Alarma </h4>
-		</center>
-	  </div>
-      <div class="modal-body">
-	  <center>
-		<table class="table">
-			<thead>
-			<tr class="danger">
-				<td>
-					 <label class="text-danger">Fecha Aviso</label>
-				<td>
-					<div class='input-group date' id='datetimepicker33'>
-          					<input type='text' class="form-control" id="IC14"/>
-          					<span class="input-group-addon">
-            					<span class="glyphicon glyphicon-calendar" onclick="limpiaCamposEnfocados(3)"></span>
-          					</span>
-        				</div>
-				<td>		
-				</td>
-			</tr>
-			<tr class="danger">
-				<td>
-					 <label class="text-danger">Fecha Limite</label>
-				<td>
-					<div class='input-group date' id='datetimepicker44'>
-          					<input type='text' class="form-control" id="IC15"/>
-          					<span class="input-group-addon">
-            					<span class="glyphicon glyphicon-calendar" onclick="limpiaCamposEnfocados(3)"></span>
-          					</span>
-        				</div>
-				<td>
-				</td>
-			</tr>
-			</thead>	
-		</table>
-		</center>
-      </div>
-      <div class="modal-footer">
-	   <center>
-	  <button id="btnGd1" type="button" class="btn btn-default"  >Guardar</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-		</center>     
-	 </div>
-    </div>
-  </div>
-  </div>
-	<!-- fin del popup Alarma-->
 	
 	<!-- popup alarma-->
 		   	    <!-- Modal -->
@@ -403,6 +389,71 @@
   </div>
   </div>
 	<!-- fin del popup Alarma-->   
+	
+	
+	<div ></div>
+	   
+<div id="myModal5" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+	 <div class="modal-content">
+      <div class="modal-header">		
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		<center>
+			<h4>Archivo Adjunto </h4>	
+		</center>
+	  </div>
+      
+	   <div id="divAjuste2" class="modal-body" >   
+	  <center>
+		 <table class="table">
+			<thead>
+			<tr class="danger">
+				<td>
+					 <label class="text-danger">Ver Archivo Adjunto</label>
+				</td>
+					<td >
+					
+					
+					<a id="abrirDoc" ng-href="{{url}}" class="btn btn-default" target="_blank" >Abrir Documento</a>
+					
+				</td>
+			</tr>
+			<tr class="danger">
+				<td>
+					 <label class="text-danger">Editar Archivo Adjunto</label>
+					 
+					<td> <div class="input-group">
+                <label class="input-group-btn">
+                    <span class="btn btn-danger">
+                        <img src="../../../../images/adjuntar.png" width="20" height="20" /> <input id ='adjun' onchange = "dato_Adjunto()" style="display: none;" accept=".pdf" type="file">
+                    </span>
+                </label>
+                <input id='input_adjunto' class="form-control" readonly="" type="text" style="width:150px" disabled>
+            </div>
+				
+				
+				
+			<!-- Fin Adjuntar -->
+				</td>
+        			
+				
+			</tr>
+			</thead>
+			
+		</table>
+		</center>
+      </div>
+      <div class="modal-footer">
+	  <center>
+		<button id = "btnGda" type="button" class="btn btn-default"   >Guardar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </center>
+	  </div>
+    </div>
+  </div>
+  </div>
+	<!-- fin del popup Alarma--> 
 <script type="text/javascript">
 
 $(document).ready(function() {// Solicita la informacion de la sesion si aun no existe en el storage
@@ -412,11 +463,34 @@ $(document).ready(function() {// Solicita la informacion de la sesion si aun no 
 
 	$("#ayuda").click(
 	function(){$("#miAyuda").show();});
+	
+
+  
+      });
+
+
+let app = angular.module('app', ['ui.bootstrap']);
+app.controller('ControllerAngular', controllerAngular); 
+app.filter('startFromGrid', function() {
+  return function(input, start) {
+    start = +start;
+    return input.slice(start);
+  }
 });
 
-let app = angular.module('app', []);
-app.controller('ControllerAngular', controllerAngular); 
-
+app.directive('convertToNumber', function() {
+  return {
+    require: 'ngModel',
+    link: function(scope, element, attrs, ngModel) {
+      ngModel.$parsers.push(function(val) {
+        return parseInt(val, 10);
+      });
+      ngModel.$formatters.push(function(val) {
+        return '' + val;
+      });
+    }
+  };
+});
 /**
 * Funciones de los calendarios de la pagina
 **/
@@ -447,6 +521,41 @@ app.controller('ControllerAngular', controllerAngular);
     });
   
  
+
+function MB_03($scope)// Toma el tipo de busqueda y regresa el sufijo correspondiente a la dirección del servidor
+{
+	let op = $scope.criterio;
+	console.log("El tipo de busqueda es por: |" + op + "|");
+	switch(op)
+	{
+		case 'Nº oficio': // Oficio
+			return 'BO';
+		case 'Destinatorio': // Destinatario
+			return 'BD';
+		case 'Remitente': // Remitente
+			return 'BR';
+		case 'Asunto': // Asunto
+			return 'BA';
+	}
+}  
+
+function MB_04($scope) //Toma el criterio de busqueda y devuelve la columna que se debe buscar en la BD
+{
+	let op = $scope.criterio;
+	switch(op)
+	{
+		case 'Nº oficio': // Oficio
+			return 'TC_3';
+		case 'Destinatorio': // Destinatario
+			return 'TC_5';
+		case 'Remitente': // Remitente
+			return 'TC_7';
+		case 'Asunto': // Asunto
+			return 'TC_8';
+	}
+	
+} 
+
    $('#datetimepicker7').datetimepicker({
         format: 'DD-MM-YYYY', 
    		showClear:true
@@ -456,6 +565,29 @@ app.controller('ControllerAngular', controllerAngular);
         format: 'DD-MM-YYYY', 
    		showClear:true
     });
+/*
+var menu1 = new BootstrapMenu('#demo2LeftBtn',{
+  menuEvent: 'click', // default value, can be omitted
+  menuSource: 'element',
+  menuPosition: 'belowLeft', // default value, can be omitted
+  actions:[{
+      name: 'Ver',
+      onClick: function() {
+       // toastr.info("'Action' clicked!");
+      }
+    }, {
+      name: 'Editar',
+      onClick: function() {document.location.href="#myModal2";
+	  $("<a href='#myModal2'></a>").click(); 
+	   //window.open('#myModal12');
+	  console.log("e'#myModal12'ntro");
+       // toastr.info("'Another action' clicked!");
+      }
+    }]
+});
+*/
+
+
 
 
 </script>

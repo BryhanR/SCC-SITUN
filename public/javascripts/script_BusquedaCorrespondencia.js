@@ -1,10 +1,17 @@
+
+function dato_Adjunto(){ //
+adj= $('#adjun').prop('files');
+$('#input_adjunto').val(adj[0].name);
+}
 function controllerAngular($scope)//ControllerAngular
  {
 	$scope.criterio = "Asunto";
 	$scope.correspondencias = new Array();
-	$scope.updateCorrespondencias = c => $scope.correspondencias = c;
+	$scope.updateCorrespondencias = c => ($scope.correspondencias =c,$scope.totalItems=$scope.correspondencias.length);
 	$scope.buscar = _ => busquedaCorrespondencia($scope);
-	$scope.clear = _ => limpiaTabla($scope);
+	$scope.clear = _ => limpiaTabla($scope);	 
+	$scope.Adjuntando = f => actualizarAdj($scope,f);
+	$scope.AsignaUrl = r => UrlAdj($scope,r);
 	$scope.obtenerEnlaces	= n => buscaEnlaces($scope, n);
 	$scope.enlaces = new Array();
     $scope.obtenerInformacion	= e => asignarInformacion($scope, e);
@@ -12,13 +19,31 @@ function controllerAngular($scope)//ControllerAngular
 	$scope.actualiza =_ => actualizarInfo($scope);
 	$scope.Alarma= x => ajusteAlarma($scope,x);
 	$scope.nuevaAlarma = h => nuevaAlarma($scope, h);
-  }
+
+
+//-----------------------------
+	$scope.totalItems = 0;
+  	$scope.currentPage = 1;
+  	$scope.pageSize = 10;
+  	$scope.paginationSize = 5;
+
+  $scope.setPage = function (pageNo) {
+    $scope.currentPage = pageNo;
+  };
+
+  $scope.pageChanged = function() {
+    console.log('Page changed to: ' + $scope.currentPage);
+    console.log('total Items: ' + $scope.totalItems);
+  };
+
   
-   
+//-----------------------------
+      };
+ 
  
  function buscaEnlaces($scope, cor) //Muestra todos los enlaces relacionados con una correspondencia especifica
  {	
-	 fetch( 'http://localhost:3000/api/ALL/ENLACES', {  
+	 fetch( 'http://' + ip + ':'+ puerto +'/api/ALL/ENLACES', {  
     method: 'POST', 
     datatype:'json',
     headers: {  
@@ -37,11 +62,11 @@ function controllerAngular($scope)//ControllerAngular
  }
  
  
- let conditional;
+ var conditional;
   function asignarInformacion($scope, cor){ //Busca la correspondencia y muestra la informacion de esta
-   conditional=cor.tc_1;
+
    console.log("asigna"+cor.tc_1);
-	 fetch( 'http://localhost:3000/api/TC/BC', {  
+	 fetch( 'http://' + ip + ':'+ puerto +'/api/TC/BC', {  
     method: 'POST', 
     datatype:'json',
     headers: {  
@@ -55,6 +80,33 @@ function controllerAngular($scope)//ControllerAngular
 			)
 	.catch(err => console.log('Request failed', err));
  }
+ 
+
+ 
+ 
+ 
+// let keyUrl;
+ function UrlAdj($scope, cor){
+	
+	 $scope.url='http://' + ip + ':'+ puerto +'/Adjunto/'+cor.tc_12;
+	if(cor.tc_12.length!=0)
+		$("#abrirDoc").removeAttr("disabled");
+	else{
+		
+		 $('#abrirDoc').attr('disabled', 'disabled');
+		 $scope.url='';
+	}
+		
+	 $('#input_adjunto').val(cor.tc_12);
+	  $("#btnGda").click(function(){
+		console.log("guarde");
+		actualizarAdj(cor.tc_1);
+		$("[data-dismiss=modal]").trigger({ type: "click" });
+		busquedaCorrespondencia($scope)});
+ }
+
+ 
+
  
  let person;
  let condicion;
@@ -83,7 +135,7 @@ function controllerAngular($scope)//ControllerAngular
 {								//y lo cambia por el id de la persona
  	
     console.log("Person"+person);
-	fetch( 'http://localhost:3000/api/TP/B', {  
+	fetch( 'http://' + ip + ':'+ puerto +'/api/TP/B', {  
     method: 'POST', 
     datatype:'json',
     headers: {  
@@ -106,10 +158,17 @@ function controllerAngular($scope)//ControllerAngular
  }
  
  function busquedaCorrespondencia($scope)  //Metodo de Busqueda
- {
+ { 
  	console.log("Retornado de url > " + tipoBusqueda($scope));
 	let h3 = document.getElementById('buscar').value;
-	 fetch( 'http://localhost:3000/api/TC/'+tipoBusqueda($scope), {  
+	 let table1=document.getElementById("tabla_busqueda").rows.length;
+	 let table= $("#tabla_busqueda tr").length;
+	 
+	if(table<1){
+		 $("#mensaje").html('No se encontrarón coincidencias');
+		 
+	 }else{
+	 fetch( 'http://' + ip + ':'+ puerto +'/api/TC/'+tipoBusqueda($scope), {  
     method: 'POST', 
     datatype:'json',
     headers: {  
@@ -119,10 +178,13 @@ function controllerAngular($scope)//ControllerAngular
       }
 	)	 
 	.then(res => res.json())
-	.then(obj => $scope.$apply( _=>
-					$scope.updateCorrespondencias(obj.data)))
-	.catch(err => console.log('Request failed', err));
+	.then(obj =>{
+		$scope.$apply( _=>
+		$scope.updateCorrespondencias(obj.data));})
+		.catch(err => console.log('Request failed', err));
+	 }
  }
+ 
  
 function tipoBusqueda($scope)// Toma el tipo de busqueda y regresa el sufijo correspondiente a la dirección del servidor
 {
@@ -192,6 +254,35 @@ function actualizarInfo($scope){ //Actualiza la informacion que se haya editado
     busquedaCorrespondencia($scope);
 	$("[data-dismiss=modal]").trigger({ type: "click" });
 	}
+  }
+  
+  function actualizarAdj(cor){ //Actualiza la informacion que se haya editado
+  console.log("conditionalllll", conditional);
+  let doc = $('#input_adjunto').val();
+  console.log("doooc",doc);
+  fetch( 'http://' + ip + ':'+ puerto +'/api/TC/UDA', {  
+    method: 'POST', 
+    datatype:'json',
+    headers: {  
+      "Content-type": "application/x-www-form-urlencoded",
+
+      } ,
+    body: "TC_1="+cor+ "&TC_12="+doc
+      }
+	  )
+  .then(function(response) {
+
+  
+			if(doc!=''){ 
+			 var formData  = new FormData();		
+			 formData.append('arc', adj[0]);
+			fetch('http://' + ip + ':'+ puerto +'/upload', {
+    		method: 'POST',
+    		body: formData
+  });
+							}else
+						$("#mensaje").text("Fallo al realizar la acción"); 
+  });
   }
   
   function checkCampoOficio(){ //Cambia el valor del campo referente al numero de oficio si la opcion SIN OFICIO esta marcada
@@ -347,7 +438,7 @@ function cambioClase2(){//Realiza el cambio de clase de los campon de fecha del 
 	
 function actualizarCorrespondencia($scope,cor){ //Recoge los datos de los campos y realiza el fecth de inserción 
 	var d=new Date($("#IC1").val());
-	let a1=conditional;
+	let a1=condicion;
 	let b3 = $("#IC1").val().substr(6,4)+"-"+$("#IC1").val().substr(3,2)+"-"+$("#IC1").val().substr(0,2);
 	console.log("anooo "+b3);
 	let c3 = $('#IC2').val().toUpperCase(); 
@@ -361,7 +452,7 @@ function actualizarCorrespondencia($scope,cor){ //Recoge los datos de los campos
 	let j3 = $('#IC9').val().toUpperCase();
     let k3 = $('#IC10').val().toUpperCase();
 
- fetch( 'http://localhost:3000/api/TC/UD', {  
+ fetch( 'http://' + ip + ':'+ puerto +'/api/TC/UD', {  
     method: 'POST', 
     datatype:'json',
     headers: {  
@@ -390,7 +481,7 @@ function ajusteAlarma($scope ,cor)  //Metodo de ajuste de alarma
  {   let corr=cor.tc_1;
  	console.log("Retornado de url > " + "Alarmas");
 	console.log( cor.tc_1);
-	fetch( 'http://localhost:3000/api/TA/ALL_TA', {  
+	fetch( 'http://' + ip + ':'+ puerto +'/api/TA/ALL_TA', {  
     method: 'POST', 
     datatype:'json',
     headers: {  
@@ -429,7 +520,7 @@ function cargaAlarma(data,corr){ //carga los datos de la alarma para mostrar en 
  function actualizarAlarma(data){ //Recoge los datos de los campos y realiza el fecth de actualizacion de alarma
 	let b3 = $("#IC15").val().substr(6,4)+"-"+$("#IC15").val().substr(3,2)+"-"+$("#IC15").val().substr(0,2);
 	let d3 = $("#IC14").val().substr(6,4)+"-"+$("#IC14").val().substr(3,2)+"-"+$("#IC14").val().substr(0,2);
-	fetch( 'http://localhost:3000/api/TA/UDF', {  
+	fetch( 'http://' + ip + ':'+ puerto +'/api/TA/UDF', {  
     method: 'POST', 
     datatype:'json',
     headers: {  
@@ -450,7 +541,7 @@ function nuevaAlarma(data){//Insercion de una nueva alarma a las correpondencia 
 	    let c5 = $("#IC17").val().substr(6,4)+"-"+$("#IC17").val().substr(3,2)+"-"+$("#IC17").val().substr(0,2);
 		let d5 = 0;
 		if(b5!= "" && c5!=""){ 
-		fetch( 'http://localhost:3000/api/TA/I', {  
+		fetch( 'http://' + ip + ':'+ puerto +'/api/TA/I', {  
 			method: 'POST', 
 			datatype:'json',
 			headers: {  
@@ -469,3 +560,7 @@ function nuevaAlarma(data){//Insercion de una nueva alarma a las correpondencia 
 		});
 		}
 	}
+	
+	
+	
+

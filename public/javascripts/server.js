@@ -23,8 +23,8 @@ var db = pgp(connectionString);
 //-------- CREACION DE UN NUEVO DATO DE UNA TABLA ----------
 //-------- CREACION DE UN NUEVO TP EN LA TABLA ----------
 function createTP(req, res, next) {
-  db.none('insert into TP(TP_1, TP_2, TP_3, TP_4)' +
-      'values(${TP_1}, ${TP_2}, ${TP_3}, ${TP_4})',
+  db.none('insert into TP(TP_1, TP_2, TP_3, TP_4, TP_5)' +
+      'values(${TP_1}, ${TP_2}, ${TP_3}, ${TP_4}, ${TP_5})',
     req.body)
     .then(function () {
       res.status(200)
@@ -186,6 +186,25 @@ function getSingleTP(req, res, next) {
     });
 }
 
+//------ RETORNO DE TP por coincidencia ---------------------
+function getALLTP4(req, res, next) {
+	var low = req.body.TP_4.toLowerCase();
+	req.body.TP_4 = '%' + low + '%';
+  db.any('select * from TP where TP_4  LIKE ${TP_4}', req.body) // //-/**-**--**-*--*-*-*-
+    .then(function (data) {
+      console.log("Solucitud de una persona..");
+      res.status(200)
+        .json({
+          status: 'success',
+          data: data,
+          message: 'Retrieved ONE TP'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
 //------ RETORNO DE UN TU ESPECIFICO ---------------------
 function getSingleTU(req, res, next) {
   db.one('select * from TU where TU_1 = ${TU_1}', req.body)
@@ -269,8 +288,10 @@ function getALLTP3(req, res, next) {
 function getALLTC1(req, res, next) {
 	var low = req.body.TC_3.toLowerCase();
  req.body.TC_3 = '%' + low + '%';
- var promises = [];
-  db.any('select * from TC where LOWER(TC_3) LIKE ${TC_3}', req.body)
+ let sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
+   "from TC, TP where LOWER(TC_3) LIKE ${TC_3} and TC_9 = TP_4";
+  //db.any('select * from TC where LOWER(TC_3) LIKE ${TC_3}', req.body)
+  db.any(sql, req.body)
 	.then( function (data) {
 		res.status(200)
         .json({
@@ -286,8 +307,10 @@ function getALLTC5(req, res, next) {
 	console.log("entra");
 	var low = req.body.TC_1;
  req.body.TC_1 = low ;
- var promises = [];
-  db.any('select * from TC where TC_1 = ${TC_1}', req.body)
+ let sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
+   "from TC, TP where TC_1 = ${TC_1} and TC_9 = TP_4";
+  //db.any('select * from TC where TC_1 = ${TC_1}', req.body)
+  db.any(sql, req.body)
 	.then( function (data) {
 		res.status(200)
         .json({
@@ -304,15 +327,7 @@ function getAllEnlaces(req, res, next)	// devuelve los enlaces de una correspond
 	var flag = true;
     db.func('Enlaces',c)
 	.then( v => (v[0].enlaces) ? v[0].enlaces :[])
-	.then(en => en.reduce( (ant, act) => 
-										(
-											(act.tc_1 != c ) ? 
-															ant[ flag ? 0 : 1 ].push(act.tc_3 )
-															: flag = false
-										
-											,ant 
-										)
-							,[[],[]]))
+	.then(en => en.reduce( (ant, act) => ((act.a >0 ) ? ant[1].push(act.tc_3 ):ant[0].push(act.tc_3 ),ant ),[[],[]]))
 	.then(function (data) {
       res.status(200)
         .json({
@@ -327,9 +342,11 @@ function getAllEnlaces(req, res, next)	// devuelve los enlaces de una correspond
 //------ RETORNO DE UN TC ESPECIFICO SEGUN TC_5 ---------------------
 function getALLTC2(req, res, next) {
 	var low = req.body.TC_5.toLowerCase();
-	 var promises = [];
  req.body.TC_5 =  '%' + low + '%';
-  db.any('select * from TC where LOWER(TC_5) LIKE ${TC_5}', req.body)
+ let sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
+   "from TC, TP where LOWER(TC_5) LIKE ${TC_5} and TC_9 = TP_4";
+  //db.any('select * from TC where LOWER(TC_5) LIKE ${TC_5}', req.body)
+  db.any(sql, req.body)
     .then(function (data) {
       res.status(200)
         .json({
@@ -347,8 +364,10 @@ function getALLTC2(req, res, next) {
 function getALLTC3(req, res, next) {
 	var low = req.body.TC_7.toLowerCase();
   req.body.TC_7 =  '%' + low + '%';
-   var promises = [];
-  db.any('select * from TC where LOWER(TC_7) LIKE ${TC_7}', req.body)
+    let sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
+   "from TC, TP where LOWER(TC_7) LIKE ${TC_7} and TC_9 = TP_4";
+  //db.any('select * from TC where LOWER(TC_7) LIKE ${TC_7}', req.body)
+  db.any(sql, req.body)
       .then(function (data) {
       res.status(200)
         .json({
@@ -366,8 +385,10 @@ function getALLTC3(req, res, next) {
 function getALLTC4(req, res, next) {
 	var low = req.body.TC_8.toLowerCase();
 	req.body.TC_8 =  '%' +low+'%';
-	 var promises = [];
-	db.any('select * from TC where LOWER(TC_8) LIKE ${TC_8}', req.body)
+   let sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
+   "from TC, TP where LOWER(TC_8) LIKE ${TC_8} and TC_9 = TP_4";
+	//db.any('select * from TC where LOWER(TC_8) LIKE ${TC_8}', req.body)
+  db.any(sql, req.body)
     .then(function (data) {
       res.status(200)
         .json({
@@ -454,7 +475,7 @@ function getALLTA1(req, res, next) {
 //-------- ACTUALIZACIONES  DE UNA TABLA ----------
 //-------- ACTUALIZACION DE LA TABLA TP ----------
 function updateTP(req, res, next) {
-  db.none('update TP set TP_1=${TP_1}, TP_2=${TP_2}, TP_3=${TP_3} where TP_4=${TP_4}',
+  db.none('update TP set TP_1=${TP_1}, TP_2=${TP_2}, TP_3=${TP_3}, TP_5=${TP_5} where TP_4=${TP_4}',
     req.body)
     .then(function () {
       res.status(200)
@@ -498,6 +519,22 @@ function updateTC(req, res, next) {
         .json({
           status: 'success',
           message: 'Updated TC'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+//-----Actualizar adjunto
+function updateTCAdj(req, res, next) {
+	req.body.TC_1 = parseInt(req.body.TC_1);
+  db.none('update TC set TC_12=${TC_12} where TC_1=${TC_1}',
+    req.body)
+    .then(function () {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'Updated TC Adjunto'
         });
     })
     .catch(function (err) {
@@ -668,7 +705,7 @@ function getLastTC(req, res, next) {
 
 function getTPTU(req, res, next) {
 console.log('Entro '+req.TU_1);
-  db.any('select TP_1, TP_2, TP_3, TU_1, TU_2, TU_3 from TP, TU '+
+  db.any('select TP_1, TP_2, TP_3, TP_5, TU_1, TU_2, TU_3 from TP, TU '+
      'where TU_1 = ${TU_1} and TP_4 = TU_1', req.body)
     .then(function (data) {
       res.status(200)
@@ -686,7 +723,7 @@ console.log('Entro '+req.TU_1);
 
 function getUSR(usr) {
 console.log('Entro '+usr.TU_1);
-  return db.any('select TP_1, TP_2, TP_3, TU_1, TU_2, TU_3 from TP, TU '+
+  return db.any('select TP_1, TP_2, TP_3, TP_5, TU_1, TU_2, TU_3 from TP, TU '+
      'where TU_1 = ${TU_1} and TP_4 = TU_1', usr)
     /*.then(function (data) {
       console.log("data recogida en server...");
@@ -698,9 +735,21 @@ console.log('Entro '+usr.TU_1);
     });*/
 }
 
+function resetPassword(usr)
+{
+  usr.TU_2 = generar(6);
+
+  return db.none('update TU set TU_2 = ${TU_2} where TU_1=${TU_1}',usr);
+}
 
 
-
+function generar(longitud)
+{
+  var caracteres = "abcdefghijkmnpqrtuvwxyzABCDEFGHIJKLMNPQRTUVWXYZ2346789";
+  var contraseña = "";
+  for (i=0; i<longitud; i++) contraseña += caracteres.charAt(Math.floor(Math.random()*caracteres.length));
+  return contraseña;
+}
 
 //------ EXPORTACIONES DE LOS MODULOS ---------
 module.exports = {
@@ -709,6 +758,7 @@ module.exports = {
   getALLTP1: getALLTP1,
   getALLTP2: getALLTP2,
   getALLTP3: getALLTP3,
+  getALLTP4: getALLTP4,
   getAllTU: getAllTU,
   getAllTC: getAllTC,
   getSingleTP: getSingleTP,
@@ -736,10 +786,12 @@ module.exports = {
   updateTP: updateTP,
   updateTU: updateTU,
   updateTC: updateTC,
+  updateTCAdj: updateTCAdj,
   updateTE: updateTE,
   getLastTC: getLastTC,
   updateTA: updateTA,
   updateTAFechas:updateTAFechas,
   getAllEnlaces: getAllEnlaces,
-  getUSR: getUSR
+  getUSR: getUSR,
+  resetPassword: resetPassword
 };

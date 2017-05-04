@@ -31,11 +31,32 @@ function controllerAngular($scope)//ControllerAngular
 	$scope.setCurrent = c => $scope.current = c;
 	$scope.updateDoc = a => modificaCampos(a, $scope);//$scope.current == 1? ($scope.doc1 = a, deshabilitar('E1')): ($scope.doc2 = a, deshabilitar('E2'));
 	
-	$scope.updateCorrespondencias = c => $scope.correspondencias = c;
+	$scope.updateCorrespondencias = c => ($scope.correspondencias =c,$scope.totalItems=$scope.correspondencias.length);
 	$scope.buscar = (a,b) => busqueda(a,$scope,b);
 	$scope.enlazar = _ => crearEnlace($scope);
 	
 	$scope.editar = d => botonEditar(d, $scope);
+
+
+
+//-----------------------------
+	$scope.totalItems = 0;
+  	$scope.currentPage = 1;
+  	$scope.pageSize = 10;
+  	$scope.paginationSize = 5;
+
+  $scope.setPage = function (pageNo) {
+    $scope.currentPage = pageNo;
+  };
+
+  $scope.pageChanged = function() {
+    console.log('Page changed to: ' + $scope.currentPage);
+    console.log('total Items: ' + $scope.totalItems);
+  };
+
+  
+//-----------------------------
+	
 		
   }
   
@@ -68,7 +89,7 @@ function controllerAngular($scope)//ControllerAngular
 		let criterio = ((keycode != 8)?(h3 + String.fromCharCode(keycode)) : h3.substr(0,h3.length-1)).toUpperCase();
 
 	
-		fetch( 'http://localhost:3000/api/TC/' + tipoBusqueda($scope), {  
+		fetch( 'http://' + ip + ':'+ puerto +'/api/TC/' + tipoBusqueda($scope), {  
 			method: 'POST', 
 			datatype:'json',
 			headers: {  
@@ -142,7 +163,7 @@ function tipoBusquedaBD($scope) //Toma el criterio de busqueda y devuelve la col
 		
 		}
 		else{
-		fetch( 'http://localhost:3000/api/TE/I', {  
+		fetch( 'http://' + ip + ':'+ puerto +'/api/TE/I', {  
 			method: 'POST', 
 			datatype:'json',
 			headers: {  
@@ -180,6 +201,6 @@ function tipoBusquedaBD($scope) //Toma el criterio de busqueda y devuelve la col
 	if(banderita == true)
 	{
 		localStorage.clear();
-		window.location.href ='http://localhost:3000/HTML/Ingreso%20de%20Correspondencia'
+		window.location.href ='http://' + ip + ':'+ puerto +'/HTML/Ingreso%20de%20Correspondencia'
 	}
   }

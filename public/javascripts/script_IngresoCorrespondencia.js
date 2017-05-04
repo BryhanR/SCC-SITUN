@@ -20,8 +20,9 @@ function controllerAngular($scope)//ControllerAngular
   
   function actualizaTablaAlarmas($scope) { //Actualiza la tabla de alarmas
   
-	 fetch( 'http://localhost:3000/api/TA/ALL_FECHA', {  
+	 fetch( 'http://' + ip + ':'+ puerto +'/api/TA/ALL_FECHA', {  
     method: 'POST', 
+    mode: 'no-cors',
     datatype:'json',
     headers: {  
       "Content-type": "application/x-www-form-urlencoded"  
@@ -36,7 +37,7 @@ function controllerAngular($scope)//ControllerAngular
  function eliminaAlarma(a, $scope){ //Elimina las alarmas de la tabla
 
 $("#IC15").click(function(){
-    fetch( 'http://localhost:3000/api/TA/UD', {  
+    fetch( 'http://' + ip + ':'+ puerto +'/api/TA/UD', {  
     method: 'POST', 
     datatype:'json',
     headers: {  
@@ -110,7 +111,7 @@ function ingresoCorrespondencia($scope){ //Recoge los datos de los campos y real
 
   
   console.log("xxx "+b3);
- fetch( 'http://localhost:3000/api/TC/I', {  
+ fetch( 'http://' + ip + ':'+ puerto +'/api/TC/I', {  
     method: 'POST', 
     datatype:'json',
     headers: {  
@@ -370,7 +371,7 @@ function cambioClase2(){//Realiza el cambio de clase de los campon de fecha del 
 }
 function consultaIdCorrespondencia(){//Realiza la consulta del id de la ultima correspondencia ingresada
 					//Guarda el dato en el localstorage y cambia a la pagina a la de enlace
-		fetch( 'http://localhost:3000/api/TC/BC', {  
+		fetch( 'http://' + ip + ':'+ puerto +'/api/TC/BC', {  
 			method: 'GET', 
 			datatype:'json',
 			headers: {  
@@ -384,7 +385,7 @@ function consultaIdCorrespondencia(){//Realiza la consulta del id de la ultima c
 			let correspondencia = new Correspondencia(obj.data[0].tc_3,y,true); // // Aqui necesitamos los datos de la correspondencia de la BD
 			localStorage.setItem("user",JSON.stringify(correspondencia));
 		})
-		.then( _ => window.location.href='http://localhost:3000/HTML/Enlace%20de%20Documentos')
+		.then( _ => window.location.href='http://' + ip + ':'+ puerto +'/HTML/Enlace%20de%20Documentos')
 		.catch(function(error) {  
 			console.log('Request failed', error);  
 		});
@@ -397,7 +398,7 @@ function existeCorrespondencia($scope){//Realiza la consulta si la correspondenc
 	     return;
 		}
 	let parametro = $('#IC2').val().toUpperCase(); 
-	fetch( 'http://localhost:3000/api/TC/BO', {  
+	fetch( 'http://' + ip + ':'+ puerto +'/api/TC/BO', {  
     method: 'POST', 
     datatype:'json',
     headers: {  
@@ -444,7 +445,7 @@ function existeCorrespondencia($scope){//Realiza la consulta si la correspondenc
 			limpiarCampos();
 		}
 		if(b5!= "" && c5!=""){ 
-		fetch( 'http://localhost:3000/api/TA/I', {  
+		fetch( 'http://' + ip + ':'+ puerto +'/api/TA/I', {  
 			method: 'POST', 
 			datatype:'json',
 			headers: {  
@@ -478,7 +479,7 @@ function existeCorrespondencia($scope){//Realiza la consulta si la correspondenc
 	}
 	
 	function ultimaCorrespondencia(){  //Devuelve el ultimo codigo de la ultima correspondencia
-	return Promise.resolve(fetch( 'http://localhost:3000/api/TC/BC', {  
+	return Promise.resolve(fetch( 'http://' + ip + ':'+ puerto +'/api/TC/BC', {  
     method: 'GET', 
     datatype:'json',
     headers: {  

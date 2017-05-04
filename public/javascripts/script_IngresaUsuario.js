@@ -2,7 +2,7 @@
 function existeUsuario(){//Realiza la consulta si un usuario existe
  
 	let d = $('#IU4').val().toUpperCase();
-	 fetch( 'http://localhost:3000/api/TP/B', {  
+	 fetch( 'http://' + ip + ':'+ puerto +'/api/TP/B', {  
     method: 'POST', 
     datatype:'json',
     headers: {  
@@ -43,29 +43,29 @@ function ingresaInformacion($scope){ //Recoge los datos de los campos y realiza 
 	let f3 = $('#IU2').val().toUpperCase();
 	let g3 = $('#IU3').val().toUpperCase();
 	let h3 = $('#IU4').val().toUpperCase();
-	let o3 = $('#IU5').val().toUpperCase();
-	//let i3 = $('#IU6').val().toUpperCase();
+	let o3 = $('#IU5').val();//.toUpperCase();
+	let i3 = $('#IU8').val();
 	let j3;
 	if($("#IU7").prop("checked"))
 	 j3 = '1'; 
 	else
 	j3='0';
-	ingresaPersona(e3,f3,g3,h3);
+	ingresaPersona(e3,f3,g3,h3,i3);
 	ingresaUsuario(h3,o3,j3);
 	$("#mensaje").text("Acción realiza con éxito");
  
 }
 
 
-function ingresaPersona(a,b,c,d){// Realiza la inserción de una persona a la base de datos
+function ingresaPersona(a,b,c,d,e){// Realiza la inserción de una persona a la base de datos
 
- fetch( 'http://localhost:3000/api/TP/I', {  
+ fetch( 'http://' + ip + ':'+ puerto +'/api/TP/I', { 
     method: 'POST', 
     datatype:'json',
     headers: {  
       "Content-type": "application/x-www-form-urlencoded"  
       } ,
-    body: "TP_1="+ a + "&TP_2="+ b +"&TP_3="+ c +"&TP_4="+ d
+    body: "TP_1="+ a + "&TP_2="+ b +"&TP_3="+ c +"&TP_4="+ d + "&TP_5="+e
       }
 	  )
   .then(function(response) {
@@ -82,7 +82,7 @@ function ingresaPersona(a,b,c,d){// Realiza la inserción de una persona a la ba
 	
 	function ingresaUsuario(a2,b2,c2){//Realiza la inserciónde un usuario a la base de datos
 
-	fetch( 'http://localhost:3000/api/TU/I', {  
+	fetch( 'http://' + ip + ':'+ puerto +'/api/TU/I', {  
     method: 'POST', 
     datatype:'json',
     headers: {  
