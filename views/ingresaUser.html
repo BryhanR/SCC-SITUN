@@ -171,7 +171,7 @@
     });
 
 
-     $('#Formulario').validate({
+   validator = $('#Formulario').validate({
           debug: true,
         errorPlacement: function (error, element) {
             $(element).tooltipster('update', $(error).text());
@@ -198,10 +198,12 @@
               maxlength:9
             },
             IU5: {
-              required: true
+              required: true,
+              equalTo: "#IU6"
             },
             IU6: {
-              required: true
+              required: true,
+              equalTo: "#IU5"
             },
             IU8: {
               required: true
@@ -224,10 +226,12 @@
               maxlength:"La identificacion debe contener 9 dígitos"
             },
             IU5: {
-              required: "Se requiere contraseña"
+              required: "Se requiere contraseña",
+              equalTo: "Las contraseñas no coinciden"
             },
             IU6: {
-              required: "Se requiere confirmación de contraseña"
+              required: "Se requiere confirmación de contraseña",
+              equalTo: "Las contraseñas no coinciden"
             },
             IU8: {
               required: "Se requiere correo electrónico de usuario",

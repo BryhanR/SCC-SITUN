@@ -33,7 +33,6 @@ function existeUsuario(){//Realiza la consulta si un usuario existe
 	 if(validaCampos())
 	existeUsuario();	
 	
-	
 	}
 	
 function ingresaInformacion($scope){ //Recoge los datos de los campos y realiza el fecth de inserción 
@@ -224,8 +223,11 @@ function cambioClase1(op){//Realiza un cambio de clase a los campos de entrada d
 	default: break;
 	}
 }	
+
+var validator;
 	
 function botonCancelar(valor){//Metodo del boton cancelar 
+validator.hideErrors();
 if(valor==true){
 limpiaCampos();
 limpiaDivMensaje();
