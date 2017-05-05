@@ -12,7 +12,7 @@ function controllerAngular($scope)//ControllerAngular
 	$scope.updateAlarmas= c => $scope.alarmas = c;
 	$scope.init = _ => actualizaTablaAlarmas($scope);	
 	$scope.visto = a => eliminaAlarma(a, $scope);
-	$scope.guardarCorrespondencia =   _  => existeCorrespondencia($scope);
+	$scope.guardarCorrespondencia =   _  => ingresoCorrespondencia($scope);//existeCorrespondencia($scope);
 	$scope.updateU = u => $scope.usuario = u;
 	$scope.usuario = "gaga";
   }
@@ -138,7 +138,7 @@ function ingresoCorrespondencia($scope){ //Recoge los datos de los campos y real
 							if(doc!=''){ 
 							 var formData  = new FormData();		
 							 formData.append('arc', adj[0]);
-							fetch('http://localhost:3000/upload', {
+							fetch('http://'+ip+':'+puerto+'/upload', {
     						method: 'POST',
     						body: formData
   });
