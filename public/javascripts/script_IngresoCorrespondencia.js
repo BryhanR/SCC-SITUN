@@ -12,7 +12,7 @@ function controllerAngular($scope)//ControllerAngular
 	$scope.updateAlarmas= c => $scope.alarmas = c;
 	$scope.init = _ => actualizaTablaAlarmas($scope);	
 	$scope.visto = a => eliminaAlarma(a, $scope);
-	$scope.guardarCorrespondencia =   _  => ingresoCorrespondencia($scope);//existeCorrespondencia($scope);
+	$scope.guardarCorrespondencia =   _  => existeCorrespondencia($scope);
 	$scope.updateU = u => $scope.usuario = u;
 	$scope.usuario = "gaga";
   }
@@ -398,7 +398,7 @@ function existeCorrespondencia($scope){//Realiza la consulta si la correspondenc
 	     return;
 		}
 	let parametro = $('#IC2').val().toUpperCase(); 
-	fetch( 'http://' + ip + ':'+ puerto +'/api/TC/BO', {  
+	/*fetch( 'http://' + ip + ':'+ puerto +'/api/TC/BO', {  
     method: 'POST', 
     datatype:'json',
     headers: {  
@@ -425,7 +425,9 @@ function existeCorrespondencia($scope){//Realiza la consulta si la correspondenc
 	.then( _ => subePagina())
 	.catch(err => {
 		console.log('Request failed', err)});
-		
+		*/
+		ingresoCorrespondencia($scope);
+		subePagina();
 	}
 	
 	
