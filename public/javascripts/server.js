@@ -288,7 +288,7 @@ function getALLTP3(req, res, next) {
 function getALLTC1(req, res, next) {
 	var low = req.body.TC_3.toLowerCase();
  req.body.TC_3 = '%' + low + '%';
- let sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
+ var sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
    "from TC, TP where LOWER(TC_3) LIKE ${TC_3} and TC_9 = TP_4";
   //db.any('select * from TC where LOWER(TC_3) LIKE ${TC_3}', req.body)
   db.any(sql, req.body)
@@ -307,7 +307,7 @@ function getALLTC5(req, res, next) {
 	console.log("entra");
 	var low = req.body.TC_1;
  req.body.TC_1 = low ;
- let sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
+ var sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
    "from TC, TP where TC_1 = ${TC_1} and TC_9 = TP_4";
   //db.any('select * from TC where TC_1 = ${TC_1}', req.body)
   db.any(sql, req.body)
@@ -343,7 +343,7 @@ function getAllEnlaces(req, res, next)	// devuelve los enlaces de una correspond
 function getALLTC2(req, res, next) {
 	var low = req.body.TC_5.toLowerCase();
  req.body.TC_5 =  '%' + low + '%';
- let sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
+ var sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
    "from TC, TP where LOWER(TC_5) LIKE ${TC_5} and TC_9 = TP_4";
   //db.any('select * from TC where LOWER(TC_5) LIKE ${TC_5}', req.body)
   db.any(sql, req.body)
@@ -364,7 +364,7 @@ function getALLTC2(req, res, next) {
 function getALLTC3(req, res, next) {
 	var low = req.body.TC_7.toLowerCase();
   req.body.TC_7 =  '%' + low + '%';
-    let sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
+    var sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
    "from TC, TP where LOWER(TC_7) LIKE ${TC_7} and TC_9 = TP_4";
   //db.any('select * from TC where LOWER(TC_7) LIKE ${TC_7}', req.body)
   db.any(sql, req.body)
@@ -385,7 +385,7 @@ function getALLTC3(req, res, next) {
 function getALLTC4(req, res, next) {
 	var low = req.body.TC_8.toLowerCase();
 	req.body.TC_8 =  '%' +low+'%';
-   let sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
+   var sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
    "from TC, TP where LOWER(TC_8) LIKE ${TC_8} and TC_9 = TP_4";
 	//db.any('select * from TC where LOWER(TC_8) LIKE ${TC_8}', req.body)
   db.any(sql, req.body)
