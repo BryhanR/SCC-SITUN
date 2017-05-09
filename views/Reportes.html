@@ -120,11 +120,10 @@
 								<thead> 
 									<tr class="danger">
 										<td>#Oficio</td>
-										<td>F.Oficio</td>
-										<td>F.Recibido</td>
+										<td>Fecha de Oficio</td>
+										<td>Fecha Recibido</td>
 										<td>Asunto</td>
 										<td>Destino</td>
-										<td>Copia</td>
 										<td>Remitente</td>			
 										<td>Estado</td>
 									</tr>
@@ -136,7 +135,6 @@
 										<td> {{c.tc_2 | date:'dd/MM/yyyy'}} </td>
 										<td> {{c.tc_8 }} </td>
 										<td> {{c.tc_5 }} </td>
-										<td> {{c.tc_6 }} </td>
 										<td> {{c.tc_7 }} </td>					
 										<td> {{c.tc_10 }} </td>
 									</tr>
@@ -162,8 +160,8 @@
 	   	</div>
        
 	   
-	    <script src="\..\javascripts\jspdf.js"></script>
-
+	    <script src="\..\javascripts\jspdf.debug.js"></script>
+       	<script src="\..\javascripts\jspdf.plugin.autotable.js"></script>
 
 
 	   
