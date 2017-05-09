@@ -73,14 +73,14 @@
                     <td><label class="text-danger">Nombre</label></td>
 					          <td>
                       <div id="div1" class="form-group">
-                        <textarea id="IU1" name ="IU1" type="text" class="form-control"  onfocus="limpiaCamposEnfocados(1)"></textarea></div>
+                        <textarea id="IU1" name ="IU1" type="text" class="form-control"></textarea></div>
                     </td>
 				          </tr>
                   <tr>
                     <td> <label class="text-danger">Apellido 1</label> </td>
                     <td>
                       <div id="div2" class="form-group">
-                        <textarea id="IU2" name ="IU2" type="text" class="form-control"  onfocus="limpiaCamposEnfocados(2)"></textarea>
+                        <textarea id="IU2" name ="IU2" type="text" class="form-control"></textarea>
                       </div>
                     </td> 
 				          </tr>
@@ -88,7 +88,7 @@
                     <td> <label class="text-danger">Apellido 2</label> </td>
                     <td>
                       <div id="div3" class="form-group">
-                        <textarea id="IU3" name ="IU3" type="text" class="form-control"  onfocus="limpiaCamposEnfocados(3)"></textarea>
+                        <textarea id="IU3" name ="IU3" type="text" class="form-control"></textarea>
                       </div>
                     </td> 
 				          </tr>
@@ -96,7 +96,7 @@
                     <td> <label class="text-danger">Identificación</label> </td>
                     <td>
                       <div id="div4" class="form-group">
-                        <textarea id="IU4" name ="IU4" type="text" class="form-control"  onfocus="limpiaCamposEnfocados(4)"></textarea>
+                        <textarea id="IU4" name ="IU4" type="text" class="form-control"></textarea>
                       </div>
                     </td> 
                   </tr>
@@ -104,7 +104,7 @@
                     <td> <label class="text-danger">Correo</label> </td>
                     <td>
                       <div id="div8" class="form-group">
-                        <textarea id="IU8" name ="IU8" type="email" class="form-control"  onfocus="limpiaCamposEnfocados(8)"></textarea>
+                        <textarea id="IU8" name ="IU8" type="email" class="form-control"></textarea>
                       </div>
                     </td> 
                   </tr>
@@ -112,7 +112,7 @@
                     <td> <label class="text-danger">Contraseña </label></td>
                     <td>
                       <div id="div5" class="form-group">
-                        <input id="IU5" name ="IU5" type="password" class ="form-control"  onfocus="limpiaCamposEnfocados(5)">
+                        <input id="IU5" name ="IU5" type="password" class ="form-control"  >
                       </div>
                     </td> 
                   </tr>
@@ -120,7 +120,7 @@
                     <td> <label class="text-danger">Confirmar contraseña  </label></td>
                     <td>
                       <div id="div6" class="form-group" >
-                        <input id="IU6" name ="IU6" type="password" class="form-control"  onfocus="limpiaCamposEnfocados(6)">
+                        <input id="IU6" name ="IU6" type="password" class="form-control"">
                       </div>
                     </td> 
                   </tr>
@@ -198,8 +198,7 @@
               maxlength:9
             },
             IU5: {
-              required: true,
-              equalTo: "#IU6"
+              required: true
             },
             IU6: {
               required: true,
@@ -221,13 +220,12 @@
             },
             IU4: {
               required: "Se requiere identificación de usuario",
-              number: "La identificación es el número de cedula sin guiones",
+              number: "La identificación debe ser un número (cédula sin guiones)",
               minlength:"La identificacion debe contener 9 dígitos",
               maxlength:"La identificacion debe contener 9 dígitos"
             },
             IU5: {
-              required: "Se requiere contraseña",
-              equalTo: "Las contraseñas no coinciden"
+              required: "Se requiere contraseña"
             },
             IU6: {
               required: "Se requiere confirmación de contraseña",
@@ -243,6 +241,7 @@
              botonGuardar();         
             }
         });
+
 
 
         solicitarInformacionDeSesion("#EUM");
