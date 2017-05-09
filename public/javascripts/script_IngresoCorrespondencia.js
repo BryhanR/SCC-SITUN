@@ -138,7 +138,7 @@ function ingresoCorrespondencia($scope){ //Recoge los datos de los campos y real
 							if(doc!=''){ 
 							 var formData  = new FormData();		
 							 formData.append('arc', adj[0]);
-							fetch('http://localhost:3000/upload', {
+							fetch('http://'+ip+':'+puerto+'/upload', {
     						method: 'POST',
     						body: formData
   });
@@ -398,7 +398,7 @@ function existeCorrespondencia($scope){//Realiza la consulta si la correspondenc
 	     return;
 		}
 	let parametro = $('#IC2').val().toUpperCase(); 
-	fetch( 'http://' + ip + ':'+ puerto +'/api/TC/BO', {  
+	/*fetch( 'http://' + ip + ':'+ puerto +'/api/TC/BO', {  
     method: 'POST', 
     datatype:'json',
     headers: {  
@@ -425,7 +425,9 @@ function existeCorrespondencia($scope){//Realiza la consulta si la correspondenc
 	.then( _ => subePagina())
 	.catch(err => {
 		console.log('Request failed', err)});
-		
+		*/
+		ingresoCorrespondencia($scope);
+		subePagina();
 	}
 	
 	

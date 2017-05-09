@@ -11,12 +11,13 @@ function controllerAngular($scope)//ControllerAngular
 	$scope.actualiza =_ => actualizarInfo($scope);
 	$scope.usuario = JSON.parse(localStorage.getItem('usuario'));
 	$scope.esDisabled = id => id ===$scope.usuario.Id;//id.localeCompare($scope.usuario.Id) === 0;
+	$scope.limpiarEdicion = _ => limpiarValores();
   }
   
   
   function actualizarInfo($scope){ //Actualiza la informacion en la base de datos
   //console.log('validacion '+validar());
-    if(validar()){
+    //if(validar()){
 	//console.log('Entro despues de validacion'+validar()); // Quitar
 	actualizarPersona();
 	actualizarUsuario();
@@ -28,7 +29,7 @@ function controllerAngular($scope)//ControllerAngular
     	solicitarInformacionDeSesion();
     }
 	$('#myModal').modal('hide'); 
-	}
+	//}
   }
   
   function actualizarPersona(){ //actualiza la infromación del usuario en la tabla personas
@@ -93,6 +94,8 @@ function controllerAngular($scope)//ControllerAngular
   });
  
   }
+
+  /*
   function validar(){ //Valiad los campos de entrada
 	I2 = true;
 	I3 = true;
@@ -167,9 +170,10 @@ function controllerAngular($scope)//ControllerAngular
 
 		return (I2  && I3  && I4 && I5 && I6 );	
 }
-
+*/
 
 function limpiarValores(){ //Limpia los valores de los campos de entrada
+    /*
     $("#div5").attr('class','form-group') ;
 	$("#IU5").attr('title','');
 	$("#IU5").val("");
@@ -177,9 +181,15 @@ function limpiarValores(){ //Limpia los valores de los campos de entrada
 	for(i=1;i<6;i++){
 	   cambioClase1(i);
 	}
+	*/
+
+	$("#FormularioUs")[0].reset();
+	validator.submitted = {};
+	validator.elements().tooltipster('hide');
 }
   
-  function cambioClase1(op){ //Realiza el cambio de clase de has-error a form-group
+  var validator = {};
+  /*function cambioClase1(op){ //Realiza el cambio de clase de has-error a form-group
 	switch(op){
 		case 1:  $("#div1").attr('class','form-group'); break;
 		case 2:	 $("#div2").attr('class','form-group'); break;
@@ -187,7 +197,7 @@ function limpiarValores(){ //Limpia los valores de los campos de entrada
 		case 4:  $("#div4").attr('class','form-group'); break;
 		case 5:  $("#div5").attr('class','form-group'); break;
 	}
-  }
+  }*/
   
   function activar(){//Tiene la función del botón cambiar contraseña para habilitarlo
     $("#IU4").removeAttr("disabled");
@@ -240,21 +250,22 @@ function limpiarValores(){ //Limpia los valores de los campos de entrada
 	 $("#IU4").val(data.tu_2);
 	 $("#IU8").val(data.tp_5);
 	 if(data.tu_3 == 1)
-		$("#administrador_checkbox").prop("checked", "checked");
-	 
+		$("#administrador_checkbox").prop("checked", "checked");	 
 	 else
 		$("#administrador_checkbox").prop("checked", "");
 
  }
  
- function busquedaUsuario($scope)  //Metodo de Busqueda
+  function busquedaUsuario($scope)  //Metodo de Busqueda
  {
 	console.log("Retornado de url > " + tipoBusqueda($scope));
 	 let h3 = document.getElementById('buscar').value;
-	 //let table=document.getElementById("tabla_busqueda").rows.length;
+
+	 let table1=document.getElementById("tabla_busqueda").rows.length;
 	 let table= $("#tabla_busqueda tr").length;
 	 
 	 if(table<1){
+
 		 $("#mensaje").html('No se encontrarón coincidencias');
 		 
 	 }else{
@@ -268,10 +279,12 @@ function limpiarValores(){ //Limpia los valores de los campos de entrada
       }
 	)	 
 	.then(res => res.json())
-	.then(obj => $scope.$apply( _=>
-					$scope.updateUsuarios(obj.data)))
+	.then(obj =>{ 
+	$scope.$apply( _=>
+	$scope.updateUsuarios(obj.data));})
 	.catch(err => console.log('Request failed', err));
 	 } 
+
 }
  
  

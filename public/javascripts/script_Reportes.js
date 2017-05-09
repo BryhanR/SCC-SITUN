@@ -3,10 +3,31 @@ function  controllerAngular($scope)//ControllerAngular controller de todos los m
  {
 
 	$scope.correspondencias = new Array();
-	$scope.updateCorrespondencias = c => $scope.correspondencias = c;
+	$scope.updateCorrespondencias = c => ($scope.correspondencias = c,$scope.totalItems=$scope.correspondencias.length);
 	$scope.buscar = _ => buscarCorrespondencias($scope);
 	$scope.clear = _ => limpiarPantalla($scope);
 	$scope.generarReporte = _ => crearReporte($scope);
+
+
+
+//-----------------------------
+	$scope.totalItems = 0;
+  	$scope.currentPage = 1;
+  	$scope.pageSize = 10;
+  	$scope.paginationSize = 5;
+
+  $scope.setPage = function (pageNo) {
+    $scope.currentPage = pageNo;
+  };
+
+  $scope.pageChanged = function() {
+    console.log('Page changed to: ' + $scope.currentPage);
+    console.log('total Items: ' + $scope.totalItems);
+  };
+
+  
+//-----------------------------
+
 	
   }
   
@@ -301,13 +322,9 @@ fetch( 'http://' + ip + ':'+ puerto +'/api/TC/FR', {   //Envia la ruta del servi
 
 	let fA=fecha1.substring(10, 6)+'-'+fecha1.substring(5, 3)+'-'+fecha1.substring(2, 0);
 	
-	if(fecha2 < fA ){
-	$("#mensaje").text("No hay correspondencias almacenadas que se encuentren en ese rango de fechas"); 
-	return false;
-    }
-	else{
-	$("#mensaje").text("");
-	}
+	if(fecha2 < fA )
+		return false;
+
 	
 	})
 	.catch(err => console.log('Request failed', err));
