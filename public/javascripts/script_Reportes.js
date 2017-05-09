@@ -152,20 +152,36 @@ function crearReporte($scope){ //Metodo que genera el reporte
 
 if(validarEspaciosVacios()){
 
+var doc = new jsPDF('l' );
+
+var res = doc.autoTableHtmlToJson(document.getElementById("tabla_encabezado"));
+var res2 = doc.autoTableHtmlToJson(document.getElementById("tabla_busqueda"));
+
+doc.text(110, 15, "Reporte de Correspondencia");
+    
+	  
+	   doc.autoTable(res.columns, res.data, {
+        startY: 20,
+        margin: {horizontal: 7},
+        bodyStyles: {valign: 'top'},
+        styles: {overflow: 'linebreak'},
+        columnStyles: {text: {columnWidth: 'auto'}}
+    });
 
 
-let doc = new jsPDF('l', 'pt', 'legal');
 
-doc.text("Reporte de correspondencia SCC-SITUN ", 260, 30); //Escribe el texto de encabezado
+	   doc.autoTable(res2.columns, res2.data, {
+        startY: doc.autoTable.previous.finalY + 15,
+        margin: {horizontal: 7},
+        bodyStyles: {valign: 'top'},
+        styles: {overflow: 'linebreak'},
+        columnStyles: {text: {columnWidth: 'auto'}}
+    });
 
-let res = doc.autoTableHtmlToJson(document.getElementById('tabla_encabezado')); //Recupera la primer tabla
-doc.autoTable(res.columns, res.data); //Lo envia al PDF
+   doc.save("Reporte de Correspondencia");
 
-let res2 = doc.autoTableHtmlToJson(document.getElementById('tabla_busqueda')); //Recupera la segunda tabla
-doc.autoTable(res2.columns, res2.data, { //Lo envia al PDF
-    startY: doc.autoTableEndPosY() + 80 
-});
-doc.save('ReporteCorrespondencia.pdf');	  //Guarda el PDF
+
+
  
  
  
