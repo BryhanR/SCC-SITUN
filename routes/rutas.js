@@ -59,9 +59,9 @@ router.get('/logout',function(req, res){
 router.post('/recoverPass',function(req, res){
 
 	console.log("Solicitud de recuperacion de passpord para " + req.body.usuario);
-	let nodemailer = require('nodemailer');
+	var nodemailer = require('nodemailer');
 	// create reusable transporter object using the default SMTP transport
-	let transporter = nodemailer.createTransport('SMTP',{
+	var transporter = nodemailer.createTransport('SMTP',{
     service: 'gmail',
     host: "smtp.gmail.com",
     auth: {
@@ -70,11 +70,11 @@ router.post('/recoverPass',function(req, res){
     }
 	});
 	// setup email data with unicode symbols
-	let usr = {TU_1:req.body.usuario};
+	var usr = {TU_1:req.body.usuario};
 	db.resetPassword(usr)
 	.then(_ => db.getUSR(usr).then( function(data){
 			usr = data[0];
-			let mailOptions = {
+			var mailOptions = {
     			from: '"SCC-SITUN" <scc.situn@gmail.com>', // sender address
     			to: usr.tp_5, // list of receivers
     			subject: 'Nueva contraseña para SCC-SITUN', // Subject line
