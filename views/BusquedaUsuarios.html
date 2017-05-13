@@ -313,9 +313,11 @@ $(document).ready(function() {
           rules: {
             IU1: {
               required: true
+			  
             },
             IU2: {
               required: true
+			  
             },
             IU3: {
               required: true
@@ -333,24 +335,24 @@ $(document).ready(function() {
           },
           messages: {
             IU1: {
-              required: "Se requiere nombre de usuario"
+              required: "Campo requerido"
             },
             IU2: {
-              required: "Se requiere primer Apellido de usuario"
+              required: "Campo requerido"
             },
             IU3: {
-              required: "Se requiere segundo Apellido de usuario"
+              required: "Campo requerido"
             },
             IU4: {
-              required: "Se requiere contraseña"
+              required: "Campo requerido"
             },
             IU5: {
-              required: "Se requiere confirmación de contraseña",
+              required: "Campo requerido",
               equalTo: "Las contraseñas no coinciden"
             },
             IU8: {
-              required: "Se requiere correo electrónico de usuario",
-              email: "No es un formato de correo válido"
+              required: "Campo requerido",
+              email: "El formato de correo no es válido"
             }
           },
           submitHandler: function(form) {
