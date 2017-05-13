@@ -82,14 +82,20 @@ function controllerAngular($scope)//ControllerAngular
  }
  
 
- 
+ function existeUrl(url) { // Verifica que exista el archivo adjunto mediante el url del archivo
+   var http = new XMLHttpRequest();
+   http.open('HEAD', url, false);
+   http.send();
+   return http.status!=404;
+}
  
  
 // let keyUrl;
  function UrlAdj($scope, cor){
-	
+		
 	 $scope.url='http://' + ip + ':'+ puerto +'/Adjunto/'+cor.tc_12;
-	if(cor.tc_12.length!=0)
+
+	if(existeUrl($scope.url) && cor.tc_12!=null && cor.tc_12.length!=0)
 		$("#abrirDoc").removeAttr("disabled");
 	else{
 		
