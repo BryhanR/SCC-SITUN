@@ -262,6 +262,10 @@ function limpiarCampos(){//Limpia el valor de los campos de entrada
 
 	  solicitarInformacionDeSesion("#ICM");
 	  $('#datetimepicker4').data("DateTimePicker").date(new Date());
+
+	  $("#IC2").prop('disabled', false);
+	  $("#IC5").prop('disabled', false);
+
 	/*for(let i=1;i<10;i++){
 	cambioClase1(i);
 }

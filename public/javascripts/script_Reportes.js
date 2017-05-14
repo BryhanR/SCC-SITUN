@@ -196,8 +196,8 @@ if(validarEspaciosVacios()){
 		var res = doc.autoTableHtmlToJson(document.getElementById("tabla_encabezado"));
         var res2 = doc.autoTableHtmlToJson(document.getElementById("tabla_busqueda"));
 
-	   
-	   doc.text(45, 15, "Reporte de Correspondencias SITUN");
+	   var title = "Reporte de Correspondencias SITUN";
+	   doc.text(80, 15, title);
 	   
 	   doc.autoTable(res.columns, res.data, {
         startY: 20,
@@ -211,7 +211,7 @@ if(validarEspaciosVacios()){
 	
         doc.autoTable( res2.columns, data , {
         startY: doc.autoTable.previous.finalY + 15,
-         addPageContent: footer,
+        addPageContent: footer,
         margin: {horizontal: 7,bottom:20},
         pageBreak: 'auto',
         bodyStyles: {valign: 'top'},
