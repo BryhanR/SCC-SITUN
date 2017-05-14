@@ -10,7 +10,7 @@ function controllerAngular($scope)//ControllerAngular
 	$scope.updateCorrespondencias = c => ($scope.correspondencias =c,$scope.totalItems=$scope.correspondencias.length);
 	$scope.buscar = _ => busquedaCorrespondencia($scope);
 	$scope.clear = _ => limpiaTabla($scope);	 
-	$scope.Adjuntando = f => actualizarAdj($scope,f);
+	//$scope.Adjuntando = f => actualizarAdj($scope,f);
 	$scope.AsignaUrl = r => UrlAdj($scope,r);
 	$scope.obtenerEnlaces	= n => buscaEnlaces($scope, n);
 	$scope.enlaces = new Array();
@@ -82,12 +82,18 @@ function controllerAngular($scope)//ControllerAngular
  }
  
 
- 
+ function existeUrl(url) { // Verifica que exista el archivo adjunto mediante el url del archivo
+   var http = new XMLHttpRequest();
+   http.open('HEAD', url, false);
+   http.send();
+   return http.status!=404;
+}
  
  
 // let keyUrl;
  function UrlAdj($scope, cor){
 	
+	 var cst=0;
 	 $scope.url='http://' + ip + ':'+ puerto +'/Adjunto/'+cor.tc_12;
 	if(cor.tc_12.length!=0)
 		$("#abrirDoc").removeAttr("disabled");
@@ -96,15 +102,44 @@ function controllerAngular($scope)//ControllerAngular
 		 $('#abrirDoc').attr('disabled', 'disabled');
 		 $scope.url='';
 	}
-		
 	 $('#input_adjunto').val(cor.tc_12);
-	  $("#btnGda").click(function(){
-		console.log("guarde");
-		actualizarAdj(cor.tc_1);
+	  $("#btnGda").click(function(){if(cst==0){
+	  actualizarAdj(cor.tc_1,cor.tc_12);
+	  cst++;
+	  	  
 		$("[data-dismiss=modal]").trigger({ type: "click" });
-		busquedaCorrespondencia($scope)});
+	  busquedaCorrespondencia($scope)}});
  }
 
+
+function actualizarAdj(cor,cor2){ //Actualiza la informacion que se haya editado
+	 
+  let doc = $('#input_adjunto').val();
+  fetch( 'http://' + ip + ':'+ puerto +'/api/TC/UDA', {  
+    method: 'POST', 
+    datatype:'json',
+    headers: {  
+      "Content-type": "application/x-www-form-urlencoded",
+
+      } ,
+    body: "TC_1="+cor+ "&TC_12="+doc
+      }
+	  )
+  .then(function(response) {
+
+  
+			if(doc!=''&&doc!=cor2){ 
+			 var formData  = new FormData();		
+			 formData.append('arc', adj[0]);
+			fetch('http://' + ip + ':'+ puerto +'/upload', {
+    		method: 'POST',
+    		body: formData
+  });
+							}else
+						$("#mensaje").text("Fallo al realizar la acción"); 
+  });
+ cor=null; }
+  
  
 
  
@@ -255,36 +290,6 @@ function actualizarInfo($scope){ //Actualiza la informacion que se haya editado
 	$("[data-dismiss=modal]").trigger({ type: "click" });
 	//}
   }
-  
-  function actualizarAdj(cor){ //Actualiza la informacion que se haya editado
-  console.log("conditionalllll", conditional);
-  let doc = $('#input_adjunto').val();
-  console.log("doooc",doc);
-  fetch( 'http://' + ip + ':'+ puerto +'/api/TC/UDA', {  
-    method: 'POST', 
-    datatype:'json',
-    headers: {  
-      "Content-type": "application/x-www-form-urlencoded",
-
-      } ,
-    body: "TC_1="+cor+ "&TC_12="+doc
-      }
-	  )
-  .then(function(response) {
-
-  
-			if(doc!=''){ 
-			 var formData  = new FormData();		
-			 formData.append('arc', adj[0]);
-			fetch('http://' + ip + ':'+ puerto +'/upload', {
-    		method: 'POST',
-    		body: formData
-  });
-							}else
-						$("#mensaje").text("Fallo al realizar la acción"); 
-  });
-  }
-  
   function checkCampoOficio(){ //Cambia el valor del campo referente al numero de oficio si la opcion SIN OFICIO esta marcada
 if($("#IC12").is(':checked')){
 	$("#IC2").val("SIN OFICIO");
