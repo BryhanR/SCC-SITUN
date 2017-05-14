@@ -12,8 +12,10 @@
        <script src="\..\javascripts\script_menu.js"></script>
 		<script type="text/javascript" src="\..\javascripts\script_BusquedaCorrespondencia.js"></script>
 	<script src="\..\javascripts\jquery-1.12.2.js"></script>
+	<script src="\..\javascripts\jquery.validate.min.js"></script>
 	<script src="\..\javascripts\moment-2.15.1.js"></script>
-	<script src="\..\javascripts\bootstrap-3-3-7.min.js"></script><script type="text/javascript" src="\..\javascripts\BootstrapMenu.js"></script>
+	<script src="\..\javascripts\bootstrap-3-3-7.min.js"></script>
+	<script type="text/javascript" src="\..\javascripts\BootstrapMenu.js"></script>
 	<script type="text/javascript" src="\..\javascripts\BootstrapMenu.min.js"></script>
 	<link rel="stylesheet" href="\..\stylesheets\bootstrap-3-3-7.min.css">
 	<script src="\..\javascripts\bootstrap-datetimepicker-4.7.14.js"></script>
@@ -26,6 +28,9 @@
     <script type="text/javascript" src="\..\javascripts\jquery.ui.position.js"></script>
 
     <script type="text/javascript" src=".\..\javascripts\jquery.contextMenu.js"></script>
+
+<script src="\..\javascripts\validatePlugin.js"></script>
+
 </head>
 
 <body ng-controller = "ControllerAngular">
@@ -186,6 +191,9 @@
                </div>
       </form>
 	  
+<link rel="stylesheet" href="\..\stylesheets\validatePlugin.css">
+
+<form name = "FormularioCorrespondencia" id="FormularioCorrespondencia">
 	  <!-- popup editar correspondencia-->
 	<!-- Trigger the modal with a button -->
 <!-- Modal -->
@@ -205,69 +213,111 @@
 				<td>
 					 <label class="text-danger">Fecha Recibido</label>
 				<td>
-					<div class='input-group date' id='datetimepicker55'>
-          					<input type='text' class="form-control" id="IC1"/>
-          					<span class="input-group-addon">
-            					<span class="glyphicon glyphicon-calendar" onclick="limpiaCamposEnfocados(3)"></span>
-          					</span>
-        				</div>
+        			<div class='input-group date' id='datetimepicker55'>
+          				<input type='text' class="form-control" id="IC1" name="IC1" data-toggle="tooltip" data-placement="right" title="Fecha invalida o mayot a la de oficio"/>
+          				<span class="input-group-addon">
+            				<span class="glyphicon glyphicon-calendar"></span>
+          				</span>
+        			</div>
 				<td>
 					
 				</td>
 			</tr>
                 <tr>
                     <td> <label class="text-danger">N° Oficio</label> </td>
-                    <td><div  id="div2"class="form-group"><textarea  id="IC2" type="text" class="form-control" onfocus="limpiaCamposEnfocados(2)"></textarea>
-					<label class="text-danger" style=""><input  type="checkbox" id="IC12" value="first_checkbox" onchange="checkCampoOficio()">Sin Oficio</label></div></td>           
+                    <td>
+                     <div  id="div2" class="form-group">
+                      <textarea id="IC2" name = "IC2" data-toggle="tooltip" data-placement="right" title="N° oficio imcompleto"type="text" class="form-control"></textarea>
+					            <label class="text-danger" style="">
+                        <input  type="checkbox" id="IC12" name= "IC12" onchange="checkCampoOficio()" value="first_checkbox">Sin Oficio
+                      </label>
+                    </div>
+					</td>
+
 					</tr>
                 <tr>
                     <td> <label class="text-danger">Fecha Oficio</label></td>
-                    <td> <div class='input-group date' id='datetimepicker66'>
-          					<input type='text' class="form-control" id="IC3"/>
-          					<span class="input-group-addon">
-            					<span class="glyphicon glyphicon-calendar" onclick="limpiaCamposEnfocados(3)"></span>
-          					</span>
-        				</div>
+                    <td> 
+                    <div class='input-group date' id='datetimepicker66'>
+          				    <input type='text' class="form-control" id="IC3" name="IC3" data-toggle="tooltip" data-placement="right" title="Fecha invalida o menor a la de recibido" />
+          					  <span class="input-group-addon">
+            					  <span class="glyphicon glyphicon-calendar" ></span>
+          					  </span>
+        				    </div>
 					</td>
                 </tr>
                 <tr>
                     <td> <label class="text-danger">Destinatario </label></td>
-                    <td><div id="div4" class="form-group"><textarea id="IC4" type="text" class="form-control"  onfocus="limpiaCamposEnfocados(4)"></textarea></div></td> 
+                    <td>
+                      <div id="div4" class="form-group">
+                        <textarea id="IC4" name="IC4" data-toggle="tooltip" data-placement="right" title="Datos de destinatario imcompletos" type="text" class="form-control"></textarea>
+                      </div>
+                    </td> 
                 </tr>
-				 <tr>
-                    <td> <label class="text-danger">Copia </label></td>
-                    <td><div id="div5" class="form-group"><textarea id="IC5" type="text" class="form-control" onfocus="limpiaCamposEnfocados(5)"></textarea></div></td> 
-                </tr>
-				 <tr>
-                    <td> <label class="text-danger">Remitente </label></td>
-                    <td><div id="div6" class="form-group"><textarea id="IC6" type="text" class="form-control" onfocus="limpiaCamposEnfocados(6)"></textarea></div></td>                </tr>
+				        <tr>
+                  <td> <label class="text-danger">Copia </label></td>
+                  <td>
+                    <div id="div5" class="form-group">
+                      <textarea id="IC5" name="IC5" data-toggle="tooltip" data-placement="right" title="Datos de copia imcompletos" type="text" class="form-control"></textarea>
+					            <label class="text-danger" style="">
+                        <input  type="checkbox" id="check_SinCopia" name="check_SinCopia" value="first_checkbox" onchange="checkCampoCopia()">Sin Copia
+                      </label>
+                    </div>
+                  </td>
+			          </tr>
+				        <tr>
+                  <td> <label class="text-danger">Remitente </label></td>
+                  <td>
+                    <div id="div6" class="form-group">
+                      <textarea type="text" class="form-control" id="IC6" name="IC6" data-toggle="tooltip" data-placement="right" title="Datos de remitente imcompletos"></textarea>
+                    </div>
+                  </td>               
+			         </tr>
                 <tr>
                     <td> <label class="text-danger">Asunto</label></td>
-                    <td><div id="div7"class="form-group"><textarea id="IC7" type="text" class="form-control"rows=4 cols=30 onfocus="limpiaCamposEnfocados(7)"></textarea></input></div></td> <!--****** NUEVO ***********-->
+                    <td>
+                      <div id="div7" class="form-group">
+                        <textarea id="IC7" name="IC7" data-toggle="tooltip" data-placement="right" title="Datos de asunto imcompletos" type="text" class="form-control" rows=4 cols=30></textarea>
+                      </div>
+                    </td> 
                 </tr>
-				<tr>
-                    <td> <label class="text-danger">Recibido</label></td>
-                    <td><div id="div8"class="form-group"><input id="IC8" type="text"class="form-control" onfocus="limpiaCamposEnfocados(8)" ng-model="usuario" disabled></input> <div></td> <!--****** NUEVO ***********-->
+				        <tr>
+                  <td> <label class="text-danger">Recibido</label></td>
+                  <td>
+                    <div id="div8" class="form-group">
+                      <input id="IC8" name="IC8" data-toggle="tooltip" data-placement="right" title="Datos de recibido imcompletos" type="text" class="form-control"  ng-model="usuario" disabled/> 
+                    </div>
+                  </td> 
                 </tr>
-				<tr>
-                    <td> <label class="text-danger">Estado</label></td>
-                    <td><div id="div9"class="form-group"><textarea type="text" class="form-control" id="IC9"  onfocus="limpiaCamposEnfocados(9)"></textarea></div></td> <!--****** NUEVO ***********-->
+				        <tr>
+                  <td> <label class="text-danger">Estado</label></td>
+                  <td>
+                    <div id="div9" class="form-group">
+                      <textarea type="text" class="form-control" id="IC9" name="IC9" data-toggle="tooltip" data-placement="right" title="Datos de estado imcompletos"></textarea>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                     <td> <label class="text-danger">Observaciones</label></td>
-                    <td><div id="div10"class="form-group"><textarea type="text"class="form-control" id="IC10" data-toggle="tooltip" data-placement="right" title="Hooray!"> </textarea></input></div></td> <!--****** NUEVO ***********-->
+                    <td>
+                      <div id="div10" class="form-group">
+                        <textarea type="text" class="form-control" id="IC10" name="IC10" ></textarea>
+                      </div>
+                    </td>
                 </tr>
-                </center>
 						</tbody>
 		           </table>  
       <div class="modal-footer">
-	    <center><button type="button" class="btn btn-default" ng-click = "actualiza(c)" >Guardar</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button></center>	
+	    <center><button type="submit" class="btn btn-default" >Guardar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="limpiarCampos()">Cerrar</button></center>	
       </div>
     </div>
   </div>
   </div>
 </div>
+</form> 
+	
+<link rel="stylesheet" href="\..\stylesheets\bootstrap-3-3-7.min.css">
 	<!-- fin del popup editar correspondencia-->
 	  <!-- Trigger the modal with a button -->
 <!-- Modal -->
@@ -329,6 +379,8 @@
 <!-- Modal -->
 <div ></div>
 	   
+<form id="FormularioAlarma" name="FormularioAlarma">
+
 <div id="myModal4" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
@@ -353,9 +405,9 @@
 					 <label class="text-danger">Fecha Aviso</label>
 				<td>
 					<div class='input-group date' id='datetimepicker7'>
-          					<input type='text' class="form-control" id="IC16"/>
+          					<input type='text' class="form-control" id="IC16" name="IC16" />
           					<span class="input-group-addon">
-            					<span class="glyphicon glyphicon-calendar" onclick="limpiaCamposEnfocados(3)"></span>
+            					<span class="glyphicon glyphicon-calendar"></span>
           					</span>
         				</div>
 				<td>
@@ -366,9 +418,9 @@
 					 <label class="text-danger">Fecha Limite</label>
 				<td>
 				<div class='input-group date' id='datetimepicker8'>
-          					<input type='text' class="form-control" id="IC17"/>
+          					<input type='text' class="form-control" id="IC17" name="IC17" />
           					<span class="input-group-addon">
-            					<span class="glyphicon glyphicon-calendar" onclick="limpiaCamposEnfocados(3)"></span>
+            					<span class="glyphicon glyphicon-calendar"></span>
           					</span>
         				</div>
 				<td>
@@ -381,8 +433,8 @@
       </div>
       <div class="modal-footer">
 	  <center>
-		<button id = "btnGd" type="button" class="btn btn-default"   >Guardar</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+		<button id = "btnGd" type="submit" class="btn btn-default"   >Guardar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="limpiarCampos()">Cancelar</button>
       </center>
 	  </div>
     </div>
@@ -390,7 +442,7 @@
   </div>
 	<!-- fin del popup Alarma-->   
 	
-	
+	</form>
 	<div ></div>
 	   
 <div id="myModal5" class="modal fade" role="dialog">
@@ -565,6 +617,181 @@ function MB_04($scope) //Toma el criterio de busqueda y devuelve la columna que 
         format: 'DD-MM-YYYY', 
    		showClear:true
     });
+
+
+ $('#FormularioCorrespondencia input, #FormularioCorrespondencia textarea').tooltipster({
+        trigger: 'custom',
+        onlyOne: false,
+        position: 'right'
+    });
+
+ $('#FormularioAlarma input').tooltipster({
+        trigger: 'custom',
+        onlyOne: false,
+        position: 'right'
+    });
+
+
+   validator = $('#FormularioCorrespondencia').validate({
+          debug: true,
+        errorPlacement: function (error, element) {
+            $(element).tooltipster('update', $(error).text());
+            $(element).tooltipster('show');
+        },
+         success: function (label, element) {
+            $(element).tooltipster('hide');
+
+        },
+          rules: {
+            IC1: { // Fecha de recibido
+              required: true,
+              menorIgualHoy: true
+            },
+            IC2: { // # de oficio
+              required: true
+            },
+            IC3: { // Fecha de oficio
+              required: true,
+              menorIgualFecha:"#IC1"
+            },
+            IC4: { // Destinatario
+              required: true
+            },
+            IC5: { // Copia 
+              required: true
+            },
+            IC6: { // Remitente
+              required: true
+            },
+            IC7: { // Asunto
+              required: true
+            },
+            IC8: { // Recibido por
+              required: true
+            },
+            IC9: { // Estado
+              required: true
+            }
+          },
+          messages: {
+            IC1: {
+              required: "Se requiere fecha de recibido",
+              menorIgualHoy: "La fecha de recibido no puede ser mayor que hoy"
+            },
+            IC2: {
+              required: "Se requiere número de oficio"
+            },
+            IC3: {
+              required: "Se requiere fecha de oficio",
+              menorIgualFecha: "La fecha de oficio no puede ser mayor que la fecha de recibido"
+            },
+            IC4: {
+              required: "Se requiere destinatario"
+            },
+            IC5: {
+              required: "Se requiere indicar la copia"
+            },
+            IC6: {
+              required: "Se requiere remitente"
+            },
+            IC7: {
+              required: "Se requiere asunto"
+            },
+            IC8: {
+              required: "Se requiere por quien fué recibido"
+            },
+            IC9: {
+              required: "Se requiere El estado del documento"
+            }
+          },
+          submitHandler: function(form) {
+             console.log('Intentando ingresar un Correspondencia'); 
+             //botonGuardar();         
+             angular.element($('#IC5')).scope().actualiza();  
+            }
+        });
+
+		validatorAlarma = $('#FormularioAlarma').validate({
+          debug: true,
+        errorPlacement: function (error, element) {
+            $(element).tooltipster('update', $(error).text());
+            $(element).tooltipster('show');
+        },
+         success: function (label, element) {
+            $(element).tooltipster('hide');
+
+        },
+          rules: {
+            IC16: { // Fecha de Aviso
+              required: true,
+              mayorIgualHoy: true
+            },
+            IC17: { // Fecha Limite de aviso
+              required: true,
+              mayorIgualFecha:'#IC16'
+            }
+          },
+          messages: {
+            IC16: {
+              required: "Se requiere fecha de recibido",
+              menorIgualHoy: "La fecha de recibido no puede ser mayor que hoy"
+            },
+            IC17: {
+              required: "Se requiere número de oficio",
+              mayorIgualFecha: "Debe ser mayor que fecha de aviso"
+            }
+          },
+          submitHandler: function(form) {
+             console.log('Intentando ingresar una alarma'); 
+             if(tmp1)
+             	actualizarAlarma(tmp);
+             else
+             	nuevaAlarma(tmp);
+             //botonGuardar();         
+             //angular.element($('#IC5')).scope().guardarCorrespondencia();  
+            }
+        });
+
+
+   $.validator.addMethod("menorIgualFecha",
+        function(value, element, param) {
+            var i = new Date(value.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
+            var j = new Date($(param).val().replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
+            return (i <= j) ? true : false;
+        }
+    );
+   $.validator.addMethod("mayorIgualFecha",
+        function(value, element, param) {
+            if(value == '' && $(param).val()=='') return true;
+            var i = new Date(value.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
+            var j = new Date($(param).val().replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
+            return (i >= j) ? true : false;
+        }
+    );
+   $.validator.addMethod("menorIgualHoy",
+        function(value, element, param) {
+          if(param == false) return true;
+            var i = new Date(value.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
+            var j = new Date();
+            return (i <= j) ? true : false;
+        }
+    );
+
+   $.validator.addMethod("mayorIgualHoy",
+        function(value, element, param) {
+          if(param == false) return true;
+          if(value == '') return true;
+
+          var date = new Date();
+          var i = new Date(value.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
+          var j = new Date(moment(new Date ).format('MM-DD-YYYY'));
+
+            console.log(i);
+            console.log(j);
+            return (i >= j) ? true : false;
+        }
+    );
+
 /*
 var menu1 = new BootstrapMenu('#demo2LeftBtn',{
   menuEvent: 'click', // default value, can be omitted

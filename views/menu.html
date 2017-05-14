@@ -9,10 +9,12 @@
 <body  ng-app ng-controller="menuControllerAngular" data-ng-init="init()">
 
 <div id='menu'></div>
+
+<form name = "FormularioEdicionPerfil" id="FormularioEdicionPerfil">
   <!-- Trigger the modal with a button -->
 <!-- Modal -->
 <div class="col-md-1"></div>
-     
+
 <div id="myModalP" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
@@ -22,59 +24,62 @@
         <h4 class="text-danger">Edición</h4>
       </div>
       <div class="modal-body">
-    <center><table  id ="tablaAU">
+    <center>
+
+  
+    <table  id ="tablaAU">
                 <tbody>
         <tr>
                     <td><label class="text-danger">Identificación</label></td>
-          <td><div id="divP0" class="form-group"><input id="IPU0" type="text" class="form-control" disabled ></input></div></td>
+          <td><div id="divP0" class="form-group"><input id="IPU0" name="IPU0" type="text" class="form-control" disabled ></input></div></td>
         </tr>
         
         <tr>
                     <td><label class="text-danger">Nombre</label></td>
-          <td><div id="divP1" class="form-group"><textarea id="IPU1" type="text" class="form-control" onfocus="cambioClase1P(1)"  ></textarea></div></td>
+          <td><div id="divP1" class="form-group"><textarea id="IPU1" name="IPU1" type="text" class="form-control"></textarea></div></td>
         </tr>
         
         <tr>
                     <td> <label class="text-danger">Primer Apellido</label> </td> 
-          <td><div id="divP2" class="form-group"><textarea id="IPU2" type="text" class="form-control" onfocus="cambioClase1P(2)"></textarea></div></td>         
+          <td><div id="divP2" class="form-group"><textarea id="IPU2" name="IPU2" type="text" class="form-control"></textarea></div></td>         
         </tr>
         
                 <tr>
                     <td> <label class="text-danger">Segundo Apellido</label> </td>
-                   <td><div id="divP3" class="form-group"><textarea id="IPU3" type="text" class="form-control" onfocus="cambioClase1P(3)"></textarea></div></td> 
+                   <td><div id="divP3" class="form-group"><textarea id="IPU3" name="IPU3" type="text" class="form-control"></textarea></div></td> 
                 </tr>
             <tr>
                     <td> <label class="text-danger">Correo</label> </td>
-                   <td><div id="div8" class="form-group"><textarea id="IPU8" type="email" class="form-control"  onfocus="cambioClase1(8)"></textarea></div></td> 
+                   <td><div id="div8" class="form-group"><textarea id="IPU8" name="IPU8" type="email" class="form-control"></textarea></div></td> 
                 </tr>
                 <tr>
             <td><label class="text-danger" for="exampleInputPassword1" >Contraseña</label> </td> 
-                    <td><div id="divP4" class="form-group"><input type="password" class="form-control" id="IPU4" onfocus="cambioClase1P(4)" disabled></input></div> </td>  
+                    <td><div id="divP4" class="form-group"><input type="password" class="form-control" id="IPU4" name="IPU4" disabled></input></div> </td>  
           <td><button id="btnCambiar" type="button" class="btn btn-default"  onclick = "activarP()" style= "margin-left:10px; margin-bottom:10px">Cambiar</button></td>
                 </tr>
         
         <tr>
             <td><label class="text-danger" for="exampleInputPassword1" style="display:none" id="LIPU5">Confirmar Contraseña</label> </td> 
-                    <td><div id="divP5" class="form-group"><input type="password" class="form-control" id="IPU5" style="display:none" onfocus="cambioClase1P(5)"></input></div> </td>  
+                    <td><div id="divP5" class="form-group"><input type="password" class="form-control" id="IPU5" name="IPU5" style="display:none"></input></div> </td>  
           
          </tr>
         
         <tr>
                     <td> <label class="text-danger">Administrador </label></td>
-          <td> <label class="text-danger" style=""><input  type="checkbox" id="administrador_checkboxP" value="enlace_checkbox" disabled></label></td>
+          <td> <label class="text-danger" style=""><input  type="checkbox" id="administrador_checkboxP" name="administrador_checkboxP" value="enlace_checkbox" disabled></label></td>
                 </tr>
                         </tbody> 
        </table>  </center>    
       </div>
       <div class="modal-footer">
-      <center><button type="button" class="btn btn-default"  onclick = "actualizarInfoUsuarioP()">Guardar</button>
+      <center><button type="submit" class="btn btn-default">Guardar</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button></center> 
       </div>
     </div>
 
   </div>
   </div>
-
+  </form>  
 
 <!--
 
@@ -184,6 +189,89 @@ $(document).ready(function() {
   '</div><!-- /.container-fluid -->'+
 '</nav>';
 
+
+
+
+$('#menu').html(enc);
+
+
+
+ $('#FormularioEdicionPerfil input[type="password"], #FormularioEdicionPerfil textarea').tooltipster({
+        trigger: 'custom',
+        onlyOne: false,
+        position: 'right'
+    });
+
+
+   var validator = $('#FormularioEdicionPerfil').validate({
+          debug: true,
+        errorPlacement: function (error, element) {
+            $(element).tooltipster('update', $(error).text());
+            $(element).tooltipster('show');
+        },
+         success: function (label, element) {
+            $(element).tooltipster('hide');
+
+        },
+          rules: {
+            IPU0: { // id
+              required: true
+            },
+            IPU1: { // Nombre
+              required: true
+            },
+            IPU2: { // Apellido 1
+              required: true
+            },
+            IPU3: { // Apellido 2
+              required: true
+            },
+            IPU8: { // Correo
+              required: true
+            },
+            IPU4: { // Contraseña
+              required: true
+            },
+            IPU5: { // Confirmacion de contraseña
+              required: true,
+              equalTo: "#IPU4"
+            }
+          },
+          messages: {
+            IPU0: {
+              required: "Campo requerido"
+            },
+            IPU1: {
+              required: "Campo requerido"
+            },
+            IPU2: {
+              required: "Campo requerido"
+            },
+            IPU3: {
+              required: "Campo requerido"
+            },
+            IPU8: {
+              required: "Campo requerido",
+              email: "No es un correo válido"
+            },
+            IPU4: {
+              required: "Campo requerido"             
+            },
+            IPU5: {
+              required: "Campo requerido",
+              equalTo: "Las contraseñas no coinciden"
+            }
+          },
+          submitHandler: function(form) {
+             console.log('Intentando actualizar un usuario'); 
+               actualizarInfoUsuarioP();     
+            }
+        });
+
+//solicitarInformacionDeSesion();
+
+
+});
 $( document ).ready(function() {
   $(".nav li").on("click", function(){
     console.log($(this).attr('id'));
@@ -196,15 +284,6 @@ $( document ).ready(function() {
     
   });
 });
-
-
-$('#menu').html(enc);
-
-//solicitarInformacionDeSesion();
-
-
-});
-
 
 
 
