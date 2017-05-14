@@ -6,7 +6,7 @@ function  controllerAngular($scope)//ControllerAngular controller de todos los m
 	$scope.updateCorrespondencias = c => ($scope.correspondencias = c,$scope.totalItems=$scope.correspondencias.length);
 	$scope.buscar = _ => buscarCorrespondencias($scope);
 	$scope.clear = _ => limpiarPantalla($scope);
-	$scope.generarReporte = _ => crearReporte($scope);
+	$scope.generarReporte = _ => crearReporte($scope.correspondencias);
 
 
 
@@ -146,13 +146,87 @@ function limpiarPantalla($scope){// limpia
 	$("#dwpdf").hide();
 
 } 
-	
+	var footer = function (data) {
+  let str = 'Página ' + data.pageCount;
+  // Total page number plugin only available in jspdf v1.0+
+  if (typeof doc.putTotalPages === 'function') {
+    str = str + '/' + totalPagesExp;
+  }
 
-function crearReporte($scope){ //Metodo que genera el reporte
+  doc.textColor = [179, 0, 179];
+  doc.setFontSize(10);
+  doc.text(str, doc.internal.pageSize.width/2 -(str.length/2), doc.internal.pageSize.height - 5);
+};
+
+var doc;
+ var totalPagesExp = "{total_pages_count_string}";
+function crearReporte(correspondecias){ //Metodo que genera el reporte
 
 if(validarEspaciosVacios()){
 
-var doc = new jsPDF('l' );
+
+
+        var data = [];        
+
+        var tam = correspondecias.length;
+
+		
+        for(var i = 0; i<tam; i++){
+            var rowData = [];
+			
+		     let fechaOficio=  "                                                                                                               " + (correspondecias[i].tc_4.substr(8, 2)+"-"+correspondecias[i].tc_4.substr(5, 2)+"-"+correspondecias[i].tc_4.substr(0, 4)  );
+			 let fechaRecibido="                                                                                                                 " + (correspondecias[i].tc_2.substr(8, 2)+"-"+correspondecias[i].tc_2.substr(5, 2)+"-"+correspondecias[i].tc_2.substr(0, 4));
+			 
+			 let numeroOficio= "                                                                                     "  + correspondecias[i].tc_3;
+			 
+            rowData.push(numeroOficio);
+            rowData.push(fechaOficio);
+            rowData.push(fechaRecibido);
+            rowData.push(correspondecias[i].tc_8);
+            rowData.push(correspondecias[i].tc_5);
+            rowData.push(correspondecias[i].tc_7);
+			rowData.push(correspondecias[i].tc_10);
+            data.push(rowData);
+        };              
+		
+        doc = new jsPDF('l');
+
+        doc.setFontSize(20);        
+		
+		var res = doc.autoTableHtmlToJson(document.getElementById("tabla_encabezado"));
+        var res2 = doc.autoTableHtmlToJson(document.getElementById("tabla_busqueda"));
+
+	   
+	   doc.text(45, 15, "Reporte de Correspondencias SITUN");
+	   
+	   doc.autoTable(res.columns, res.data, {
+        startY: 20,
+        margin: {horizontal: 7},
+        bodyStyles: {valign: 'top'},
+        styles: {overflow: 'linebreak'},
+        columnStyles: {text: {columnWidth: 'auto'}}
+    });
+	
+	
+	
+        doc.autoTable( res2.columns, data , {
+        startY: doc.autoTable.previous.finalY + 15,
+         addPageContent: footer,
+        margin: {horizontal: 7,bottom:20},
+        pageBreak: 'auto',
+        bodyStyles: {valign: 'top'},
+        columnStyles: {text: {columnWidth: 'auto'}},
+        styles: { overflow: 'linebreak'}
+
+
+        
+    });
+
+        doc.putTotalPages("{total_pages_count_string}");
+	 doc.save("Reporte de Correspondencia");
+
+
+/*var doc = new jsPDF('l' );
 
 var res = doc.autoTableHtmlToJson(document.getElementById("tabla_encabezado"));
 var res2 = doc.autoTableHtmlToJson(document.getElementById("tabla_busqueda"));
@@ -180,47 +254,14 @@ doc.text(110, 15, "Reporte de Correspondencia");
 
    doc.save("Reporte de Correspondencia");
 
+*/
 
 
- 
- 
- 
-//Deje este código en caso de que se necesite cambiar, después se puede quitar
- /*  Para usar este codigo hay que cambiar el script de abajo en Reportes.HTML  por jspdf2 y comentar el codigo de arriba
-let pdf = new jsPDF('l', 'pt', 'letter');
-let source =  $('#HTMLtoPDF')[0] ;
-pdf.setFontSize(15);
-specialElementHandlers = {
-	'#bypassme': function(element, renderer){
-		return true
-	}
-}
-margins = {
-    top: 50,
-    left: 25,
-    width: 600
-  };
-  
-pdf.fromHTML(
-    source // El cuerpo del PDF en este caso HTML o string
-  	, margins.left // x coordenada x
-  	, margins.top // y coordenada y
-  	, {
-  		'width': margins.width 
-  		, 'elementHandlers': specialElementHandlers
-  	},
-  	function (dispose) {
-  		t ="{total_pages_count_string}";
-  		str = 'total pages: ' + t;
-  		//pdf.text(150,pdf.internal.pageSize.height, str);
-        pdf.save('ReporteCorrespondencia.pdf');
-      }
-  )		
- */
+
   
   
   
-  } 
+    } 
   
 }
 
