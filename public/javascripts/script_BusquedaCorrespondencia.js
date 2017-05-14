@@ -10,7 +10,7 @@ function controllerAngular($scope)//ControllerAngular
 	$scope.updateCorrespondencias = c => ($scope.correspondencias =c,$scope.totalItems=$scope.correspondencias.length);
 	$scope.buscar = _ => busquedaCorrespondencia($scope);
 	$scope.clear = _ => limpiaTabla($scope);	 
-	$scope.Adjuntando = f => actualizarAdj($scope,f);
+	//$scope.Adjuntando = f => actualizarAdj($scope,f);
 	$scope.AsignaUrl = r => UrlAdj($scope,r);
 	$scope.obtenerEnlaces	= n => buscaEnlaces($scope, n);
 	$scope.enlaces = new Array();
@@ -92,25 +92,54 @@ function controllerAngular($scope)//ControllerAngular
  
 // let keyUrl;
  function UrlAdj($scope, cor){
-		
+	
+	 var cst=0;
 	 $scope.url='http://' + ip + ':'+ puerto +'/Adjunto/'+cor.tc_12;
-
-	if(existeUrl($scope.url) && cor.tc_12!=null && cor.tc_12.length!=0)
+	if(cor.tc_12.length!=0)
 		$("#abrirDoc").removeAttr("disabled");
 	else{
 		
 		 $('#abrirDoc').attr('disabled', 'disabled');
 		 $scope.url='';
 	}
-		
 	 $('#input_adjunto').val(cor.tc_12);
-	  $("#btnGda").click(function(){
-		console.log("guarde");
-		actualizarAdj(cor.tc_1);
+	  $("#btnGda").click(function(){if(cst==0){
+	  actualizarAdj(cor.tc_1,cor.tc_12);
+	  cst++;
+	  	  
 		$("[data-dismiss=modal]").trigger({ type: "click" });
-		busquedaCorrespondencia($scope)});
+	  busquedaCorrespondencia($scope)}});
  }
 
+
+function actualizarAdj(cor,cor2){ //Actualiza la informacion que se haya editado
+	 
+  let doc = $('#input_adjunto').val();
+  fetch( 'http://' + ip + ':'+ puerto +'/api/TC/UDA', {  
+    method: 'POST', 
+    datatype:'json',
+    headers: {  
+      "Content-type": "application/x-www-form-urlencoded",
+
+      } ,
+    body: "TC_1="+cor+ "&TC_12="+doc
+      }
+	  )
+  .then(function(response) {
+
+  
+			if(doc!=''&&doc!=cor2){ 
+			 var formData  = new FormData();		
+			 formData.append('arc', adj[0]);
+			fetch('http://' + ip + ':'+ puerto +'/upload', {
+    		method: 'POST',
+    		body: formData
+  });
+							}else
+						$("#mensaje").text("Fallo al realizar la acción"); 
+  });
+ cor=null; }
+  
  
 
  
@@ -230,16 +259,16 @@ function limpiaTabla($scope){// limpia el div con el id de buscar
 	$scope.correspondencias = new Array();
 	} 
 
- function limpiaCamposEnfocados(n){//Limpia los campos cuando se enfocan
+/* function limpiaCamposEnfocados(n){//Limpia los campos cuando se enfocan
   limpiaDivMensaje();
   cambioClase1(n);
  }
- 
+ */
  function limpiaDivMensaje(){//Limpia el div con el id=mensaje
 $("#mensaje").text("");
 }
 
-function cambioClase1(op){//Realiza un cambio de clase a los campos de entrada del formulario de la clase has-error a from-group
+/*function cambioClase1(op){//Realiza un cambio de clase a los campos de entrada del formulario de la clase has-error a from-group
 	switch(op){
 	case 1: document.getElementById("datetimepicker55").className= "input-append form-group";break;
 	case 2: document.getElementById("div2").className ="form-group" ; break;
@@ -253,44 +282,14 @@ function cambioClase1(op){//Realiza un cambio de clase a los campos de entrada d
 	default: break;
 	}
 	}
-	
+	*/
 function actualizarInfo($scope){ //Actualiza la informacion que se haya editado
-    if(validar()){
+    //if(validar()){
 	actualizarCorrespondencia($scope);
     busquedaCorrespondencia($scope);
 	$("[data-dismiss=modal]").trigger({ type: "click" });
-	}
+	//}
   }
-  
-  function actualizarAdj(cor){ //Actualiza la informacion que se haya editado
-  console.log("conditionalllll", conditional);
-  let doc = $('#input_adjunto').val();
-  console.log("doooc",doc);
-  fetch( 'http://' + ip + ':'+ puerto +'/api/TC/UDA', {  
-    method: 'POST', 
-    datatype:'json',
-    headers: {  
-      "Content-type": "application/x-www-form-urlencoded",
-
-      } ,
-    body: "TC_1="+cor+ "&TC_12="+doc
-      }
-	  )
-  .then(function(response) {
-
-  
-			if(doc!=''){ 
-			 var formData  = new FormData();		
-			 formData.append('arc', adj[0]);
-			fetch('http://' + ip + ':'+ puerto +'/upload', {
-    		method: 'POST',
-    		body: formData
-  });
-							}else
-						$("#mensaje").text("Fallo al realizar la acción"); 
-  });
-  }
-  
   function checkCampoOficio(){ //Cambia el valor del campo referente al numero de oficio si la opcion SIN OFICIO esta marcada
 if($("#IC12").is(':checked')){
 	$("#IC2").val("SIN OFICIO");
@@ -301,7 +300,59 @@ if($("#IC12").is(':checked')){
 	$("#IC2").prop("disabled",false);
 	}
 }
+function checkCampoCopia(){ //Cambia el valor del campo COPIA por la opción SIN COPIA
+if($("#check_SinCopia").is(':checked')){
+	$("#IC5").val("SIN COPIA");
+	$('#IC5').focus();
+	$("#IC5").prop("disabled",true);	
+	}
+	else{
+	$("#IC5").val("");	
+	$("#IC5").prop("disabled",false);
+	$('#IC5').focus();
+	}
+}
 
+var validator;
+var validatorAlarma;
+function limpiarCampos(){//Limpia el valor de los campos de entrada
+	$("#FormularioCorrespondencia")[0].reset();
+	validator.submitted = {};
+	validator.elements().tooltipster('hide');
+
+	$("#FormularioAlarma")[0].reset();
+	validatorAlarma.submitted = {};
+	validatorAlarma.elements().tooltipster('hide');
+
+	 // solicitarInformacionDeSesion("#ICM");
+	 // $('#datetimepicker4').data("DateTimePicker").date(new Date());
+	/*for(let i=1;i<10;i++){
+	cambioClase1(i);
+}
+	$("#IC2").val("");
+	$("#IC2").removeAttr("disabled");
+	$("#IC3").val("");
+	$("#IC4").val("");
+	$("#IC5").val("");
+	$("#IC5").removeAttr("disabled");
+	$("#IC6").val("");
+	$("#IC7").val("");
+	$("#IC9").val("");
+	$("#IC10").val("");
+	$("#IC13").val("");
+	$("#IC14").val("");
+	$("#IC12").prop("checked",false);
+	$("#IC2").prop("checked",false);
+	$("#check_SinCopia").prop("checked",false);
+	$('#adjun').val(""); 
+    $('#input_adjunto').val(""); 
+	$( "#enlace_checkbox" ).prop( "checked", false );
+
+	*/
+}
+
+
+/*
 function validaFechas(){   //validacion de fechas editadas
 	let fechaR=$("#IC1").val();
 	let s=new Date(fechaR.substring(10, 6)+'-'+fechaR.substring(5, 3)+'-'+fechaR.substring(2, 0));
@@ -441,7 +492,7 @@ function cambioClase2(){//Realiza el cambio de clase de los campon de fecha del 
 	document.getElementById("IC3").title = "Fecha de oficio mayor a la de recibido" ;
 	return false;}
 	}
-	
+	*/
 function actualizarCorrespondencia($scope,cor){ //Recoge los datos de los campos y realiza el fecth de inserción 
 	var d=new Date($("#IC1").val());
 	let a1=condicion;
@@ -501,31 +552,44 @@ function ajusteAlarma($scope ,cor)  //Metodo de ajuste de alarma
 	.catch(err => console.log('Request failed', err));
  }
  
+var tmp;
+var tmp1;
 function cargaAlarma(data,corr){ //carga los datos de la alarma para mostrar en pantalla
+  
+	tmp = corr;
    if(data!=null){
-  $("#myModal3").modal("show");
-      $("#IC15").val(data.ta_2.substr(8,2)+"-"+data.ta_2.substr(5,2)+"-"+data.ta_2.substr(0,4));
-	  $("#IC14").val(data.ta_3.substr(8,2)+"-"+data.ta_3.substr(5,2)+"-"+data.ta_3.substr(0,4));
-	  $("#btnGd1").click(function(){
+ 
+      $("#IC16").val(data.ta_2.substr(8,2)+"-"+data.ta_2.substr(5,2)+"-"+data.ta_2.substr(0,4));
+	  $("#IC17").val(data.ta_3.substr(8,2)+"-"+data.ta_3.substr(5,2)+"-"+data.ta_3.substr(0,4));
+	  tmp1 = corr;
+	   $("#myModal4").modal("show");
+	 /* $("#btnGd1").click(function(){
 		console.log("guarde2");
 		actualizarAlarma(corr);
 		$("[data-dismiss=modal]").trigger({ type: "click" });
 		}//fin function
 		);
+		*/
 	 return 0; }
+
 	  else{
+	  	tmp1 = null;
 	   $("#myModal4").modal("show");
-	   $("#btnGd").click(function(){
+	   /*$("#btnGd").click(function(){
 		console.log("guarde");
 		nuevaAlarma(corr);
-		$("[data-dismiss=modal]").trigger({ type: "click" });});
+		$("[data-dismiss=modal]").trigger({ type: "click" });
+		});
+		*/
 	   return 1;
 	   }
+
+
  }
   
  function actualizarAlarma(data){ //Recoge los datos de los campos y realiza el fecth de actualizacion de alarma
-	let b3 = $("#IC15").val().substr(6,4)+"-"+$("#IC15").val().substr(3,2)+"-"+$("#IC15").val().substr(0,2);
-	let d3 = $("#IC14").val().substr(6,4)+"-"+$("#IC14").val().substr(3,2)+"-"+$("#IC14").val().substr(0,2);
+	let b3 = $("#IC16").val().substr(6,4)+"-"+$("#IC16").val().substr(3,2)+"-"+$("#IC16").val().substr(0,2);
+	let d3 = $("#IC17").val().substr(6,4)+"-"+$("#IC17").val().substr(3,2)+"-"+$("#IC17").val().substr(0,2);
 	fetch( 'http://' + ip + ':'+ puerto +'/api/TA/UDF', {  
     method: 'POST', 
     datatype:'json',

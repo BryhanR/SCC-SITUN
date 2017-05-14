@@ -14,7 +14,7 @@ var options = {
 var pgp = require('pg-promise')(options);
 
 //------ CONEXION A LA BASE DE DATOS ------------------
-var connectionString = "pg://postgres:admin123@localhost:5432/BD_SITUN"; // CAMBIAR POR CLAVE DEL POSTGRES DE USTEDES
+var connectionString = "pg://postgres:root@localhost:5432/BD_SITUN"; // CAMBIAR POR CLAVE DEL POSTGRES DE USTEDES
 var db = pgp(connectionString);
 
 
@@ -288,10 +288,11 @@ function getALLTP3(req, res, next) {
 function getALLTC1(req, res, next) {
 	var low = req.body.TC_3.toLowerCase();
  req.body.TC_3 = '%' + low + '%';
- var sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
+ /*var sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
    "from TC, TP where LOWER(TC_3) LIKE ${TC_3} and TC_9 = TP_4";
-  //db.any('select * from TC where LOWER(TC_3) LIKE ${TC_3}', req.body)
-  db.any(sql, req.body)
+   */
+  db.any('select * from TC where LOWER(TC_3) LIKE ${TC_3}', req.body)
+  //db.any(sql, req.body)
 	.then( function (data) {
 		res.status(200)
         .json({
@@ -307,10 +308,11 @@ function getALLTC5(req, res, next) {
 	console.log("entra");
 	var low = req.body.TC_1;
  req.body.TC_1 = low ;
- var sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
+ /*var sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
    "from TC, TP where TC_1 = ${TC_1} and TC_9 = TP_4";
-  //db.any('select * from TC where TC_1 = ${TC_1}', req.body)
-  db.any(sql, req.body)
+   */
+  db.any('select * from TC where TC_1 = ${TC_1}', req.body)
+  //db.any(sql, req.body)
 	.then( function (data) {
 		res.status(200)
         .json({
@@ -343,10 +345,11 @@ function getAllEnlaces(req, res, next)	// devuelve los enlaces de una correspond
 function getALLTC2(req, res, next) {
 	var low = req.body.TC_5.toLowerCase();
  req.body.TC_5 =  '%' + low + '%';
- var sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
+ /*var sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
    "from TC, TP where LOWER(TC_5) LIKE ${TC_5} and TC_9 = TP_4";
-  //db.any('select * from TC where LOWER(TC_5) LIKE ${TC_5}', req.body)
-  db.any(sql, req.body)
+   */
+  db.any('select * from TC where LOWER(TC_5) LIKE ${TC_5}', req.body)
+  //db.any(sql, req.body)
     .then(function (data) {
       res.status(200)
         .json({
@@ -364,10 +367,11 @@ function getALLTC2(req, res, next) {
 function getALLTC3(req, res, next) {
 	var low = req.body.TC_7.toLowerCase();
   req.body.TC_7 =  '%' + low + '%';
-    var sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
+  /*  var sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
    "from TC, TP where LOWER(TC_7) LIKE ${TC_7} and TC_9 = TP_4";
-  //db.any('select * from TC where LOWER(TC_7) LIKE ${TC_7}', req.body)
-  db.any(sql, req.body)
+   */
+  db.any('select * from TC where LOWER(TC_7) LIKE ${TC_7}', req.body)
+  //db.any(sql, req.body)
       .then(function (data) {
       res.status(200)
         .json({
@@ -385,10 +389,11 @@ function getALLTC3(req, res, next) {
 function getALLTC4(req, res, next) {
 	var low = req.body.TC_8.toLowerCase();
 	req.body.TC_8 =  '%' +low+'%';
-   var sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
+   /*var sql = "select TC_1, TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, (TP_1 || ' ' || TP_2) as TC_9, TC_10, TC_11, TC_12 "+
    "from TC, TP where LOWER(TC_8) LIKE ${TC_8} and TC_9 = TP_4";
-	//db.any('select * from TC where LOWER(TC_8) LIKE ${TC_8}', req.body)
-  db.any(sql, req.body)
+   */ 
+	db.any('select * from TC where LOWER(TC_8) LIKE ${TC_8}', req.body)
+  //db.any(sql, req.body)
     .then(function (data) {
       res.status(200)
         .json({
