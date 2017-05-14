@@ -146,7 +146,7 @@ function cargarDatosUsuarioP(data){
 
   function actualizarInfoUsuarioP(){ //Actualiza la informacion en la base de datos
   console.log('validacion '+validarP());
-    if(validarP()){
+  //  if(validarP()){
 	console.log('Entro despues de validacion'+validarP()); // Quitar
 
 	
@@ -168,7 +168,7 @@ function cargarDatosUsuarioP(data){
 	//$('#myModalP').hide();
 	$('#myModalP').hide();
     $('.modal-backdrop').hide();
-	}
+	//}
   }
 
  
@@ -243,8 +243,14 @@ function cargarDatosUsuarioP(data){
     $("#IPU5").show();	
     $("#btnCambiar").hide();
   }
-
-
+  
+  function desactivarP(){
+    $("#IPU4").attr('disabled','disabled');
+    $("#LIPU5").hide();
+    $("#IPU5").hide();
+	$("#btnCambiar").show();
+  }
+/*
   function validarP(){ //Valiad los campos de entrada
 	I2 = true;
 	I3 = true;
@@ -320,9 +326,13 @@ function cargarDatosUsuarioP(data){
 		return (I2  && I3  && I4 && I5 && I6 );	
 }
 
-
-
+*/
+var validatorPerfil;
 function limpiarValoresP(){ //Limpia los valores de los campos de entrada
+   $("#FormularioEdicionPerfil")[0].reset();
+	validatorPerfil.submitted = {};
+	validatorPerfil.elements().tooltipster('hide');
+	/*
     $("#div5").attr('class','form-group') ;
 	$("#IPU5").attr('title','');
 	$("#IPU5").val("");
@@ -330,8 +340,9 @@ function limpiarValoresP(){ //Limpia los valores de los campos de entrada
 	for(i=1;i<6;i++){
 	   cambioClase1P(i);
 	}
+	*/
 }
-  
+  /*
   function cambioClase1P(op){ //Realiza el cambio de clase de has-error a form-group
 	switch(op){
 		case 1:  $("#div1").attr('class','form-group'); break;
@@ -341,17 +352,5 @@ function limpiarValoresP(){ //Limpia los valores de los campos de entrada
 		case 5:  $("#div5").attr('class','form-group'); break;
 	}
   }
+  */
   
-  function activarP(){
-    $("#IPU4").removeAttr("disabled");
-    $("#LIPU5").show();
-    $("#IPU5").show();	
-    $("#btnCambiar").hide();
-  }
-  
-  function desactivarP(){
-    $("#IPU4").attr('disabled','disabled');
-    $("#LIPU5").hide();
-    $("#IPU5").hide();
-	$("#btnCambiar").show();
-  }
