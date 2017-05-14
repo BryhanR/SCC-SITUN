@@ -95,7 +95,7 @@ function controllerAngular($scope)//ControllerAngular
 	
 	 var cst=0;
 	 $scope.url='http://' + ip + ':'+ puerto +'/Adjunto/'+cor.tc_12;
-	if(cor.tc_12.length!=0)
+	if(existeUrl($scope.url) && cor.tc_12!=null && cor.tc_12.length!=0)
 		$("#abrirDoc").removeAttr("disabled");
 	else{
 		
