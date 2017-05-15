@@ -149,8 +149,8 @@ function tipoBusquedaBD($scope) //Toma el criterio de busqueda y devuelve la col
 	  let a4;
 	  let b4;
 	  if(banderita == true){
-		a4 = obj.id;
-		b4 = $scope.doc1.tc_1;
+		a4 = $scope.doc1.tc_1;
+		b4 = obj.id;
 		localStorage.clear();
 		}
 		else{
