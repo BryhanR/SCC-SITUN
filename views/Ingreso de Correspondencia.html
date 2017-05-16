@@ -284,9 +284,8 @@
 		  <tbody>
 			<tr ng-repeat = "c in alarmas">
 	
-		 
 					<td> <button   ng-click="visto(c)"  data-toggle="modal" data-target="#myModal"  >-</button> </td>
-					<td> {{c.tc_3}} </td>
+					<td ng-dblclick="BuscarCorrespondencia(c)" ng-mouseover="sobre()"  ng-mouseleave="fuera()"> {{c.tc_3}}</td>
 					<td> {{c.ta_3 | date:'dd/MM/yyyy'}} </td>
 					<td> {{c.ta_2 | date:'dd/MM/yyyy'}} </td>
 			
