@@ -1,3 +1,22 @@
+function abrirBusqueda(b,$scope){
+	
+	
+	
+	localStorage.setItem('corres_B',b.tc_3);
+	//console.log(localStorage.getItem('corres_B'));
+	//localStorage.removeItem('corres_B');
+	 window.open('http://' + ip +':'+ puerto +'/HTML/Busqueda','_self');
+	 // , "no", "directories=no, location=no, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=400, height=400"
+	
+}
+
+function cambioCursorSobre() {
+  $('html,body').css('cursor','pointer');
+}
+
+function cambioCursorAfuera() {
+  $('html,body').css('cursor','default');
+}
 
 
 function dato_Adjunto(){ //
@@ -15,6 +34,9 @@ function controllerAngular($scope)//ControllerAngular
 	$scope.guardarCorrespondencia =   _  => existeCorrespondencia($scope);
 	$scope.updateU = u => $scope.usuario = u;
 	$scope.usuario = "gaga";
+	$scope.BuscarCorrespondencia =b=> abrirBusqueda(b,$scope);
+	$scope.sobre =_=> cambioCursorSobre();
+	$scope.fuera =_=> cambioCursorAfuera();
   }
   
   
