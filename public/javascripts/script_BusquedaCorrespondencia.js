@@ -1,4 +1,23 @@
 
+function iniciar_B($scope){
+	if(localStorage.getItem('corres_B')!=null){
+		
+		// Seleccionamos el tipo de busqueda por numero de oficio
+		var $miSelect = $('#opBusqueda');
+        $miSelect.val($miSelect.children('option:first').val());
+		$scope.criterio = "Nº oficio";
+		
+		$("#buscar").val(localStorage.getItem('corres_B')); 
+		
+		localStorage.removeItem('corres_B'); // Eliminamos el elemento del localStorage
+		busquedaCorrespondencia($scope);
+	}
+	
+	
+	
+}
+
+
 function dato_Adjunto(){ //
 adj= $('#adjun').prop('files');
 $('#input_adjunto').val(adj[0].name);
@@ -19,7 +38,7 @@ function controllerAngular($scope)//ControllerAngular
 	$scope.actualiza =_ => actualizarInfo($scope);
 	$scope.Alarma= x => ajusteAlarma($scope,x);
 	$scope.nuevaAlarma = h => nuevaAlarma($scope, h);
-
+	$scope.ini_Busqueda = _ => iniciar_B($scope);
 
 //-----------------------------
 	$scope.totalItems = 0;

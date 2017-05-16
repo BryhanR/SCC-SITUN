@@ -1,3 +1,7 @@
+function abrirBusqueda(b,$scope){
+	localStorage.setItem('corres_B',b.tc_3);
+	 window.open('http://' + ip +':'+ puerto +'/HTML/Busqueda','_self');
+}
 
 
 function dato_Adjunto(){ //
@@ -15,6 +19,10 @@ function controllerAngular($scope)//ControllerAngular
 	$scope.guardarCorrespondencia =   _  => existeCorrespondencia($scope);
 	$scope.updateU = u => $scope.usuario = u;
 	$scope.usuario = "gaga";
+	$scope.BuscarCorrespondencia =b=> abrirBusqueda(b,$scope);
+	$scope.sobre =_=> cambioCursorSobre();
+	$scope.fuera =_=> cambioCursorAfuera();
+	
   }
   
   

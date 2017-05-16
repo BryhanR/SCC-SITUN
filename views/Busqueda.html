@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html ng-app = "app">
-    <head>
+<html ng-app = "app" >
+    <head >
 	
 	
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,7 +33,7 @@
 
 </head>
 
-<body ng-controller = "ControllerAngular">
+<body ng-controller = "ControllerAngular" >
 	<div id="menuDiv"></div>
 
 	<!-- Modal de MIAYUDA-->
@@ -71,7 +71,7 @@
 	</div>  <!-- fin del popup de ayuda --> 
 	  
 	<!---Cuerpo-->
-	<body background="../images/situn4.png">
+	<body background="../images/situn4.png"  ng-init= "ini_Busqueda()">
 
       <div class="panel panel-danger" style="max-width: 96.5%; margin-left:15px" >
 		 <div class="text-danger" style="margin-left:25px">
@@ -335,15 +335,16 @@
 			<thead>
 			<tr class="danger">
 				<td>
-					<h3>Superiores</h3>
-				<td>
 					<h3>Inferiores</h3>
+				<td>
+					<h3>Superiores</h3>
 				<td>
 					
 				</td>
 			</tr>
 			</thead>
 			<tbody>
+			
 				<tr>
 					<td>
 						<div>
@@ -506,7 +507,7 @@
 
 $(document).ready(function() {// Solicita la informacion de la sesion si aun no existe en el storage
 	//$("#menuDiv").load("/HTML/menu", function(){$("#BDM").addClass("activa");}); 
-	
+
 	 solicitarInformacionDeSesion("#BDM");
 
 	$("#ayuda").click(
