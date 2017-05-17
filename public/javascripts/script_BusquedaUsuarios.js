@@ -16,9 +16,6 @@ function controllerAngular($scope)//ControllerAngular
   
   
   function actualizarInfo($scope){ //Actualiza la informacion en la base de datos
-  //console.log('validacion '+validar());
-    //if(validar()){
-	//console.log('Entro despues de validacion'+validar()); // Quitar
 	actualizarPersona();
 	actualizarUsuario();
     busquedaUsuario($scope);
@@ -29,7 +26,6 @@ function controllerAngular($scope)//ControllerAngular
     	solicitarInformacionDeSesion();
     }
 	$('#myModal').modal('hide'); 
-	//}
   }
   
   function actualizarPersona(){ //actualiza la infromación del usuario en la tabla personas
@@ -94,84 +90,6 @@ function controllerAngular($scope)//ControllerAngular
   });
  
   }
-
-  /*
-  function validar(){ //Valiad los campos de entrada
-	I2 = true;
-	I3 = true;
-	I4 = true;
-	I5 = true;
-	I6 = true;
-
-	if($("#IU1").val().length == 0){
-		$("#div1").attr('class','form-group has-error') ;
-		$("#IU1").attr('title','Campo Obligatorio') ;
-		I2 = false;
-	}
-	else{
-	  cambioClase1(1);
-	$("#IU1").attr('title','');
-	}
-	if($("#IU2").val().length == 0){
-		$("#div2").attr('class','form-group has-error') ;
-		$("#IU2").attr('title','Campo Obligatorio') ;
-		I3 = false;
-	}
-	else{
-	 cambioClase1(2);
-	$("#IU2").attr('title','');
-	}
-	if($("#IU3").val().length == 0){
-		$("#div3").attr('class','form-group has-error') ;
-		$("#IU3").attr('title','Campo Obligatorio') ;
-		I4 = false;
-	}
-	else{
-	 cambioClase1(3);
-	$("#IU3").attr('title','');
-	}
-	if($("#IU4").val().length == 0){
-		$("#div4").attr('class','form-group has-error') ;
-		$("#IU4").attr('title','Campo Obligatorio') ;
-		I5 = false;
-	}
-	else{
-	 cambioClase1(4);
-	$("#IU4").attr('title','');
-	}
-	if($( "#IU4" ).prop("disabled")!=true){ 
-	if($("#IU5").val().length == 0){
-		$("#div5").attr('class','form-group has-error') ;
-		$("#IU5").attr('title','Campo Obligatorio') ;
-		I6 = false;
-	}
-	else{
-	 cambioClase1(5);
-	$("#IU5").attr('title','');
-	}
-	}
-	if($("#IU4").val()!=$("#IU5").val() && $( "#IU4" ).prop("disabled")!=true){
-		$("#div4").attr('class','form-group has-error') ;
-		$("#IU4").attr('title','La contraseña no coincide') ;
-		$("#div5").attr('class','form-group has-error') ;
-		$("#IU5").attr('title','La contraseña no coincide') ;
-		$("#IU5").val("");
-		$("#IU4").val("");
-		I6 = false;
-	}
-	else{
-	if(I6&&I5){
-	 cambioClase1(4);
-	$("#IU4").attr('title','');
-	 cambioClase1(5);
-	$("#IU5").attr('title','');
-	}
-	}
-
-		return (I2  && I3  && I4 && I5 && I6 );	
-}
-*/
-
 function limpiarValores(){ //Limpia los valores de los campos de entrada
     /*
     $("#div5").attr('class','form-group') ;
@@ -189,15 +107,6 @@ function limpiarValores(){ //Limpia los valores de los campos de entrada
 }
   
   var validator = {};
-  /*function cambioClase1(op){ //Realiza el cambio de clase de has-error a form-group
-	switch(op){
-		case 1:  $("#div1").attr('class','form-group'); break;
-		case 2:	 $("#div2").attr('class','form-group'); break;
-		case 3:  $("#div3").attr('class','form-group'); break;
-		case 4:  $("#div4").attr('class','form-group'); break;
-		case 5:  $("#div5").attr('class','form-group'); break;
-	}
-  }*/
   
   function activar(){//Tiene la función del botón cambiar contraseña para habilitarlo
     $("#IU4").removeAttr("disabled");
