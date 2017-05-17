@@ -225,42 +225,6 @@ if(validarEspaciosVacios()){
         doc.putTotalPages("{total_pages_count_string}");
 	 doc.save("Reporte de Correspondencia");
 
-
-/*var doc = new jsPDF('l' );
-
-var res = doc.autoTableHtmlToJson(document.getElementById("tabla_encabezado"));
-var res2 = doc.autoTableHtmlToJson(document.getElementById("tabla_busqueda"));
-
-doc.text(110, 15, "Reporte de Correspondencia");
-    
-	  
-	   doc.autoTable(res.columns, res.data, {
-        startY: 20,
-        margin: {horizontal: 7},
-        bodyStyles: {valign: 'top'},
-        styles: {overflow: 'linebreak'},
-        columnStyles: {text: {columnWidth: 'auto'}}
-    });
-
-
-
-	   doc.autoTable(res2.columns, res2.data, {
-        startY: doc.autoTable.previous.finalY + 15,
-        margin: {horizontal: 7},
-        bodyStyles: {valign: 'top'},
-        styles: {overflow: 'linebreak'},
-        columnStyles: {text: {columnWidth: 'auto'}}
-    });
-
-   doc.save("Reporte de Correspondencia");
-
-*/
-
-
-
-  
-  
-  
     } 
   
 }

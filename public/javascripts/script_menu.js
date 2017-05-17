@@ -61,10 +61,6 @@ function cargarMenu() //CArga el menu del sistema
     '</div><!-- /.navbar-collapse -->'+
   '</div><!-- /.container-fluid -->'+
 '</nav>';
-
-//$('#menu').html(enc);
-//var el = document.getElementById('menu');
-	//angular.element(el).append( $compile(html)($scope) )
 }
 
 function solicitarInformacionDeSesion(page)//solicita los datos actualizados de la persona 
@@ -82,15 +78,10 @@ function solicitarInformacionDeSesion(page)//solicita los datos actualizados de 
         var name = req.nombre + ' '+ req.apellido;
         $('#userInfo').html(name+'<span class="caret"></span>');
         $("#IC8").val(name);
-
-        //console.log(req);
-        //console.log("success!");
-        //$('#myModalP').modal('hide')
         $("#menuDiv").load("/HTML/menu", function(){$(page).addClass("activa");}); 
 
       },  
       complete: function() {  
-          //console.log("complete!");  
 
       }  
 
@@ -145,30 +136,17 @@ function cargarDatosUsuarioP(data){
  }
 
   function actualizarInfoUsuarioP(){ //Actualiza la informacion en la base de datos
-  console.log('validacion '+validarP());
-  //  if(validarP()){
-	console.log('Entro despues de validacion'+validarP()); // Quitar
-
-	
-	//$("#myModalP .close").click() 
-	//$('#myModalP').fadeOut(600);
-	var cod='No Definido';
+	var cod = 'No Definido';
 	 actualizarPersonaP()
 	.then( _=> actualizarUsuarioP()
 		.then( _=> (
 				$("ul.nav").children().each( (a,b) => cod= (cod =='No Definido' &&  b.className==='activa')?b.id:cod),
-				//$('#myModalP').modal('hide'),
 				solicitarInformacionDeSesion('#'+cod)
 				
 				)
 		));
-    //busquedaUsuario($scope);
-    
-	//$('#myModalP').modal('hide');
-	//$('#myModalP').hide();
 	$('#myModalP').hide();
     $('.modal-backdrop').hide();
-	//}
   }
 
  
@@ -190,17 +168,6 @@ function cargarDatosUsuarioP(data){
 	"&TP_3="+ d + "&TP_4="+ a + "&TP_5="+ e 
       }
 	  );
-  /*.then(function(response) {
-		return response.text().then(function(res) {
-				//console.log("Resultado: "+res);
-					if(res.indexOf("error")==-1){
-						$("#mensaje").text("Acción realizada con exito");
-			}
-				});
-	})
-  .catch(function(error) {  
-   console.log('Request failed', error);  
-  });*/
   }
   
   
@@ -223,17 +190,6 @@ function cargarDatosUsuarioP(data){
 	"&TU_3="+ c
       }
 	  )
-  /*.then(function(response) {
-		return response.text().then(function(res) {
-				console.log("Resultado: "+res);
-					if(res.indexOf("error")==-1){
-						$("#mensaje").text("Acción realizada con exito");
-			}
-				});
-	})
-  .catch(function(error) {  
-   console.log('Request failed', error);  
-  });*/
  
   }
 
@@ -250,107 +206,11 @@ function cargarDatosUsuarioP(data){
     $("#IPU5").hide();
 	$("#btnCambiar").show();
   }
-/*
-  function validarP(){ //Valiad los campos de entrada
-	I2 = true;
-	I3 = true;
-	I4 = true;
-	I5 = true;
-	I6= true;
 
-	if($("#IPU1").val().length == 0){
-		$("#divP1").attr('class','form-group has-error') ;
-		$("#IPU1").attr('title','Campo Obligatorio') ;
-		I2 = false;
-	}
-	else{
-	  cambioClase1P(1);
-	$("#IPU1").attr('title','');
-	}
-	if($("#IPU2").val().length == 0){
-		$("#divP2").attr('class','form-group has-error') ;
-		$("#IPU2").attr('title','Campo Obligatorio') ;
-		I3 = false;
-	}
-	else{
-	 cambioClase1P(2);
-	$("#IPU2").attr('title','');
-	}
-	if($("#IPU3").val().length == 0){
-		$("#divP3").attr('class','form-group has-error') ;
-		$("#IPU3").attr('title','Campo Obligatorio') ;
-		I4 = false;
-	}
-	else{
-	 cambioClase1P(3);
-	$("#IPU3").attr('title','');
-	}
-	if($("#IPU4").val().length == 0){
-		$("#divP4").attr('class','form-group has-error') ;
-		$("#IPU4").attr('title','Campo Obligatorio') ;
-		I5 = false;
-	}
-	else{
-	 cambioClase1P(4);
-	$("#IPU4").attr('title','');
-	}
-	if($( "#IPU4" ).prop("disabled")!=true){ 
-	if($("#IPU5").val().length == 0){
-		$("#divP5").attr('class','form-group has-error') ;
-		$("#IPU5").attr('title','Campo Obligatorio') ;
-		I6 = false;
-	}
-	else{
-	 cambioClase1P(5);
-	$("#IPU5").attr('title','');
-	}
-	}
-	if($("#IPU4").val()!=$("#IPU5").val() && $( "#IPU4" ).prop("disabled")!=true){
-		$("#divP4").attr('class','form-group has-error') ;
-		$("#IPU4").attr('title','La contraseña no coincide') ;
-		$("#divP5").attr('class','form-group has-error') ;
-		$("#IPU5").attr('title','La contraseña no coincide') ;
-		$("#IPU5").val("");
-		$("#IPU4").val("");
-		I6 = false;
-	}
-	else{
-	if(I6&&I5){
-	 cambioClase1P(4);
-	$("#IPU4").attr('title','');
-	 cambioClase1P(5);
-	$("#IPU5").attr('title','');
-	}
-	}
-
-		return (I2  && I3  && I4 && I5 && I6 );	
-}
-
-*/
 var validatorPerfil;
 function limpiarValoresP(){ //Limpia los valores de los campos de entrada
    $("#FormularioEdicionPerfil")[0].reset();
 	validatorPerfil.submitted = {};
 	validatorPerfil.elements().tooltipster('hide');
-	/*
-    $("#div5").attr('class','form-group') ;
-	$("#IPU5").attr('title','');
-	$("#IPU5").val("");
-	let i =1;
-	for(i=1;i<6;i++){
-	   cambioClase1P(i);
-	}
-	*/
 }
-  /*
-  function cambioClase1P(op){ //Realiza el cambio de clase de has-error a form-group
-	switch(op){
-		case 1:  $("#div1").attr('class','form-group'); break;
-		case 2:	 $("#div2").attr('class','form-group'); break;
-		case 3:  $("#div3").attr('class','form-group'); break;
-		case 4:  $("#div4").attr('class','form-group'); break;
-		case 5:  $("#div5").attr('class','form-group'); break;
-	}
-  }
-  */
-  
+ 
