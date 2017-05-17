@@ -733,7 +733,7 @@ function MB_04($scope) //Toma el criterio de busqueda y devuelve la columna que 
           messages: {
             IC16: {
               required: "Se requiere fecha de recibido",
-              menorIgualHoy: "La fecha de recibido no puede ser mayor que hoy"
+              mayorIgualHoy: "La fecha de recibido no puede ser mayor que hoy"
             },
             IC17: {
               required: "Se requiere número de oficio",
@@ -746,8 +746,10 @@ function MB_04($scope) //Toma el criterio de busqueda y devuelve la columna que 
              	actualizarAlarma(tmp);
              else
              	nuevaAlarma(tmp);
-             limpiarCampos();
-             $("#myModal4").modal("hide");
+
+				 limpiarCampos();
+				$('#btnGd').modal('hide');
+
              //botonGuardar();         
              //angular.element($('#IC5')).scope().guardarCorrespondencia();  
             }

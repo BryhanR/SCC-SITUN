@@ -353,22 +353,34 @@ var tmp;
 var tmp1;
 function cargaAlarma(data,corr){ //carga los datos de la alarma para mostrar en pantalla  
 	tmp = corr;
-   	if(data!=null){ 
-    	$("#IC16").val(data.ta_2.substr(8,2)+"-"+data.ta_2.substr(5,2)+"-"+data.ta_2.substr(0,4));
-	  	$("#IC17").val(data.ta_3.substr(8,2)+"-"+data.ta_3.substr(5,2)+"-"+data.ta_3.substr(0,4));
-	  	tmp1 = corr;
-	  	$("#myModal4").modal("show");
-	  	return 0; 
-	}else{
+
+   if(data!=null){
+ 
+      $("#IC17").val(data.ta_2.substr(8,2)+"-"+data.ta_2.substr(5,2)+"-"+data.ta_2.substr(0,4));
+	  $("#IC16").val(data.ta_3.substr(8,2)+"-"+data.ta_3.substr(5,2)+"-"+data.ta_3.substr(0,4));
+	  tmp1 = corr;
+	   $("#myModal4").modal("show");
+	 /* $("#btnGd1").click(function(){
+		console.log("guarde2");
+		actualizarAlarma(corr);
+		$("[data-dismiss=modal]").trigger({ type: "click" });
+		}//fin function
+		);
+		*/
+	 return 0; }
+
+	  else{
+
 	  	tmp1 = null;
 	   	$("#myModal4").modal("show");
 	   	return 1;
 	}
  }
-  
-function actualizarAlarma(data){ //Recoge los datos de los campos y realiza el fecth de actualizacion de alarma
-	let b3 = $("#IC16").val().substr(6,4)+"-"+$("#IC16").val().substr(3,2)+"-"+$("#IC16").val().substr(0,2);
-	let d3 = $("#IC17").val().substr(6,4)+"-"+$("#IC17").val().substr(3,2)+"-"+$("#IC17").val().substr(0,2);
+
+ function actualizarAlarma(data){ //Recoge los datos de los campos y realiza el fecth de actualizacion de alarma
+	let d3 = $("#IC16").val().substr(6,4)+"-"+$("#IC16").val().substr(3,2)+"-"+$("#IC16").val().substr(0,2);
+	let b3 = $("#IC17").val().substr(6,4)+"-"+$("#IC17").val().substr(3,2)+"-"+$("#IC17").val().substr(0,2);
+
 	fetch( 'http://' + ip + ':'+ puerto +'/api/TA/UDF', {  
     	method: 'POST', 
     	datatype:'json',
