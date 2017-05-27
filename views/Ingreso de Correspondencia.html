@@ -282,16 +282,21 @@
 			<!--	</table> -- VER-->
    
 		  <tbody>
-			<tr ng-repeat = "c in alarmas">
+			<tr ng-repeat = "c in alarmas" ng-mouseenter="hover = true" ng-class="{cursorp: hover}" 
+				ng-mouseleave="hover = false" ng-dblclick="BuscarCorrespondencia(c)">
 	
-		 
 					<td> <button   ng-click="visto(c)"  data-toggle="modal" data-target="#myModal"  >-</button> </td>
-					<td> {{c.tc_3}} </td>
+					<td > {{c.tc_3}}</td>
 					<td> {{c.ta_3 | date:'dd/MM/yyyy'}} </td>
 					<td> {{c.ta_2 | date:'dd/MM/yyyy'}} </td>
 			
 			</tr>
-			
+			<style>
+			.cursorp{
+				cursor: pointer;
+				background-color:#d86d6f;
+			}
+			</style>
 		</tbody>    
 	        </table>
 			

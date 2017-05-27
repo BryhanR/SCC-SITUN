@@ -1,3 +1,7 @@
+function abrirBusqueda(b,$scope){
+	localStorage.setItem('corres_B',b.tc_3);
+	 window.open('http://' + ip +':'+ puerto +'/HTML/Busqueda','_self');
+}
 
 
 function dato_Adjunto(){ //
@@ -15,6 +19,10 @@ function controllerAngular($scope)//ControllerAngular
 	$scope.guardarCorrespondencia =   _  => existeCorrespondencia($scope);
 	$scope.updateU = u => $scope.usuario = u;
 	$scope.usuario = "gaga";
+	$scope.BuscarCorrespondencia =b=> abrirBusqueda(b,$scope);
+	$scope.sobre =_=> cambioCursorSobre();
+	$scope.fuera =_=> cambioCursorAfuera();
+	
   }
   
   
@@ -59,13 +67,6 @@ $("#IC15").click(function(){
 		});
 	
 	}
- /*
- function limpiaCamposEnfocados(n){//Limpia los campos cuando se enfocan
-  limpiaDivMensaje();
-  cambioClase1(n);
-
- }
- */
  
  function checkCampoOficio(){ //Cambia el valor del campo referente al numero de oficio si la opcion SIN OFICIO esta marcada
 if($("#IC12").is(':checked')){
@@ -158,98 +159,10 @@ function ingresoCorrespondencia($scope){ //Recoge los datos de los campos y real
   
 }
 
-/*
-function validacionCampos(){	 //Valida todos los campos 
-	IC1 = true;
-	IC2 = true;
-	IC3 = true;
-	IC4	= true;
-	IC5 = true;
-	IC6 = true;
-	IC7 = true;
-	IC8 = true;
-	IC9 = true;
-	IC10 = true;
-	
-	if($("#IC1").val().length == 0){
-		cambioClase3(1);
-		IC1 = false;
-	}
-	else{
-	cambioClase1(1);
-	}
-	if($("#IC2").val().length == 0){
-		cambioClase3(2);		
-		IC2 = false;
-	}
-	else{
-		cambioClase1(2);
-	}
-	
-	if($("#IC3").val().length == 0){
-		cambioClase3(3);
-		IC3 = false;
-	}
-	else{
-		cambioClase1(3);
-		}
-	if($("#IC4").val().length == 0){
-		cambioClase3(4);
-		IC4 = false;
-	}
-	else{
-		cambioClase1(4);
-	}
-	if($("#IC5").val().length == 0){
-		cambioClase3(5); 
-		IC5 = false;
-	}
-	else{
-		cambioClase1(5);
-	}
-	if($("#IC6").val().length == 0){
-		cambioClase3(6);
-		IC6 = false;
-	}
-	else{
-		cambioClase1(6);
-	}
-	if($("#IC7").val().length == 0){
-		cambioClase3(7);
-		IC7 = false;
-	}
-	else{
-		cambioClase1(7);
-	}
-	if($("#IC8").val().length == 0){
-		cambioClase3(8);
-		IC8 = false;
-	}
-	else{
-		cambioClase1(8);
-	}
-	if($("#IC9").val().length == 0){
-		cambioClase3(9);
-		IC9 = false;
-	}
-	else{
-		cambioClase1(9);
-	}
-	if( $("#IC13").val().length != 0 ||   $("#IC14").val().length != 0  ){ // En caso de programar la alarma
-	  var aux=validacionCamposAlarma();
-		return (IC1 && IC2  && IC3  && IC4 	&& IC5 && IC6 && IC7 && IC8 && IC9 && aux &&cambioClase2());
-		}
-		else{
-		return (IC1 && IC2  && IC3  && IC4 	&& IC5 && IC6 && IC7 && IC8 && IC9 && cambioClase2());
-		}
-}
-*/
 
-<!--limpia todos los campos--->
+
 function botonCancelar(){//Metodo de cancelar
-	//limpiarCampos();
 	limpiaDivMensaje();
-	  //$("[data-toggle='tooltip']")removeAttr("data-original-title");
 	limpiarCampos();
 	subePagina();//sube la pagina
 }
@@ -262,29 +175,11 @@ function limpiarCampos(){//Limpia el valor de los campos de entrada
 
 	  solicitarInformacionDeSesion("#ICM");
 	  $('#datetimepicker4').data("DateTimePicker").date(new Date());
-	/*for(let i=1;i<10;i++){
-	cambioClase1(i);
-}
-	$("#IC2").val("");
-	$("#IC2").removeAttr("disabled");
-	$("#IC3").val("");
-	$("#IC4").val("");
-	$("#IC5").val("");
-	$("#IC5").removeAttr("disabled");
-	$("#IC6").val("");
-	$("#IC7").val("");
-	$("#IC9").val("");
-	$("#IC10").val("");
-	$("#IC13").val("");
-	$("#IC14").val("");
-	$("#IC12").prop("checked",false);
-	$("#IC2").prop("checked",false);
-	$("#check_SinCopia").prop("checked",false);
-	$('#adjun').val(""); 
-    $('#input_adjunto').val(""); 
-	$( "#enlace_checkbox" ).prop( "checked", false );
 
-	*/
+	  $("#IC2").prop('disabled', false);
+	  $("#IC5").prop('disabled', false);
+
+	
 }
 
 
@@ -292,112 +187,8 @@ function limpiarCampos(){//Limpia el valor de los campos de entrada
 
 function limpiaDivMensaje(){//Limpia el div con el id=mensaje
 	$("#mensaje").text("");
-    /*$("#IC1").removeAttr("data-original-title");
-	$("#IC2").removeAttr("data-original-title");
-	$("#IC3").removeAttr("data-original-title");
-	$("#IC4").removeAttr("data-original-title");
-	$("#IC5").removeAttr("data-original-title");
-	$("#IC6").removeAttr("data-original-title");
-	$("#IC7").removeAttr("data-original-title");
-	$("#IC8").removeAttr("data-original-title");
-	$("#IC9").removeAttr("data-original-title");
-	*/
 }
 
-/*
-function cambioClase1(op){//Realiza un cambio de clase a los campos de entrada del formulario de la clase has-error a from-group
-	switch(op){
-	case 1: $("#datetimepicker4").attr('class','input-append  form-group') ;
-				$("#IC1").attr('title','') ;
-				$(document).ready(function(){
-				$("[id='IC1']").tooltip('hide');
-			});
-			break;
-	case 2: $("#div2").attr('class','input-append  form-group') ;
-				$("#IC2").attr('title','') ;
-				$(document).ready(function(){
-				$("[id='IC2']").tooltip('hide');
-			});
-			break;
-	case 3: $("#datetimepicker3").attr('class','input-append  form-group') ;
-	$("#IC3").attr('title','') ;
-					$(document).ready(function(){
-   $("[id='IC3']").tooltip('hide');
-});
-			break;
-	case 4: $("#div4").attr('class','input-append  form-group') ;
-	$("#IC4").attr('title','') ;
-						$(document).ready(function(){
-   $("[id='IC4']").tooltip('hide');
-});
-			break;
-	case 5: $("#div5").attr('class','input-append  form-group') ;
-	$("#IC5").attr('title','') ;
-					$(document).ready(function(){
-   $("[id='IC5']").tooltip('hide');
-});
-			break;
-	case 6: $("#div6").attr('class','input-append  form-group') ;
-			$("#IC6").attr('title','') ;
-						$(document).ready(function(){
-   $("[id='IC6']").tooltip('hide');
-});
-			break;
-	case 7: $("#div7").attr('class','input-append  form-group') ;
-			$("#IC7").attr('title','') ;
-					$(document).ready(function(){
-   $("[id='IC7']").tooltip('hide');
-});
-			break;
-	case 8: $("#div8").attr('class','input-append  form-group') ;
-			$("#IC8").attr('title','') ;
-						$(document).ready(function(){
-   $("[id='IC8']").tooltip('hide');
-});
-			break;
-	case 9: $("#div9").attr('class','input-append  form-group') ;
-			$("#IC9").attr('title','') ;
-						$(document).ready(function(){
-   $("[id='IC9']").tooltip('hide');
-});
-			break;
-	
-	
-	default: break;
-	}
-}
-
-*/
-
-/*
-function cambioClase2(){//Realiza el cambio de clase de los campon de fecha del formulario a la clase has-error
-	let fechaR=$("#IC1").val();
-	//La fecha debe de llevar el formato YYYY/MM/dd
-	
-	let recibido=fechaR.substring(10, 6)+'-'+fechaR.substring(5, 3)+'-'+fechaR.substring(2, 0);
-	
-	
-	
-		let fecha2=$("#IC3").val();
-	//La fecha debe de llevar el formato YYYY/MM/dd
-	
-	let oficio=fecha2.substring(10, 6)+'-'+fecha2.substring(5, 3)+'-'+fecha2.substring(2, 0);
-	
-	if(oficio<=recibido){
-		$("#datetimepicker4").attr('class','input-append  form-group') ;
-		$("#IC1").attr('title','') ;
-		$("#datetimepicker3").attr('class','input-append  form-group') ;
-		$("#IC3").attr('title','') ;
-	return true;}
-	else{
-		$("#datetimepicker4").attr('class','input-append form-group has-error') ;
-		$("#IC1").attr('title','La fecha de oficio no debe ser mayor que la fecha de recibido') ;
-		$("#datetimepicker3").attr('class','input-append form-group has-error') ;
-		$("#IC3").attr('title','La fecha de oficio no debe ser mayor que la fecha de recibido') ;
-		return false;}
-}
-
-*/
 function consultaIdCorrespondencia(){//Realiza la consulta del id de la ultima correspondencia ingresada
 					//Guarda el dato en el localstorage y cambia a la pagina a la de enlace
 		fetch( 'http://' + ip + ':'+ puerto +'/api/TC/BC', {  
@@ -421,41 +212,8 @@ function consultaIdCorrespondencia(){//Realiza la consulta del id de la ultima c
  	}
 
 function existeCorrespondencia($scope){//Realiza la consulta si la correspondencia a ingresar ya existe
-	/*if(validacionCampos() == false){
-	     $("#mensaje").text("Campos requeridos");
-		 subePagina();
-	     return;
-		}
-		*/
+
 	let parametro = $('#IC2').val().toUpperCase(); 
-	/*fetch( 'http://' + ip + ':'+ puerto +'/api/TC/BO', {  
-    method: 'POST', 
-    datatype:'json',
-    headers: {  
-      "Content-type": "application/x-www-form-urlencoded"  
-      } ,
-    body: "TC_3="+ parametro
-      }
-	)	 
-	.then(res => res.json())
-     .then(obj => {
-		if(obj.data[0]==null)
-			ingresoCorrespondencia($scope);
-		else{ 
-			if(obj.data[0].tc_3=="SIN OFICIO")
-			ingresoCorrespondencia($scope);
-			else
-			{
-			subePagina();
-			$("#mensaje").text("Fallo al realizar la acción, la correspondencia a ingresar ya existe"); 
-			}
-	  
-		}
-   })
-	.then( _ => subePagina())
-	.catch(err => {
-		console.log('Request failed', err)});
-		*/
 		ingresoCorrespondencia($scope);
 		subePagina();
 	}
@@ -528,166 +286,3 @@ function existeCorrespondencia($scope){//Realiza la consulta si la correspondenc
    	);
 	}
 	
-
-	/*
-function validacionCamposAlarma(){// Validación de los campos de fecha limite y fecha de aviso de la alarma
-let A1=true;
-let  A2=true;
-let A3= true;
-let  A4 = true;
-let A5 = true;
-let A6= true;
-
-let fechaAviso=$("#IC14").val();//Toma el valor del campo de la fecha
-let fechaLimite=$("#IC13").val();
-var d=new Date();
-let fecha1 = d.getFullYear() + '-'+((d.getMonth()+1<10)?'0':'') +(d.getMonth()+1) + '-' + ((d.getDate()<10)?'0':'') + d.getDate();
-
-if(fechaAviso.length == 0 || fechaLimite.length == 0){
-	
-	if( fechaAviso.length == 0){
-		$("#datetimepicker5").attr('class','input-append form-group has-error') ;
-		$("#IC14").attr('title','Campo Obligatorio') ;
-		A1=false;
-	}
-	else{
-	$("#datetimepicker5").attr('class','input-append  form-group') ;
-		$("#IC14").attr('title','') ;
-	}
-	
-	  if(fechaLimite.length == 0){
-		$("#datetimepicker6").attr('class','input-append form-group has-error') ;
-			$("#IC13").attr('title','Campo Obligatorio') ;
-		A2=false;
-	}
-	else{
-	$("#datetimepicker6").attr('class','input-append  form-group') ;
-		$("#IC13").attr('title','') ;
-	}
-	
-	}
-	
-	
-	
-	
-	if( fechaAviso.length != 0  && fechaLimite.length != 0  ){
-	
-	let fA=fechaAviso.substring(10, 6)+'-'+fechaAviso.substring(5, 3)+'-'+fechaAviso.substring(2, 0);
-	let fL=fechaLimite.substring(10, 6)+'-'+fechaLimite.substring(5, 3)+'-'+fechaLimite.substring(2, 0);
-
-	if(fA< fecha1){
-	 $("#datetimepicker5").attr('class','input-append form-group has-error') ;
-	$("#IC14").attr('title','La fecha de aviso de la alarma debe ser mayor a la fecha Actual') ;
-	A3=false;
-	
-	}
-	else{
-		$("#datetimepicker5").attr('class','input-append  form-group') ;
-		$("#IC14").attr('title','') ;
-	if(fA>fL){
-	$("#datetimepicker5").attr('class','input-append form-group has-error') ;
-	$("#IC14").attr('title','La fecha de Aviso de la alarma no puede ser mayor a la fecha limite de respuesta del documento') ;
-	A4=false;
-	
-	}
-	else{
-	$("#datetimepicker5").attr('class','input-append  form-group') ;
-	$("#IC14").attr('title','') ;
-	}
-	}
-	
-    if(fL< fecha1){
-	$("#datetimepicker6").attr('class','input-append  form-group has-error') ;
-	$("#IC13").attr('title','La fecha Limite de respuesta del documento debe ser mayor a la fecha Actual') ;
-	A5=false;
-	
-	}
-	else{
-	$("#datetimepicker6").attr('class','input-append  form-group');
-	$("#IC13").attr('title','') ;
-	if(fA>fL){
-	$("#datetimepicker5").attr('class','input-append  form-group has-error') ;
-	$("#IC13").attr('title','La fecha de aviso de la alarma no puede ser mayor a la fecha limite de respuesta del documento') ;
-	A6=false;
-	
-	}
-	else{
-	$("#datetimepicker5").attr('class','input-append  form-group') ;
-	$("#IC14").attr('title','') ;
-	}
-	}
-	
-	
-	}
-
-	return  ( A1 && A2 && A3  && A4 && A5 && A6 ); 
-}
-
-*/
-/*
-function cambioClase3(op){//Realiza un cambio de clase a los campos de entrada del formulario de la from-group a la clase has-error
-	switch(op){
-	case 1: $("#datetimepicker4").attr('class','input-append form-group has-error') ;
-
-			$(document).ready(function(){
-   $("[id='IC1']").tooltip('show');
-});
-			break;
-	case 2: $("#div2").attr('class','form-group has-error') ;
-
-			$(document).ready(function(){
-   $("[id='IC2']").tooltip('show');
-});
-			break;
-	case 3: $("#datetimepicker3").attr('class','input-append form-group has-error') ;
-
-			$(document).ready(function(){
-   $("[id='IC3']").tooltip('show');
-});
-			break;
-	case 4: $("#div4").attr('class','form-group has-error') ;
-
-			$(document).ready(function(){
-   $("[id='IC4']").tooltip('show');
-});
-			break;
-	case 5: $("#div5").attr('class','form-group has-error') ;
-
-			$(document).ready(function(){
-   $("[id='IC5']").tooltip('show');
-});
-			break;
-	case 6: $("#div6").attr('class','form-group has-error') ;
-
-			$(document).ready(function(){
-   $("[id='IC6']").tooltip('show');
-});
-			break;
-	case 7: $("#div7").attr('class','form-group has-error') ;
-
-					$(document).ready(function(){
-   $("[id='IC7']").tooltip('show');
-});
-			break;
-	case 8: $("#div8").attr('class','form-group has-error') ;
-
-			$(document).ready(function(){
-   $("[id='IC8']").tooltip('show');
-});
-			break;
-	case 9: $("#div9").attr('class','form-group has-error') ;
-	$(document).ready(function(){
-$("[id='IC9']").tooltip('show');
-});
-			
-			break;
-	
-	
-	default: break;
-	}
-}
-*/
-    
-	
-	
-
