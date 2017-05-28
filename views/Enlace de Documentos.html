@@ -129,9 +129,7 @@
 								</tr>
 							
 							<tbody>
-								<tr ng-repeat = "c in correspondencias | startFromGrid: (currentPage-1) * pageSize | limitTo: pageSize"
-								 ng-mouseenter="hover = true" ng-class="{cursorp: hover}" 
-				                 ng-mouseleave="hover = false" ng-dblclick="BuscarCorrespondencia(c)" >
+								<tr ng-repeat = "c in correspondencias | startFromGrid: (currentPage-1) * pageSize | limitTo: pageSize" >
 								 
 									<td> <button ng-click="updateDoc(c)"> + </button> </td>
 									<td> {{c.tc_3 }} </td>
@@ -146,12 +144,6 @@
 										</center>
 									</td>
 								</tr>
-								<style>
-								.cursorp{
-				                cursor: pointer;
-			                   	background-color:#d86d6f;
-			                    }
-			                </style>
 							</tbody>
 					</table>
 					</div>
