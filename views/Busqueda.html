@@ -348,15 +348,23 @@
 				<tr>
 					<td>
 						<div>
-							<li ng-repeat = "e in enlaces[0]">{{e}}</li>
+							<li ng-repeat = "e in enlaces[0]"  ng-mouseenter="hover = true" ng-class="{cursorp: hover}" 
+				ng-mouseleave="hover = false" ng-dblclick="busquedaEnlacesSeleccionados(e)"  >{{e}}</li>
 						</div>
 					</td>
 					<td>
 						<div>
-							<li ng-repeat = "e in enlaces[1]">{{e}}</li>
+							<li ng-repeat = "e in enlaces[1]" ng-mouseenter="hover = true" ng-class="{cursorp: hover}" 
+				ng-mouseleave="hover = false" ng-dblclick="busquedaEnlacesSeleccionados(e)">{{e}}</li>
 						</div>
 					</td>
 				</tr>
+					<style>
+			.cursorp{
+				cursor: pointer;
+				background-color:#d86d6f;
+			}
+			</style>
 			</tbody>
 		</table> 
 		</center>

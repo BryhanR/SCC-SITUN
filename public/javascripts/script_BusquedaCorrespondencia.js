@@ -18,6 +18,12 @@ function dato_Adjunto(){ //
 }
 
 
+function abrirBusqueda(en,$scope){
+localStorage.setItem('corres_B',en);
+window.open('http://' + ip +':'+ puerto +'/HTML/Busqueda','_self');
+}
+
+
 
 function controllerAngular($scope)//ControllerAngular
 {
@@ -34,7 +40,9 @@ function controllerAngular($scope)//ControllerAngular
 	$scope.actualiza =_ => actualizarInfo($scope);
 	$scope.Alarma= x => ajusteAlarma($scope,x);
 	$scope.nuevaAlarma = h => nuevaAlarma($scope, h);
+	$scope.busquedaEnlacesSeleccionados = en  => abrirBusqueda(en,$scope);
 	$scope.ini_Busqueda = _ => iniciar_B($scope);
+
 
 //-----------------------------
 	$scope.totalItems = 0;

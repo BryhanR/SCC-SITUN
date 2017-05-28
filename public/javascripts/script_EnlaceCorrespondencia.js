@@ -17,10 +17,6 @@ function recuperarCorrespondenciaLS(){  //metodo para recuperar el id de la corr
 }
 
 
-function abrirBusqueda(b,$scope){
-	localStorage.setItem('corres_B',b.tc_3);
-	 window.open('http://' + ip +':'+ puerto +'/HTML/Busqueda','_self');
-}
 
 
 function controllerAngular($scope)//ControllerAngular
@@ -39,7 +35,7 @@ function controllerAngular($scope)//ControllerAngular
 	$scope.enlazar = _ => crearEnlace($scope);
 	
 	$scope.editar = d => botonEditar(d, $scope);
-    $scope.BuscarCorrespondencia =b=> abrirBusqueda(b,$scope);
+
 
 
 //-----------------------------
