@@ -363,7 +363,7 @@ function cargaAlarma(data,corr){ //carga los datos de la alarma para mostrar en 
 	tmp = corr;
 
    if(data!=null){
- 
+		 $("#divAjuste1").hide();
       $("#IC17").val(data.ta_2.substr(8,2)+"-"+data.ta_2.substr(5,2)+"-"+data.ta_2.substr(0,4));
 	  $("#IC16").val(data.ta_3.substr(8,2)+"-"+data.ta_3.substr(5,2)+"-"+data.ta_3.substr(0,4));
 	  tmp1 = corr;
@@ -378,7 +378,9 @@ function cargaAlarma(data,corr){ //carga los datos de la alarma para mostrar en 
 	 return 0; }
 
 	  else{
-
+		  $("#divAjuste1").show();
+		$("#IC17").val("");
+	    $("#IC16").val("");
 	  	tmp1 = null;
 	   	$("#myModal4").modal("show");
 	   	return 1;
