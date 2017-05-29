@@ -19,6 +19,7 @@ function controllerAngular($scope)//ControllerAngular
 	actualizarPersona();
 	actualizarUsuario();
     busquedaUsuario($scope);
+    busquedaUsuario($scope);
     usr = JSON.parse(localStorage.getItem('usuario'));
     id = $('#IU0').val().toUpperCase();
     if(usr.Id === id)

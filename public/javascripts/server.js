@@ -48,7 +48,7 @@ function createTU(req, res, next) {
       res.status(200)
         .json({
           status: 'success',
-          message: 'Inserted one TP'
+          message: 'Inserted one TU'
         });
     })
     .catch(function (err) {

@@ -31,7 +31,6 @@ function existeUsuario(){//Realiza la consulta si un usuario existe
 
 	function botonGuardar(){//Realiza la función del boton de guardar llamando a los metodos correspondientes
 	existeUsuario();	
-	
 	}
 	
 function ingresaInformacion($scope){ //Recoge los datos de los campos y realiza el fecth de inserción 
@@ -57,7 +56,7 @@ function ingresaInformacion($scope){ //Recoge los datos de los campos y realiza 
 
 function ingresaPersona(a,b,c,d,e){// Realiza la inserción de una persona a la base de datos
 
- fetch( 'http://' + ip + ':'+ puerto +'/api/TP/I', { 
+ fetch('http://' + ip + ':'+ puerto +'/api/TP/I', { 
     method: 'POST', 
     datatype:'json',
     headers: {  

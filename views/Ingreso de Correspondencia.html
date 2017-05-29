@@ -118,7 +118,7 @@
                   <td> <label class="text-danger">Fecha Recibido</label></td>
                   <td> 
                     <div class='input-group date' id='datetimepicker4'>
-          				    <input type='text' class="form-control" id="IC1" name="IC1" data-toggle="tooltip" data-placement="right" title="Fecha invalida o mayot a la de oficio"/>
+          				    <input type='text' class="form-control" id="IC1" name="IC1" data-toggle="tooltip" data-placement="right" title="Fecha invalida o mayot a la de oficio" onfocus= "limpiarMensaje()"/>
           					  <span class="input-group-addon">
             				    <span class="glyphicon glyphicon-calendar"></span>
           					  </span>
@@ -129,9 +129,9 @@
                   <td> <label class="text-danger">N° Oficio</label> </td>
                   <td>
                     <div  id="div2" class="form-group">
-                      <textarea id="IC2" name = "IC2" data-toggle="tooltip" data-placement="right" title="N° oficio imcompleto"type="text" class="form-control"></textarea>
+                      <textarea id="IC2" name = "IC2" data-toggle="tooltip" data-placement="right" title="N° oficio imcompleto"type="text" class="form-control" onfocus= "limpiarMensaje()"></textarea>
 					            <label class="text-danger" style="">
-                        <input  type="checkbox" id="IC12" name= "IC12" onchange="checkCampoOficio()" value="first_checkbox">Sin Oficio
+                        <input  type="checkbox" id="IC12" name= "IC12" onchange="checkCampoOficio()" value="first_checkbox" onfocus= "limpiarMensaje()">Sin Oficio
                       </label>
                     </div>
                   </td>           
@@ -140,7 +140,7 @@
                   <td><label class="text-danger">Fecha Oficio</label></td>
                   <td> 
                    	<div class='input-group date' id='datetimepicker3'>
-          				    <input type='text' class="form-control" id="IC3" name="IC3" data-toggle="tooltip" data-placement="right" title="Fecha invalida o menor a la de recibido" />
+          				    <input type='text' class="form-control" id="IC3" name="IC3" data-toggle="tooltip" data-placement="right" title="Fecha invalida o menor a la de recibido" onfocus= "limpiarMensaje()" />
           					  <span class="input-group-addon">
             					  <span class="glyphicon glyphicon-calendar" ></span>
           					  </span>
@@ -151,7 +151,7 @@
                     <td> <label class="text-danger">Destinatario </label></td>
                     <td>
                       <div id="div4" class="form-group">
-                        <textarea id="IC4" name="IC4" data-toggle="tooltip" data-placement="right" title="Datos de destinatario imcompletos" type="text" class="form-control"></textarea>
+                        <textarea id="IC4" name="IC4" data-toggle="tooltip" data-placement="right" title="Datos de destinatario imcompletos" type="text" class="form-control" onfocus= "limpiarMensaje()"></textarea>
                       </div>
                     </td> 
                 </tr>
@@ -159,9 +159,9 @@
                   <td> <label class="text-danger">Copia </label></td>
                   <td>
                     <div id="div5" class="form-group">
-                      <textarea id="IC5" name="IC5" data-toggle="tooltip" data-placement="right" title="Datos de copia imcompletos" type="text" class="form-control"></textarea>
+                      <textarea id="IC5" name="IC5" data-toggle="tooltip" data-placement="right" title="Datos de copia imcompletos" type="text" class="form-control" onfocus= "limpiarMensaje()"></textarea>
 					            <label class="text-danger" style="">
-                        <input  type="checkbox" id="check_SinCopia" name="check_SinCopia" value="first_checkbox" onchange="checkCampoCopia()">Sin Copia
+                        <input  type="checkbox" id="check_SinCopia" name="check_SinCopia" value="first_checkbox" onchange="checkCampoCopia()" onfocus= "limpiarMensaje()">Sin Copia
                       </label>
                     </div>
                   </td>
@@ -170,7 +170,7 @@
                   <td> <label class="text-danger">Remitente </label></td>
                   <td>
                     <div id="div6" class="form-group">
-                      <textarea type="text" class="form-control" id="IC6" name="IC6" data-toggle="tooltip" data-placement="right" title="Datos de remitente imcompletos"></textarea>
+                      <textarea type="text" class="form-control" id="IC6" name="IC6" data-toggle="tooltip" data-placement="right" title="Datos de remitente imcompletos" onfocus= "limpiarMensaje()"></textarea>
                     </div>
                   </td>               
 			         </tr>
@@ -178,7 +178,7 @@
                     <td> <label class="text-danger">Asunto</label></td>
                     <td>
                       <div id="div7" class="form-group">
-                        <textarea id="IC7" name="IC7" data-toggle="tooltip" data-placement="right" title="Datos de asunto imcompletos" type="text" class="form-control" rows=4 cols=30></textarea>
+                        <textarea id="IC7" name="IC7" data-toggle="tooltip" data-placement="right" title="Datos de asunto imcompletos" type="text" class="form-control" rows=4 cols=30 onfocus= "limpiarMensaje()"></textarea>
                       </div>
                     </td> 
                 </tr>
@@ -194,7 +194,7 @@
                   <td> <label class="text-danger">Trasladado a</label></td>
                   <td>
                     <div id="div9" class="form-group">
-                      <textarea type="text" class="form-control" id="IC9" name="IC9" data-toggle="tooltip" data-placement="right" title="Datos de estado imcompletos"></textarea>
+                      <textarea type="text" class="form-control" id="IC9" name="IC9" data-toggle="tooltip" data-placement="right" title="Datos de estado imcompletos" onfocus= "limpiarMensaje()"></textarea>
                     </div>
                   </td>
                 </tr>
@@ -202,7 +202,7 @@
                     <td> <label class="text-danger">Observaciones</label></td>
                     <td>
                       <div id="div10" class="form-group">
-                        <textarea type="text" class="form-control" id="IC10" name="IC10" ></textarea>
+                        <textarea type="text" class="form-control" id="IC10" name="IC10" onfocus= "limpiarMensaje()"></textarea>
                       </div>
                     </td>
                 </tr>
@@ -412,7 +412,7 @@ let app = angular.module('app', []);
             IC4: {
               required: "Campo requerido"
             },
-            IC5: {
+            IC5: { 
               required: "Campo requerido"
             },
             IC6: {
