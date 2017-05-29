@@ -118,7 +118,7 @@
 				<td></td>
 				<td>
 				<div  style="max-height: 550px; overflow-y:auto;">
-					<table class = "table table-bordered" id = "busqueda_enlace">
+					<table class = "table" id = "busqueda_enlace">
 					
 							<tr class="danger">
 								<td></td>
@@ -129,7 +129,8 @@
 								</tr>
 							
 							<tbody>
-								<tr ng-repeat = "c in correspondencias | startFromGrid: (currentPage-1) * pageSize | limitTo: pageSize">
+								<tr ng-repeat = "c in correspondencias | startFromGrid: (currentPage-1) * pageSize | limitTo: pageSize" >
+								 
 									<td> <button ng-click="updateDoc(c)"> + </button> </td>
 									<td> {{c.tc_3 }} </td>
 									<td> {{c.tc_8 }} </td>

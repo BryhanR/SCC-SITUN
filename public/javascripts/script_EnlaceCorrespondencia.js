@@ -19,7 +19,6 @@ function recuperarCorrespondenciaLS(){  //metodo para recuperar el id de la corr
 
 
 
-
 function controllerAngular($scope)//ControllerAngular
  {
 	$scope.correspondencias = new Array();
