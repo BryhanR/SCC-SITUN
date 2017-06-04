@@ -48,7 +48,7 @@ function createTU(req, res, next) {
       res.status(200)
         .json({
           status: 'success',
-          message: 'Inserted one TP'
+          message: 'Inserted one TU'
         });
     })
     .catch(function (err) {
@@ -445,7 +445,7 @@ function getALLTE_ONE(req, res, next) {
 
 function getALLTA_FECHA(req, res, next) {
   db.any('Select TA.TA_1, TC_3, TA.TA_2, TA.TA_3 '+ 
-		'from TC,(select TA.TA_1, TA.TA_2, TA.TA_3 from TA where TA_3 <= current_date and TA_2 >= current_date and TA_4 = 0) as TA '+ 
+		'from TC,(select TA.TA_1, TA.TA_2, TA.TA_3 from TA where TA_3 <= current_date  and TA_4 = 0) as TA '+ 
 		'where TC_1 = TA.TA_1;', req.body)
     .then(function (data) {
       res.status(200)

@@ -335,9 +335,9 @@
 			<thead>
 			<tr class="danger">
 				<td>
-					<h3>Inferiores</h3>
-				<td>
 					<h3>Superiores</h3>
+				<td>
+					<h3>Inferiores</h3>
 				<td>
 					
 				</td>
@@ -348,15 +348,23 @@
 				<tr>
 					<td>
 						<div>
-							<li ng-repeat = "e in enlaces[0]">{{e}}</li>
+							<li ng-repeat = "e in enlaces[0]"  ng-mouseenter="hover = true" ng-class="{cursorp: hover}" 
+				ng-mouseleave="hover = false" ng-dblclick="busquedaEnlacesSeleccionados(e)"  >{{e}}</li>
 						</div>
 					</td>
 					<td>
 						<div>
-							<li ng-repeat = "e in enlaces[1]">{{e}}</li>
+							<li ng-repeat = "e in enlaces[1]" ng-mouseenter="hover = true" ng-class="{cursorp: hover}" 
+				ng-mouseleave="hover = false" ng-dblclick="busquedaEnlacesSeleccionados(e)">{{e}}</li>
 						</div>
 					</td>
 				</tr>
+					<style>
+			.cursorp{
+				cursor: pointer;
+				background-color:#d86d6f;
+			}
+			</style>
 			</tbody>
 		</table> 
 		</center>
@@ -390,7 +398,7 @@
 	  </div>
       <div id="divAjuste1" class="modal-body">
 	  <center>
-		 <label class="text-danger">Actualmente este oficio no cuenta con una alarma. Puede crear una nueva alarma completando los siguientes campos</label>
+		 <label  class="text-danger" >Actualmente este oficio no cuenta con una alarma. Puede crear una nueva alarma completando los siguientes campos</label>
 		</center>
       </div>	  
 	   <div id="divAjuste2" class="modal-body" >   
@@ -733,7 +741,7 @@ function MB_04($scope) //Toma el criterio de busqueda y devuelve la columna que 
           messages: {
             IC16: {
               required: "Se requiere fecha de recibido",
-              menorIgualHoy: "La fecha de recibido no puede ser mayor que hoy"
+              mayorIgualHoy: "La fecha de recibido no puede ser mayor que hoy"
             },
             IC17: {
               required: "Se requiere número de oficio",
@@ -746,8 +754,10 @@ function MB_04($scope) //Toma el criterio de busqueda y devuelve la columna que 
              	actualizarAlarma(tmp);
              else
              	nuevaAlarma(tmp);
-             limpiarCampos();
-             $("#myModal4").modal("hide");
+
+				 limpiarCampos();
+				$('#btnGd').modal('hide');
+
              //botonGuardar();         
              //angular.element($('#IC5')).scope().guardarCorrespondencia();  
             }

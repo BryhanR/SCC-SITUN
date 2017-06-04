@@ -94,6 +94,7 @@ if($("#check_SinCopia").is(':checked')){
 	}
 }
 
+
 function ingresoCorrespondencia($scope){ //Recoge los datos de los campos y realiza el fecth de inserción 
 							//a la base de datos
 	let fecha1=$('#IC1').val();
@@ -258,6 +259,10 @@ function existeCorrespondencia($scope){//Realiza la consulta si la correspondenc
 		});
 		}
 	});
+	}
+	
+	function limpiarMensaje(){
+		$("#mensaje").text("");
 	}
 	
 	function subePagina() {
