@@ -9,6 +9,10 @@
 	<script src="\..\javascripts\bootstrap-3-3-7.min.js"></script>
 	<link rel="stylesheet" href="\..\stylesheets\bootstrap-3-3-7.min.css">
 	
+  <script src="\..\javascripts\validatePlugin.js"></script>
+<link rel="stylesheet" href="\..\stylesheets\validatePlugin.css">
+
+
 </head>
 <body background="../images/situn4.png">
 	<div class="container">
@@ -88,6 +92,8 @@
 </div>
  
 <script>
+
+var validator;
 $(document).ready(function(){     
  $("input:text:visible:first").focus();
         $('#myModal').modal({ backdrop: 'static', keyboard: false });
@@ -96,8 +102,23 @@ $(document).ready(function(){
          $('#psw').val('<%= pass  %>');
         <% } %>
 
-        $('#formu').validate({
+
+        $('#formu input[type="password"], #formu input[type="text"]').tooltipster({
+        trigger: 'custom',
+        onlyOne: false,
+        position: 'right'
+    });
+
+   validator =    $('#formu').validate({
           debug: true,
+        errorPlacement: function (error, element) {
+            $(element).tooltipster('update', $(error).text());
+            $(element).tooltipster('show');
+        },
+         success: function (label, element) {
+            $(element).tooltipster('hide');
+
+        },
           rules: {
             username: {
               required: true
@@ -133,6 +154,12 @@ function limpiar()
   $("#usrnamer").val('');
   $("#usrname").val('');
   $("#psw").val(''); 
+
+  $("#formu")[0].reset();
+  validator.submitted = {};
+  validator.elements().tooltipster('hide');
+
+
 }
 function OlvidarContrasenia()
 {

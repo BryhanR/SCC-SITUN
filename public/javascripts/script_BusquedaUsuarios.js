@@ -92,15 +92,6 @@ function controllerAngular($scope)//ControllerAngular
  
   }
 function limpiarValores(){ //Limpia los valores de los campos de entrada
-    /*
-    $("#div5").attr('class','form-group') ;
-	$("#IU5").attr('title','');
-	$("#IU5").val("");
-	let i =1;
-	for(i=1;i<6;i++){
-	   cambioClase1(i);
-	}
-	*/
 
 	$("#FormularioUs")[0].reset();
 	validator.submitted = {};

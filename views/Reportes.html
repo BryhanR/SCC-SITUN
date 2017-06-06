@@ -161,7 +161,7 @@
                		</div>    
                		</div>
                		<div class='btn-group'>
-    			<ul ng-show='correspondencias.length>0' class="panel-danger" uib-pagination total-items="totalItems" ng-model="currentPage" max-size="paginationSize" items-per-page="pageSize" ng-change='pageChanged()' class="pagination-sm" boundary-links="true" force-ellipses="true" previous-text="Anterior" next-text="Siguiente" last-text="Último" first-text="Primero"></ul>
+    			<ul ng-show='correspondencias.length>pageSize' class="panel-danger" uib-pagination total-items="totalItems" ng-model="currentPage" max-size="paginationSize" items-per-page="pageSize" ng-change='pageChanged()' class="pagination-sm" boundary-links="true" force-ellipses="true" previous-text="Anterior" next-text="Siguiente" last-text="Último" first-text="Primero"></ul>
         	</div>
 	   	</div>
        
@@ -174,7 +174,6 @@
 <script type="text/javascript">
   
 $(document).ready(function() {
-    // Solicita la informacion de la sesion si aun no existe en el storage
 	$("#menuDiv").load("/HTML/menu", function(){$("#RDM").addClass("activa");}); 
 		$("#ayuda").click(
 	function(){

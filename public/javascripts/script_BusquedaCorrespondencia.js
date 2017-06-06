@@ -368,13 +368,6 @@ function cargaAlarma(data,corr){ //carga los datos de la alarma para mostrar en 
 	  $("#IC16").val(data.ta_3.substr(8,2)+"-"+data.ta_3.substr(5,2)+"-"+data.ta_3.substr(0,4));
 	  tmp1 = corr;
 	   $("#myModal4").modal("show");
-	 /* $("#btnGd1").click(function(){
-		console.log("guarde2");
-		actualizarAlarma(corr);
-		$("[data-dismiss=modal]").trigger({ type: "click" });
-		}//fin function
-		);
-		*/
 	 return 0; }
 
 	  else{
