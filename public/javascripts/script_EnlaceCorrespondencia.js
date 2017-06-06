@@ -28,7 +28,7 @@ function controllerAngular($scope)//ControllerAngular
 	$scope.criterio = "Asunto";	
 	$scope.init = _ => console.log("Se ha iniciado el sistema...");
 	$scope.setCurrent = c => $scope.current = c;
-	$scope.updateDoc = a => modificaCampos(a, $scope);//$scope.current == 1? ($scope.doc1 = a, deshabilitar('E1')): ($scope.doc2 = a, deshabilitar('E2'));
+	$scope.updateDoc = a => modificaCampos(a, $scope);
 	
 	$scope.updateCorrespondencias = c => ($scope.correspondencias =c,$scope.totalItems=$scope.correspondencias.length);
 	$scope.buscar = (a,b) => busqueda(a,$scope,b);
